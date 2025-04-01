@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "code": "028738",
+        "requestedBy": "Lorraine Jimenez",
+        "requestedArea": null,
+        "requestedDateFrom": "2024-12-14 16:00:00",
+        "requestedDateTo": "2024-12-14 17:00:00",
+        "fee": 0,
+        "status": "Pending",
+        "createdBy": null,
+        "createdAt": ""
+    },
+    {
+        "id": 2,
+        "code": "028739",
+        "requestedBy": "Franklin Lim",
+        "requestedArea": null,
+        "requestedDateFrom": "2024-12-09 20:00:00",
+        "requestedDateTo": "2024-12-09 21:00:00",
+        "fee": 0,
+        "status": "Pending",
+        "createdBy": null,
+        "createdAt": ""
+    },
+    {
+        "id": 3,
+        "code": "028740",
+        "requestedBy": "Chriz Javier",
+        "requestedArea": null,
+        "requestedDateFrom": "2024-11-20 13:00:00",
+        "requestedDateTo": "2024-11-20 14:00:00",
+        "fee": 0,
+        "status": "Pending",
+        "createdBy": null,
+        "createdAt": ""
+    },
+    {
+        "id": 4,
+        "code": "028741",
+        "requestedBy": "Althea Mercado",
+        "requestedArea": null,
+        "requestedDateFrom": "2024-11-11 17:00:00",
+        "requestedDateTo": "2024-11-11 18:00:00",
+        "fee": 0,
+        "status": "Pending",
+        "createdBy": null,
+        "createdAt": ""
+    },
+    {
+        "id": 5,
+        "code": "028742",
+        "requestedBy": "Aira Tolentino",
+        "requestedArea": null,
+        "requestedDateFrom": "2024-11-02 19:00:00",
+        "requestedDateTo": "2024-11-02 20:00:00",
+        "fee": 0,
+        "status": "Pending",
+        "createdBy": null,
+        "createdAt": ""
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Sample announcement 1",
+        "content": "lasdawiqknsda",
+        "attachments": [],
+        "status": "Draft"
+    },
+    {
+        "id": 2,
+        "title": "Sample announcement 2",
+        "content": "lasdawiqknsda",
+        "attachments": [],
+        "status": "Draft"
+    },
+    {
+        "id": 3,
+        "title": "Sample announcement 3",
+        "content": "lasdawiqknsda",
+        "attachments": [],
+        "status": "Draft"
+    },
+    {
+        "id": 4,
+        "title": "Sample announcement 4",
+        "content": "lasdawiqknsda",
+        "attachments": [],
+        "status": "Draft"
+    },
+    {
+        "id": 5,
+        "title": "Sample announcement 5",
+        "content": "lasdawiqknsda",
+        "attachments": [],
+        "status": "Draft"
+    }
+]

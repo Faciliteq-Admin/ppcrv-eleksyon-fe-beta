@@ -1,0 +1,15 @@
+{
+  "short_name": "PPCRV ELEKSYON 2025",
+  "name": "PPCRV ELEKSYON 2025 TRANSPARENCY SERVER MONITORING",
+  "icons": [
+    {
+      "src": "ppcrvlogo.png",
+      "type": "image/png",
+      "sizes": "316x316"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

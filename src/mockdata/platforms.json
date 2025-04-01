@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Faciliteq Hub",
+        "code": "facihub",
+        "isEnabled": true
+    },
+    {
+        "id": 2,
+        "name": "Faciliteq 360",
+        "code": "faci360",
+        "isEnabled": true
+    },
+    {
+        "id": 3,
+        "name": "Marketplaze",
+        "code": "facimarket",
+        "isEnabled": true
+    },
+    {
+        "id": 4,
+        "name": "Roomio",
+        "code": "faciroom",
+        "isEnabled": true
+    },
+    {
+        "id": 5,
+        "name": "Smartspace",
+        "code": "facispace",
+        "isEnabled": true
+    },
+    {
+        "id": 6,
+        "name": "SmartWorx",
+        "code": "faciworx",
+        "isEnabled": true
+    }
+]

@@ -1,0 +1,121 @@
+[
+    {
+        "code": "010000000",
+        "name": "Ilocos Region",
+        "regionName": "Region I",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "020000000",
+        "name": "Cagayan Valley",
+        "regionName": "Region II",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "030000000",
+        "name": "Central Luzon",
+        "regionName": "Region III",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "040000000",
+        "name": "CALABARZON",
+        "regionName": "Region IV-A",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "170000000",
+        "name": "MIMAROPA Region",
+        "regionName": "MIMAROPA Region",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "050000000",
+        "name": "Bicol Region",
+        "regionName": "Region V",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "060000000",
+        "name": "Western Visayas",
+        "regionName": "Region VI",
+        "group": "Visayas, Reg",
+        "isActive": true
+    },
+    {
+        "code": "070000000",
+        "name": "Central Visayas",
+        "regionName": "Region VII",
+        "group": "Visayas, Reg",
+        "isActive": true
+    },
+    {
+        "code": "080000000",
+        "name": "Eastern Visayas",
+        "regionName": "Region VIII",
+        "group": "Visayas, Reg",
+        "isActive": true
+    },
+    {
+        "code": "090000000",
+        "name": "Zamboanga Peninsula",
+        "regionName": "Region IX",
+        "group": "Mindanao, Reg",
+        "isActive": true
+    },
+    {
+        "code": "100000000",
+        "name": "Northern Mindanao",
+        "regionName": "Region X",
+        "group": "Mindanao, Reg",
+        "isActive": true
+    },
+    {
+        "code": "110000000",
+        "name": "Davao Region",
+        "regionName": "Region XI",
+        "group": "Mindanao, Reg",
+        "isActive": true
+    },
+    {
+        "code": "120000000",
+        "name": "SOCCSKSARGEN",
+        "regionName": "Region XII",
+        "group": "Mindanao, Reg",
+        "isActive": true
+    },
+    {
+        "code": "130000000",
+        "name": "NCR",
+        "regionName": "National Capital Region",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "140000000",
+        "name": "CAR",
+        "regionName": "Cordillera Administrative Region",
+        "group": "Luzon, Reg",
+        "isActive": true
+    },
+    {
+        "code": "160000000",
+        "name": "Caraga",
+        "regionName": "Region XIII",
+        "group": "Mindanao, Reg",
+        "isActive": true
+    },
+    {
+        "code": "150000000",
+        "name": "BARMM",
+        "regionName": "Bangsamoro Autonomous Region in Muslim Mindanao",
+        "group": "Mindanao, Reg",
+        "isActive": true
+    }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "tenantCode": "000431",
+        "amount": 49000,
+        "tower": "2",
+        "floor": "23",
+        "floorArea": 50,
+        "unit": "2304",
+        "status": "Pending"
+    },
+    {
+        "id": 2,
+        "tenantCode": "000432",
+        "amount": 38000,
+        "tower": "3",
+        "floor": "8",
+        "floorArea": 40,
+        "unit": "807",
+        "status": "Paid"
+    },
+    {
+        "id": 3,
+        "tenantCode": "000433",
+        "amount": 45000,
+        "tower": "2",
+        "floor": "15",
+        "floorArea": 35,
+        "unit": "1512",
+        "status": "Overdue"
+    },
+    {
+        "id": 4,
+        "tenantCode": "000434",
+        "amount": 28000,
+        "tower": "1",
+        "floor": "24",
+        "floorArea": 45,
+        "unit": "2403",
+        "status": "Paid"
+    },
+    {
+        "id": 5,
+        "tenantCode": "000435",
+        "amount": 32000,
+        "tower": "1",
+        "floor": "5",
+        "floorArea": 50,
+        "unit": "508",
+        "status": "Pending"
+    }
+]

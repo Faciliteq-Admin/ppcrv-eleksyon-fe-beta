@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Gym",
+        "newRequests": 0,
+        "totalRequests": 0
+    },
+    {
+        "id": 2,
+        "name": "Parking",
+        "newRequests": 0,
+        "totalRequests": 0
+    },
+    {
+        "id": 3,
+        "name": "Clubhouse",
+        "newRequests": 0,
+        "totalRequests": 0
+    },
+    {
+        "id": 4,
+        "name": "Swimming Pool",
+        "newRequests": 0,
+        "totalRequests": 0
+    },
+    {
+        "id": 5,
+        "name": "Basketball Court",
+        "newRequests": 0,
+        "totalRequests": 0
+    },
+    {
+        "id": 6,
+        "name": "Lap Pool",
+        "newRequests": 0,
+        "totalRequests": 0
+    }
+]

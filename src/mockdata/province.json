@@ -1,0 +1,576 @@
+[
+    {
+        "code": "012800000",
+        "name": "Ilocos Norte",
+        "parent": "010000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "012900000",
+        "name": "Ilocos Sur",
+        "parent": "010000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "013300000",
+        "name": "La Union",
+        "parent": "010000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "015500000",
+        "name": "Pangasinan",
+        "parent": "010000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "020900000",
+        "name": "Batanes",
+        "parent": "020000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "021500000",
+        "name": "Cagayan",
+        "parent": "020000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "023100000",
+        "name": "Isabela",
+        "parent": "020000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "025000000",
+        "name": "Nueva Vizcaya",
+        "parent": "020000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "140100000",
+        "name": "Abra",
+        "parent": "140000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "141100000",
+        "name": "Benguet",
+        "parent": "140000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "142700000",
+        "name": "Ifugao",
+        "parent": "140000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "143200000",
+        "name": "Kalinga",
+        "parent": "140000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "144400000",
+        "name": "Mountain Province",
+        "parent": "140000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "148100000",
+        "name": "Apayao",
+        "parent": "140000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "025700000",
+        "name": "Quirino",
+        "parent": "020000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "030800000",
+        "name": "Bataan",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "031400000",
+        "name": "Bulacan",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "034900000",
+        "name": "Nueva Ecija",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "035400000",
+        "name": "Pampanga",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "036900000",
+        "name": "Tarlac",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "037100000",
+        "name": "Zambales",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "037700000",
+        "name": "Aurora",
+        "parent": "030000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "000034500",
+        "name": "Metro Manila",
+        "parent": "130000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "041000000",
+        "name": "Batangas",
+        "parent": "040000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "042100000",
+        "name": "Cavite",
+        "parent": "040000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "043400000",
+        "name": "Laguna",
+        "parent": "040000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "045600000",
+        "name": "Quezon",
+        "parent": "040000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "045800000",
+        "name": "Rizal",
+        "parent": "040000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "174000000",
+        "name": "Marinduque",
+        "parent": "170000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "175100000",
+        "name": "Occidental Mindoro",
+        "parent": "170000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "175200000",
+        "name": "Oriental Mindoro",
+        "parent": "170000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "175300000",
+        "name": "Palawan",
+        "parent": "170000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "175900000",
+        "name": "Romblon",
+        "parent": "170000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "050500000",
+        "name": "Albay",
+        "parent": "050000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "051600000",
+        "name": "Camarines Norte",
+        "parent": "050000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "051700000",
+        "name": "Camarines Sur",
+        "parent": "050000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "052000000",
+        "name": "Catanduanes",
+        "parent": "050000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "054100000",
+        "name": "Masbate",
+        "parent": "050000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "056200000",
+        "name": "Sorsogon",
+        "parent": "050000000",
+        "group": "Luzon, Prov",
+        "isActive": true
+    },
+    {
+        "code": "060400000",
+        "name": "Aklan",
+        "parent": "060000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "060600000",
+        "name": "Antique",
+        "parent": "060000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "061900000",
+        "name": "Capiz",
+        "parent": "060000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "063000000",
+        "name": "Iloilo",
+        "parent": "060000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "064500000",
+        "name": "Negros Occidental",
+        "parent": "060000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "067900000",
+        "name": "Guimaras",
+        "parent": "060000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "071200000",
+        "name": "Bohol",
+        "parent": "070000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "072200000",
+        "name": "Cebu",
+        "parent": "070000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "074600000",
+        "name": "Negros Oriental",
+        "parent": "070000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "076100000",
+        "name": "Siquijor",
+        "parent": "070000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "082600000",
+        "name": "Eastern Samar",
+        "parent": "080000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "083700000",
+        "name": "Leyte",
+        "parent": "080000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "084800000",
+        "name": "Northern Samar",
+        "parent": "080000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "086000000",
+        "name": "Samar",
+        "parent": "080000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "086400000",
+        "name": "Southern Leyte",
+        "parent": "080000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "087800000",
+        "name": "Biliran",
+        "parent": "080000000",
+        "group": "Visayas, Prov",
+        "isActive": true
+    },
+    {
+        "code": "097200000",
+        "name": "Zamboanga Del Norte",
+        "parent": "090000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "097300000",
+        "name": "Zamboanga Del Sur",
+        "parent": "090000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "098300000",
+        "name": "Zamboanga Sibugay",
+        "parent": "090000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "101300000",
+        "name": "Bukidnon",
+        "parent": "100000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "101800000",
+        "name": "Camiguin",
+        "parent": "100000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "103500000",
+        "name": "Lanao Del Norte",
+        "parent": "100000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "104200000",
+        "name": "Misamis Occidental",
+        "parent": "100000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "104300000",
+        "name": "Misamis Oriental",
+        "parent": "100000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "112300000",
+        "name": "Davao Del Norte",
+        "parent": "110000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "112400000",
+        "name": "Davao Del Sur",
+        "parent": "110000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "112500000",
+        "name": "Davao Oriental",
+        "parent": "110000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "118200000",
+        "name": "Davao De Oro",
+        "parent": "110000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "118600000",
+        "name": "Davao Occidental",
+        "parent": "110000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "124700000",
+        "name": "Cotabato",
+        "parent": "120000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "126300000",
+        "name": "South Cotabato",
+        "parent": "120000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "126500000",
+        "name": "Sultan Kudarat",
+        "parent": "120000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "128000000",
+        "name": "Sarangani",
+        "parent": "120000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "160200000",
+        "name": "Agusan Del Norte",
+        "parent": "160000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "160300000",
+        "name": "Agusan Del Sur",
+        "parent": "160000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "166700000",
+        "name": "Surigao Del Norte",
+        "parent": "160000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "166800000",
+        "name": "Surigao Del Sur",
+        "parent": "160000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "168500000",
+        "name": "Dinagat Islands",
+        "parent": "160000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "150700000",
+        "name": "Basilan",
+        "parent": "150000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "153600000",
+        "name": "Lanao Del Sur",
+        "parent": "150000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "153800000",
+        "name": "Maguindanao",
+        "parent": "150000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "156600000",
+        "name": "Sulu",
+        "parent": "150000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    },
+    {
+        "code": "157000000",
+        "name": "Tawi-Tawi",
+        "parent": "150000000",
+        "group": "Mindanao, Prov",
+        "isActive": true
+    }
+]

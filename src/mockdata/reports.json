@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "code": "000121",
+        "reportedBy": "Jas Alcantara",
+        "status": "Pending",
+        "provId": "1",
+        "cityMunId": "2",
+        "barangayId": "3",
+        "street": "ASdasds",
+        "category": "Animal Control",
+        "subcategory": "",
+        "description": "Grounded sockets",
+        "attachments": []
+    },
+    {
+        "id": 2,
+        "code": "000122",
+        "reportedBy": "Irish Ignacio",
+        "status": "Pending",
+        "provId": "1",
+        "cityMunId": "2",
+        "barangayId": "3",
+        "street": "ASdasds",
+        "category": "Animal Control",
+        "subcategory": "",
+        "description": "Grounded sockets",
+        "attachments": []
+    },
+    {
+        "id": 3,
+        "code": "000123",
+        "reportedBy": "Daniella Valencia",
+        "status": "Pending",
+        "provId": "1",
+        "cityMunId": "2",
+        "barangayId": "3",
+        "street": "ASdasds",
+        "category": "Animal Control",
+        "subcategory": "",
+        "description": "Grounded sockets",
+        "attachments": []
+    },
+    {
+        "id": 4,
+        "code": "000124",
+        "reportedBy": "Cid Romero",
+        "status": "Pending",
+        "provId": "1",
+        "cityMunId": "2",
+        "barangayId": "3",
+        "street": "ASdasds",
+        "category": "Animal Control",
+        "subcategory": "",
+        "description": "Grounded sockets",
+        "attachments": []
+    },
+    {
+        "id": 5,
+        "code": "000125",
+        "reportedBy": "Baron Pascua",
+        "status": "Pending",
+        "provId": "1",
+        "cityMunId": "2",
+        "barangayId": "3",
+        "street": "ASdasds",
+        "category": "Animal Control",
+        "subcategory": "",
+        "description": "Grounded sockets",
+        "attachments": []
+    }
+]
