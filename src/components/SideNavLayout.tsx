@@ -9,6 +9,10 @@ import {
     PhotoIcon,
     PaperClipIcon,
     DocumentDuplicateIcon,
+    BuildingLibraryIcon,
+    PresentationChartLineIcon,
+    ArrowUpOnSquareIcon,
+    MapIcon,
 } from "@heroicons/react/20/solid";
 
 import { awaitTimeout, boolValue, getUserSession } from "../utils/functions";
@@ -28,31 +32,37 @@ const defaultNav = [
         id: "national",
         title: "National",
         link: "/national",
-        icon: <HomeIcon className="w-5 h-5 shrink-0 self-center" />,
+        icon: <MapIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
         id: "local",
         title: "Local",
         link: "/local",
-        icon: <HomeIcon className="w-5 h-5 shrink-0 self-center" />,
+        icon: <MapPinIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
         id: "precints",
         title: "Precints",
         link: "/precints",
-        icon: <HomeIcon className="w-5 h-5 shrink-0 self-center" />,
+        icon: <BuildingLibraryIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
         id: "candidates",
         title: "Candidates",
         link: "/candidates",
-        icon: <HomeIcon className="w-5 h-5 shrink-0 self-center" />,
+        icon: <UsersIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
         id: "results",
         title: "Results",
         link: "/results",
-        icon: <HomeIcon className="w-5 h-5 shrink-0 self-center" />,
+        icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    },
+    {
+        id: "uploadResults",
+        title: "Upload Results",
+        link: "/upload-results",
+        icon: <ArrowUpOnSquareIcon className="w-5 h-5 shrink-0 self-center" />,
     },
 ]
 
@@ -136,6 +146,8 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('precints');
         } else if (path.includes('candidates')) {
             setSelectedItem('candidates');
+        } else if (path.includes('upload-results')) {
+            setSelectedItem('upload-results');
         } else if (path.includes('results')) {
             setSelectedItem('results');
         }

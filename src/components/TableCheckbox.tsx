@@ -43,10 +43,12 @@ const TableCheckbox = (props: any) => {
 
     // Filter logic
     const filteredData = useMemo(() => { 
-        return (!data || data.length === 0) ? [] : data.filter((row: any) => {
+        return (!data || data.length === 0) ? [] : filterQuery === '' ? data : data.filter((row: any) => {
                 if (props.filterFields) {
                     let boolValue = false;
                     for(let key of props.filterFields) {
+                        console.log(key);
+                        
                         boolValue = boolValue || row[key].toLowerCase().includes(filterQuery.toLowerCase());
                     }
                     return boolValue;
@@ -116,13 +118,13 @@ const TableCheckbox = (props: any) => {
     return (
         <div className="flex flex-col">
             <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
-                {/* <input
+                {props.showFilter && <input
                     type="text"
-                    placeholder="Filter by name or email"
+                    placeholder="Search keyword"
                     className="px-4 py-2 border border-gray-300 rounded-md"
                     value={filterQuery}
                     onChange={(e) => setFilterQuery(e.target.value)}
-                /> */}
+                />}
                 <div>
                     {props.leftWidget}
                 </div>

@@ -11,6 +11,7 @@ export default function CandidateListPage(props: any) {
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [totaCandidates, setTotalCandidates] = useState(0);
     let processing = false;
 
     useEffect(() => {
@@ -23,6 +24,7 @@ export default function CandidateListPage(props: any) {
         };
     }, []);
 
+    const filterFields = ['candidateName', 'candidateCode', 'contestCode', 'contestName'];
     const tColumns = [
         {
             header: 'Candidate Name',
@@ -43,14 +45,20 @@ export default function CandidateListPage(props: any) {
             sort: true,
         },
         {
-            header: 'Actions',
-            accessorKey: null,
-            cell: (info: any) => {
-                return <span className="">
-                    <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
-                </span>
-            }
-        }
+            header: 'Contest Name',
+            accessorKey: 'contestName',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: true,
+        },
+        // {
+        //     header: 'Actions',
+        //     accessorKey: null,
+        //     cell: (info: any) => {
+        //         return <span className="">
+        //             <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
+        //         </span>
+        //     }
+        // }
     ];
 
 
@@ -62,8 +70,8 @@ export default function CandidateListPage(props: any) {
         let response = await getRequest('/candidates');
         console.log(response.data);
         if (response && response.data) {
-            
             setData(response.data.items);
+            setTotalCandidates(response.data.total);
         }
         setLoading(false);
         processing = false;
@@ -81,18 +89,13 @@ export default function CandidateListPage(props: any) {
         <div>
             {loading && <Loader />}
             <span className="text-sm font-medium">Candidates</span>
-            {data && data.length > 0 && <TableCheckbox data={data} columns={tColumns} showActionButton={true} handleAdd={handleAddNew} />}
+            <div className="text-sm font-medium mt-6">Total Candidates: {totaCandidates}</div>
+            {data && data.length > 0 && <TableCheckbox data={data} columns={tColumns} showActionButton={false} showFilter={true} filterFields={filterFields} />}
             {!data || data.length === 0 && <EmptyCard>
                 <div className="place-self-center">
                     <p className="">
                         No data
                     </p>
-                    <button
-                        onClick={handleAddNew}
-                        className={`px-4 py-2 mt-4 bg-green-700 text-white rounded-md self-center`}
-                    >
-                        Add
-                    </button>
                 </div>
             </EmptyCard>}
         </div>

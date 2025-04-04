@@ -24,6 +24,7 @@ export default function PrecintListPage(props: any) {
         };
     }, []);
 
+    const filterFields = ['acmId', 'registeredVoters', 'regName', 'prvName', 'pollplace'];
     const tColumns = [
         {
             header: 'ACM ID',
@@ -79,15 +80,15 @@ export default function PrecintListPage(props: any) {
         //     cell: (info: any) => `${info ?? 'N/A'}`,
         //     sort: true,
         // },
-        {
-            header: 'Actions',
-            accessorKey: null,
-            cell: (info: any) => {
-                return <span className="">
-                    <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
-                </span>
-            }
-        }
+        // {
+        //     header: 'Actions',
+        //     accessorKey: null,
+        //     cell: (info: any) => {
+        //         return <span className="">
+        //             <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
+        //         </span>
+        //     }
+        // }
     ];
 
 
@@ -120,18 +121,12 @@ export default function PrecintListPage(props: any) {
             {loading && <Loader />}
             <span className="text-sm font-medium">Precints</span>
             <div className="text-sm font-medium mt-6">Total Precints: {totaPrecincts}</div>
-            {data && data.length > 0 && <TableCheckbox data={data} columns={tColumns} showActionButton={true} handleAdd={handleAddNew} />}
+            {data && data.length > 0 && <TableCheckbox data={data} columns={tColumns} showActionButton={false} />}
             {!data || data.length === 0 && <EmptyCard>
                 <div className="place-self-center">
                     <p className="">
                         No data
                     </p>
-                    <button
-                        onClick={handleAddNew}
-                        className={`px-4 py-2 mt-4 bg-green-700 text-white rounded-md self-center`}
-                    >
-                        Add
-                    </button>
                 </div>
             </EmptyCard>}
         </div>
