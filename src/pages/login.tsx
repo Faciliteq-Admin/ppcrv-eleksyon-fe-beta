@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import MainLogo from './../assets/hub.png';
+// import MainLogo from './../assets/hub.png';
+import MainLogo from './../assets/ppcrvlogo.png';
+import PoweredByLogo from './../assets/poweredByMyTech.png';
 import { useEffect, useState } from "react";
 import { postRequest } from "../utils/apiHelpers";
 import Loader from "../components/Loader";
@@ -161,10 +163,15 @@ export default function LoginPage() {
                 </form>
 
                 <p className="mt-10 text-center text-sm text-gray-500">
-                    Not a member?{' '}
+                    {/* Not a member?{' '}
                     <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                         Start a 14 day free trial
-                    </a>
+                    </a> */}
+                    <img
+                        alt="Powered by MyTechPH"
+                        src={PoweredByLogo}
+                        className="mx-auto h-14 w-auto"
+                    />
                 </p>
             </div>
         </div>
