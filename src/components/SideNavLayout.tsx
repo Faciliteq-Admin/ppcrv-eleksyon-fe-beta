@@ -59,8 +59,14 @@ const defaultNav = [
         icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
+        id: "electionReturns",
+        title: "Election Returns",
+        link: "/election-returns",
+        icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    },
+    {
         id: "uploadResults",
-        title: "Upload Results",
+        title: "Upload ER",
         link: "/upload-results",
         icon: <ArrowUpOnSquareIcon className="w-5 h-5 shrink-0 self-center" />,
     },
@@ -150,6 +156,8 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('upload-results');
         } else if (path.includes('results')) {
             setSelectedItem('results');
+        } else if (path.includes('election-returns')) {
+            setSelectedItem('electionReturns');
         }
 
         navigate(path, { state: state });

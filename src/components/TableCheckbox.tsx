@@ -14,7 +14,7 @@ const TableCheckbox = (props: any) => {
     const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
     const [filterQuery, setFilterQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(50);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
     useEffect(() => {
@@ -47,8 +47,6 @@ const TableCheckbox = (props: any) => {
                 if (props.filterFields) {
                     let boolValue = false;
                     for(let key of props.filterFields) {
-                        console.log(key);
-                        
                         boolValue = boolValue || row[key].toLowerCase().includes(filterQuery.toLowerCase());
                     }
                     return boolValue;

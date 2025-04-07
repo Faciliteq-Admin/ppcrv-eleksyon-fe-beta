@@ -1,71 +1,89 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
-import TableCheckbox from "../../../components/TableCheckbox";
 import { useEffect, useMemo, useState } from "react";
 import Loader from "../../../components/Loader";
+import { getRequest } from "../../../utils/apiHelpers";
 import EmptyCard from "../../../components/EmptyCard";
+import TableCheckbox from "../../../components/TableCheckbox";
+import moment from "moment";
+import { useElectionResults } from "../../../hooks/useElectionResults";
 import Table from "../../../components/Table";
-import { useCandidates } from "../../../hooks/useCandidates";
 
-export default function CandidateListPage(props: any) {
+export default function ElectionReturnsListPage(props: any) {
     const navigate = useNavigate();
-
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(50);
     const [search, setSearch] = useState("");
-    const { data, total, loading, getCandidates } = useCandidates(page, limit);
+
+    const { 
+        data, total, loading,
+        getElectionResults,
+     } = useElectionResults(page, limit);
+    const totalPages = Math.ceil(total / limit);
 
     useEffect(() => {
-        getCandidates(search);
-    }, [page, limit, search]);
+        getElectionResults()
+    }, [page, limit]);
 
-    const totalPages = Math.ceil(total / limit);
-    const filterFields = ['candidateName', 'candidateCode', 'contestCode', 'contestName'];
     const tColumns = [
+        {
+            header: 'Batch',
+            accessorKey: 'uploadBatchNum',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: false,
+        },
+        {
+            header: 'Precinct Code',
+            accessorKey: 'precinctCode',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: false,
+        },
         {
             header: 'Candidate Name',
             accessorKey: 'candidateName',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        // {
-        //     header: 'Candidate Code',
-        //     accessorKey: 'candidateCode',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
-        // {
-        //     header: 'Contest Code',
-        //     accessorKey: 'contestCode',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
         {
-            header: 'Contest Name',
+            header: 'Contest',
             accessorKey: 'contestName',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        // {
-        //     header: 'Actions',
-        //     accessorKey: null,
-        //     cell: (info: any) => {
-        //         return <span className="">
-        //             <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
-        //         </span>
-        //     }
-        // }
+        {
+            header: 'Registered Voters',
+            accessorKey: 'numberVoters',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: true,
+        },
+        {
+            header: 'Total Votes',
+            accessorKey: 'votesAmount',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: true,
+        },
+        {
+            header: 'Under Votes',
+            accessorKey: 'underVotes',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: true,
+        },
+        {
+            header: 'Over Votes',
+            accessorKey: 'overVotes',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: true,
+        },
+        {
+            header: 'Reception Date',
+            accessorKey: 'receptionDate',
+            cell: (info: any) => `${moment(info).format('YYYY-MM-DD HH:mm:ss') ?? 'N/A'}`,
+            sort: true,
+        },
     ];
 
-
-    const handleView = (e: any, index: any) => {
-        // navigate(`/candidates/${(data as any[])[index].id}`, { state: data[index] });
-    }
-
-    const handleAddNew = () => {
-        navigate('/candidates/new');
-    }
-
     const handleRowsPerPageChange = (e: any) => {
+        console.log(e.target.value);
+        
         setLimit(Number(e.target.value));
         setPage(1); // Reset to first page after changing rows per page
     };
@@ -82,25 +100,29 @@ export default function CandidateListPage(props: any) {
         }
     };
 
-    const handleSearch = (e: any) => {
+    async function handleSelect(e: any) {
+
+    }
+
+    const handleFilter = (e: any) => {
         setPage(1);
-        setSearch(e.target.value);
+        // getPrecincts(selectedRegion, selectedProvince, selectedProvince, selectedBarangay);
     }
 
     return (
         <div>
             {loading && <Loader />}
-            <span className="text-sm font-medium">Candidates</span>
+            <span className="text-sm font-medium">Election Returns</span>
             <div className="flex flex-col">
                 <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
-                    <input
+                    {/* <input
                         type="text"
                         placeholder="Search candidate"
                         className="px-4 py-2 border border-gray-300 rounded-md"
                         value={search}
                         onChange={handleSearch}
-                    />
-                    <p>Total Candidates: {total}</p>
+                    /> */}
+                    <p>Total: {total}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
@@ -171,6 +193,6 @@ export default function CandidateListPage(props: any) {
                     </div>
                 }
             </div>
-        </div >
+        </div>
     );
 }

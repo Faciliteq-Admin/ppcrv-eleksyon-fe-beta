@@ -5,59 +5,35 @@ import { getRequest } from "../../../utils/apiHelpers";
 import EmptyCard from "../../../components/EmptyCard";
 import TableCheckbox from "../../../components/TableCheckbox";
 import moment from "moment";
+import Table from "../../../components/Table";
+import { useResultSummary } from "../../../hooks/useResultSummary";
 
 export default function ResultListPage(props: any) {
     const navigate = useNavigate();
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(50);
+    const [search, setSearch] = useState("");
 
-    const [loading, setLoading] = useState(false);
-    const [results, setResults] = useState<any>();
-    const [batchCount, setBatchCount] = useState(0);
-    const [selectedBatch, setSelectedBatch] = useState(0);
-    let processing = false;
+    const {
+        data, total, loading,
+        getResultSummary,
+    } = useResultSummary(page, limit);
+    const totalPages = Math.ceil(total / limit);
 
     useEffect(() => {
-
-        let mounted = false;
-        getData();
-
-        return () => {
-            mounted = true;
-        };
-    }, []);
-
-    const getData = async (batchNum?: number) => {
-        if (processing) return;
-
-        processing = true;
-        setLoading(true);
-        let path = '/results';
-        if (batchNum) path += '?uploadBatchNum=' + batchNum;
-        const res = await getRequest(path);
-        if (res && res.data && res.data) {
-            setResults(res.data.items);
-            setBatchCount(res.data.totalBatch);
-            setSelectedBatch(res.data.totalBatch);
-        }
-        setLoading(false);
-        processing = false;
-    }
+        getResultSummary();
+    }, [page, limit]);
 
     const tColumns = [
         {
-            header: 'Batch',
-            accessorKey: 'uploadBatchNum',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: false,
-        },
-        {
-            header: 'Precinct Code',
-            accessorKey: 'precinctCode',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: false,
-        },
-        {
             header: 'Candidate Name',
             accessorKey: 'candidateName',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+            sort: true,
+        },
+        {
+            header: 'Total Votes',
+            accessorKey: 'totalvotes',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
@@ -67,101 +43,128 @@ export default function ResultListPage(props: any) {
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        {
-            header: 'Registered Voters',
-            accessorKey: 'numberVoters',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: true,
-        },
-        {
-            header: 'Total Votes',
-            accessorKey: 'votesAmount',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: true,
-        },
-        {
-            header: 'Under Votes',
-            accessorKey: 'underVotes',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: true,
-        },
-        {
-            header: 'Over Votes',
-            accessorKey: 'overVotes',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: true,
-        },
-        {
-            header: 'Reception Date',
-            accessorKey: 'receptionDate',
-            cell: (info: any) => `${moment(info).format('YYYY-MM-DD HH:mm:ss') ?? 'N/A'}`,
-            sort: true,
-        },
-        // {
-        //     header: 'City/Municipality',
-        //     accessorKey: 'munName',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
-        // {
-        //     header: 'Barangay',
-        //     accessorKey: 'brgyName',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
-        // {
-        //     header: 'Actions',
-        //     accessorKey: null,
-        //     cell: (info: any) => {
-        //         return <span className="">
-        //             <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
-        //         </span>
-        //     }
-        // }
     ];
 
-    const handleView = (e: any, index: any) => {
-        // navigate(`/precints/${(results as any[])[index].id}`, { state: results[index] });
+    const handleRowsPerPageChange = (e: any) => {
+        console.log(e.target.value);
+
+        setLimit(Number(e.target.value));
+        setPage(1); // Reset to first page after changing rows per page
+    };
+
+    const handleNextPage = () => {
+        if (page < totalPages) {
+            setPage(page + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (page > 1) {
+            setPage(page - 1);
+        }
+    };
+
+    async function handleSelect(e: any) {
+
     }
 
-    const handleSelect = async (e: any) => {
-        console.log(e.target.value);
-        setSelectedBatch(+e.target.value);
-        await getData(+e.target.value);
-
+    const handleFilter = (e: any) => {
+        setPage(1);
+        getResultSummary(search);
     }
 
     return (
         <div>
             {loading && <Loader />}
             <span className="text-sm font-medium">Results</span>
-            {batchCount > 0 && <div className="">
-                <label htmlFor="uploadBatchNum" className="mt-6 block text-sm/6 font-medium text-gray-900">
-                    Upload Batch Number
-                </label>
-                <div className="mt-1">
-                    <select
-                        id="uploadBatchNum"
-                        name="uploadBatchNum"
-                        value={selectedBatch}
-                        onChange={handleSelect}
-                        autoComplete="reported-area"
-                        className="px-2 py-2 w-full border border-gray-300 rounded-md text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                    // className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm/6"
-                    >
-                        {(new Array(batchCount).fill(0).map((_, idx) => idx + 1)).reverse().map((m, index) => <option key={index}>{m}</option>)}
-                    </select>
-                </div>
-            </div>}
-            {results && results.length > 0 && <TableCheckbox data={results} columns={tColumns} showActionButton={false} handleAdd={null} />}
+            <div className="flex flex-col">
+                <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="Search position / location"
+                            className="px-4 py-2 border border-gray-300 rounded-md"
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                        />
+                        <button
+                            onClick={handleFilter}
+                            className="px-4 py-2 bg-blue-300 rounded-md hover:bg-gray-400 disabled:opacity-50 self-end"
+                        >
+                            Filter
+                        </button>
+                    </div>
+                    <p>Total: {total}</p>
 
-            {!results || results.length === 0 && <EmptyCard>
-                <div className="place-self-center">
-                    <p className="">
-                        No data
-                    </p>
+                    <div className="flex justify-between">
+                        {data && data.length > 0 &&
+                            <select
+                                className="px-4 py-2 border border-gray-300 rounded-md"
+                                value={limit}
+                                onChange={handleRowsPerPageChange}
+                            >
+                                <option value={10}>10 rows</option>
+                                <option value={25}>25 rows</option>
+                                <option value={50}>50 rows</option>
+                                <option value={100}>100 rows</option>
+                                <option value={500}>500 rows</option>
+                                <option value={1000}>1000 rows</option>
+                            </select>
+                        }
+                    </div>
                 </div>
-            </EmptyCard>}
+                {data && data.length > 0 &&
+                    <Table data={data} columns={tColumns} />
+                }
+                {!data || data.length === 0 && <EmptyCard>
+                    <div className="place-self-center">
+                        <p className="">
+                            No data
+                        </p>
+                    </div>
+                </EmptyCard>
+                }
+                {/* Pagination Controls  md:flex-col justify-between  */}
+                {data && data.length > 0 &&
+                    < div className={`mt-4 ${limit > 20 ? 'grid grid-cols-1 gap-2 md:flex' : 'flex'}  justify-between`}>
+                        <div className='flex justify-between space-x-2'>
+                            {limit > 20 &&
+                                <select
+                                    className="px-4 py-2 border border-gray-300 rounded-md"
+                                    value={limit}
+                                    onChange={handleRowsPerPageChange}
+                                >
+                                    <option value={10}>10 rows</option>
+                                    <option value={25}>25 rows</option>
+                                    <option value={50}>50 rows</option>
+                                    <option value={100}>100 rows</option>
+                                    <option value={500}>500 rows</option>
+                                    <option value={1000}>1000 rows</option>
+                                </select>
+                            }
+                        </div>
+                        <div className="flex justify-between space-x-2">
+                            <button
+                                onClick={handlePreviousPage}
+                                disabled={page === 1}
+                                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 disabled:opacity-50"
+                            >
+                                Previous
+                            </button>
+                            <span className='mt-1.5'>
+                                Page {page} of {totalPages}
+                            </span>
+                            <button
+                                onClick={handleNextPage}
+                                disabled={page === totalPages}
+                                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 disabled:opacity-50"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     );
 }

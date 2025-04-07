@@ -26,6 +26,7 @@ import LocalElectionListPage from './pages/sidebar_pages/local/LocalElectionList
 import NationalElectionListPage from './pages/sidebar_pages/national/NationalElectionListPage';
 import ResultListPage from './pages/sidebar_pages/results/ResultListPage';
 import UploadResultListPage from './pages/sidebar_pages/results/UploadResultListPage';
+import ElectionReturnsListPage from './pages/sidebar_pages/results/ElectionReturnsListPage';
 
 const routes = createBrowserRouter([
     {
@@ -61,6 +62,11 @@ const routes = createBrowserRouter([
     {
         path: "results",
         element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+    {
+        path: "election-returns",
+        element: <SideNavLayout> <ElectionReturnsListPage /> </SideNavLayout>,
         errorElement: <PageNotFound />,
     },
     {
