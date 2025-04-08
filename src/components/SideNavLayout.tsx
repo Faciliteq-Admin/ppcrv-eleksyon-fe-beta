@@ -13,6 +13,8 @@ import {
     PresentationChartLineIcon,
     ArrowUpOnSquareIcon,
     MapIcon,
+    Cog6ToothIcon,
+    DocumentChartBarIcon,
 } from "@heroicons/react/20/solid";
 
 import { awaitTimeout, boolValue, getUserSession } from "../utils/functions";
@@ -62,13 +64,19 @@ const defaultNav = [
         id: "electionReturns",
         title: "Election Returns",
         link: "/election-returns",
-        icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+        icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
         id: "uploadResults",
         title: "Upload ER",
         link: "/upload-results",
         icon: <ArrowUpOnSquareIcon className="w-5 h-5 shrink-0 self-center" />,
+    },
+    {
+        id: "settings",
+        title: "Settings",
+        link: "/settings",
+        icon: <Cog6ToothIcon className="w-5 h-5 shrink-0 self-center" />,
     },
 ]
 
@@ -158,6 +166,8 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('results');
         } else if (path.includes('election-returns')) {
             setSelectedItem('electionReturns');
+        } else if (path.includes('settings')) {
+            setSelectedItem('settings');
         }
 
         navigate(path, { state: state });

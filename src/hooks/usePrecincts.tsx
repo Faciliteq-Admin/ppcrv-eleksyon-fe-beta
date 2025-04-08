@@ -18,6 +18,9 @@ export const usePrecincts = (page: number, limit: number) => {
         if (prvName) filters.push(`prvName=${prvName}`);
         if (munName) filters.push(`munName=${munName}`);
         if (brgyName) filters.push(`brgyName=${brgyName}`);
+
+        if (filters.length > 0) path += `&${filters.join('&')}`;
+
         setLoading(true);
         getRequest(path).then(response => {
             setData(response.data.items);

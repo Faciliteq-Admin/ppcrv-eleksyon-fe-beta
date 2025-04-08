@@ -71,7 +71,10 @@ export default function NationalElectionListPage(props: any) {
                         const party = cand[1].replace(')', '');
                         return (
                             <div key={idx} className="flex flex-row justify-between items-center">
-                                <div className="flex flex-row items-center gap-2">
+                                <div className="flex flex-row items-center gap-2 m-1">
+                                    <div className="p-1 size-7 bg-slate-700 rounded-full">
+                                        <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
+                                    </div>
                                     <p className="text-sm font-medium capitalize">{name.toLowerCase()}</p>
                                     <span className="text-sm font-medium">({party})</span>
                                 </div>
@@ -88,9 +91,12 @@ export default function NationalElectionListPage(props: any) {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                     {partyLists && partyLists.map((s: any, idx: number) => {
                         return (
-                            <div key={idx} className="flex flex-row justify-between items-center">
+                            <div key={idx} className="flex flex-row justify-between m-1 items-center">
                                 <div className="flex flex-row items-center gap-2">
-                                    <p className="text-sm font-medium capitalize">{s.candidateName}</p>
+                                    <div className="p-1 size-7 bg-slate-700 rounded-full">
+                                        <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
+                                    </div>
+                                    <p className="text-sm font-medium capitalize">{`${s.candidateName}`}</p>
                                 </div>
                             </div>
                         );

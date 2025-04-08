@@ -53,7 +53,7 @@ export default function LocalElectionListPage(props: any) {
         if (selectedProvince) {
             if (selectedProvince.toLowerCase().includes("national capital region")) return;
             path += `&prvName=${selectedProvince}`;
-            
+
             const contestsRes = await getRequest(path);
             if (contestsRes && contestsRes.data) {
                 if (contestsRes.data.length > 0) {
@@ -65,7 +65,7 @@ export default function LocalElectionListPage(props: any) {
                             contRes.push(c);
                         }
                     }
-    
+
                     setProvincialContest(contRes)
                 } else {
                     setProvincialContest([]);
@@ -299,7 +299,10 @@ export default function LocalElectionListPage(props: any) {
                             // const party = cand[1].replace(')', '');
                             return (
                                 <div key={idx} className="flex flex-row justify-between items-center">
-                                    <div className="flex flex-row items-center gap-2">
+                                    <div className="flex flex-row items-center gap-2 m-1">
+                                        <div className="p-1 size-7 bg-slate-700 rounded-full">
+                                            <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
+                                        </div>
                                         <p className="text-sm font-medium capitalize">{name.toLowerCase()}</p>
                                         {/* <span className="text-sm font-medium">({party})</span> */}
                                     </div>
@@ -324,7 +327,10 @@ export default function LocalElectionListPage(props: any) {
                             // const party = cand[1].replace(')', '');
                             return (
                                 <div key={idx} className="flex flex-row justify-between items-center">
-                                    <div className="flex flex-row items-center gap-2">
+                                    <div className="flex flex-row items-center gap-2 m-1">
+                                        <div className="p-1 size-7 bg-slate-700 rounded-full">
+                                            <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
+                                        </div>
                                         <p className="text-sm font-medium capitalize">{name.toLowerCase()}</p>
                                         {/* <span className="text-sm font-medium">({party})</span> */}
                                     </div>

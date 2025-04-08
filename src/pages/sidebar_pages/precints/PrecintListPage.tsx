@@ -26,7 +26,7 @@ export default function PrecintListPage(props: any) {
     const [selectedBarangay, setSelectedBarangay] = useState("");
 
     useEffect(() => {
-        getPrecincts();
+        getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
         getRegions();
     }, [page, limit, search]);
 
@@ -127,27 +127,29 @@ export default function PrecintListPage(props: any) {
 
         if (e.target.name === "selectedRegion") {
             if (e.target.name !== selectedRegion) {
-                setSelectedRegion(e.target.value);
                 setSelectedProvince("");
                 setSelectedCityMuns("");
                 setSelectedBarangay("");
+                setSelectedRegion(e.target.value);
                 getProvinces(e.target.value);
             }
 
         } else if (e.target.name === "selectedProvince") {
             if (e.target.name !== selectedProvince) {
-                setSelectedProvince(e.target.value);
                 setSelectedCityMuns("");
                 setSelectedBarangay("");
+                setSelectedProvince(e.target.value);
+                getMunicipalities(e.target.value);
             }
 
         } else if (e.target.name === "selectedCityMuns") {
             if (e.target.value !== "") {
-                setSelectedCityMuns(e.target.value);
                 setSelectedBarangay("");
+                setSelectedCityMuns(e.target.value);
+                getBarangays(e.target.value);
             }
 
-        } else if (e.target.name === "selectedCityMuns") {
+        } else if (e.target.name === "selectedBarangay") {
             if (e.target.value !== "") {
                 setSelectedBarangay(e.target.value);
             }
@@ -155,8 +157,8 @@ export default function PrecintListPage(props: any) {
     }
 
     const handleFilter = (e: any) => {
-        setPage(1);
-        getPrecincts(selectedRegion, selectedProvince, selectedProvince, selectedBarangay);
+        setPage(1);        
+        getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
     }
 
     return (

@@ -14,7 +14,7 @@ import UserFormPage from './pages/sidebar_pages/user_management/users/userForm';
 import ForgotPasswordPage from './pages/forgotPassword';
 import UserAccountListPage from './pages/sidebar_pages/user_accounts/userAccountList';
 import UserAccountFormPage from './pages/sidebar_pages/user_accounts/userAccountForm';
-import SettingsPage from './pages/sidebar_pages/settings/settings';
+import SettingsPage from './pages/sidebar_pages/settings/SettingsPage';
 import { ProjectSetupProvider } from './contexts/ProjectSetupContext';
 import SideNavLayout from './components/SideNavLayout';
 import AdministratorListPage from './pages/sidebar_pages/user_management/administrators/AdministratorListPage';
@@ -78,6 +78,11 @@ const routes = createBrowserRouter([
         path: "login",
         element: <LoginPage />,
         errorElement: <PageNotFound />
+    },
+    {
+        path: "settings",
+        element: <SideNavLayout> <SettingsPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
     },
     {
         path: "forgot-password",
