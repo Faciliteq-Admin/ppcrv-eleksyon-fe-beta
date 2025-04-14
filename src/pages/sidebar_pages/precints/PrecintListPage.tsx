@@ -146,7 +146,7 @@ export default function PrecintListPage(props: any) {
             if (e.target.value !== "") {
                 setSelectedBarangay("");
                 setSelectedCityMuns(e.target.value);
-                getBarangays(e.target.value);
+                getBarangays(selectedProvince, e.target.value);
             }
 
         } else if (e.target.name === "selectedBarangay") {
