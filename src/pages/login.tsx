@@ -131,11 +131,11 @@ export default function LoginPage() {
                             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                 Password
                             </label>
-                            <div className="text-sm">
+                            {/* <div className="text-sm">
                                 <a href="#" onClick={handleForgotPassword} className="font-semibold text-indigo-600 hover:text-indigo-500">
                                     Forgot password?
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="mt-2">
                             <input
@@ -167,11 +167,13 @@ export default function LoginPage() {
                     <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                         Start a 14 day free trial
                     </a> */}
-                    <img
-                        alt="Powered by MyTechPH"
-                        src={PoweredByLogo}
-                        className="mx-auto h-14 w-auto"
-                    />
+                    <a href="https://mytechph.net/" target="_blank">
+                        <img
+                            alt="Powered by MyTechPH"
+                            src={PoweredByLogo}
+                            className="mx-auto h-14 w-auto"
+                        />
+                    </a>
                 </p>
             </div>
         </div>

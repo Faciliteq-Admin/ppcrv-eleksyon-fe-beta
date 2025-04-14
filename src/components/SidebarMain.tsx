@@ -71,11 +71,13 @@ export default function SidebarMain(props: any) {
                     </button>
                 </div>
                 <p className="mt-10 text-center text-sm text-gray-500">
-                    <img
-                        alt="Powered by MyTechPH"
-                        src={PoweredByLogo}
-                        className={`mx-auto ${props.isMinified ? 'h-7' : 'h-14'} w-auto`}
-                    />
+                    <a href="https://mytechph.net/" target="_blank">
+                        <img
+                            alt="Powered by MyTechPH"
+                            src={PoweredByLogo}
+                            className="mx-auto h-14 w-auto"
+                        />
+                    </a>
                     {/* Version at the Bottom */}
                     <div className="relative w-full landscape-hidden:hidden bottom-0 bg-gray-900 p-2 text-center">
                         <p className="text-[10px]">v1.0.0</p>
