@@ -7,6 +7,7 @@ import EmptyCard from "../../../components/EmptyCard";
 import { toDate } from "../../../utils/functions";
 import { usePrecincts } from "../../../hooks/usePrecincts";
 import Table from "../../../components/Table";
+import { useLocations } from "../../../hooks/useLocations";
 
 export default function PrecintListPage(props: any) {
     const navigate = useNavigate();
@@ -15,9 +16,14 @@ export default function PrecintListPage(props: any) {
     const [limit, setLimit] = useState(50);
     const [search, setSearch] = useState("");
     const {
-        data, total, loading, regions, provinces, cityMuns, barangays,
-        getPrecincts, getRegions, getProvinces, getBarangays, getMunicipalities
+        data, total, loading, getPrecincts
     } = usePrecincts(page, limit);
+
+    const {
+        isLoading, regions, provinces, cityMuns, barangays,
+        getRegions, getProvinces, getBarangays, getMunicipalities
+    } = useLocations();
+
     const totalPages = Math.ceil(total / limit);
 
     const [selectedRegion, setSelectedRegion] = useState("");
@@ -143,31 +149,31 @@ export default function PrecintListPage(props: any) {
             }
 
         } else if (e.target.name === "selectedCityMuns") {
-            if (e.target.value !== "") {
+            if (e.target.value !== selectedCityMuns) {
                 setSelectedBarangay("");
                 setSelectedCityMuns(e.target.value);
                 getBarangays(selectedProvince, e.target.value);
             }
 
         } else if (e.target.name === "selectedBarangay") {
-            if (e.target.value !== "") {
+            if (e.target.value !== selectedBarangay) {
                 setSelectedBarangay(e.target.value);
             }
         }
     }
 
     const handleFilter = (e: any) => {
-        setPage(1);        
+        setPage(1);
         getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
     }
 
     return (
         <div>
             {loading && <Loader />}
+            {isLoading && <Loader />}
             <span className="text-sm font-medium">Precints</span>
-            <div className="flex flex-col">
-                <div className="flex flex-col gap-2 lg:flex-row lg:items-center mt-2">
-
+            <div className="mt-4 flex flex-col">
+                <div className="flex flex-col gap-2 lg:flex-row lg:items-center py-1">
                     <div className="">
                         <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
                             Region
@@ -251,16 +257,8 @@ export default function PrecintListPage(props: any) {
                         Filter
                     </button>
                 </div>
-                <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
-                    {/* <input
-                        type="text"
-                        placeholder="Search candidate"
-                        className="px-4 py-2 border border-gray-300 rounded-md"
-                        value={search}
-                        onChange={handleSearch}
-                    /> */}
-                    <p>Total Precints: {total}</p>
-
+                <div className="grid gap-2 my-2 lg:flex lg:justify-between">
+                    <p className="self-end">Total Precints: {total}</p>
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
                             <select
@@ -293,7 +291,7 @@ export default function PrecintListPage(props: any) {
                 {data && data.length > 0 &&
                     < div className={`mt-4 ${limit > 20 ? 'grid grid-cols-1 gap-2 md:flex' : 'flex'}  justify-between`}>
                         <div className='flex justify-between space-x-2'>
-                            {limit > 20 &&
+                            {limit > 20 && data.length > 20 &&
                                 <select
                                     className="px-4 py-2 border border-gray-300 rounded-md"
                                     value={limit}

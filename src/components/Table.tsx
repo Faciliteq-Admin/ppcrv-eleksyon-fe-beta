@@ -5,12 +5,12 @@ import down from './../assets/down.svg';
 import up from './../assets/up.svg';
 import { useNavigate } from 'react-router-dom';
 
-const Table = ({data, columns}: any) => {
+const Table = ({ data, columns, handleRowClick }: any) => {
 
 
     return (
         <div className="flex flex-col">
-            
+
             {/* Table */}
             <div className="shadow overflow-auto">
                 <table className="min-w-full shadow-md rounded-lg">
@@ -33,7 +33,7 @@ const Table = ({data, columns}: any) => {
                     </thead>
                     <tbody>
                         {data.map((row: any, idx: number) => (
-                            <tr key={idx} className="bg-white border-b">
+                            <tr key={idx} className="bg-white border-b" onClick={(e) => handleRowClick(e, row)}>
                                 {columns.map((h: any) => {
                                     return <td key={`${row.id}-${h.accessorKey}`} className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900">
                                         {h.cell(h.accessorKey ? row[h.accessorKey] : idx)}

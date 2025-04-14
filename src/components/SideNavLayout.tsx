@@ -5,10 +5,6 @@ import {
     MapPinIcon,
     UsersIcon,
     HomeIcon,
-    PaperAirplaneIcon,
-    PhotoIcon,
-    PaperClipIcon,
-    DocumentDuplicateIcon,
     BuildingLibraryIcon,
     PresentationChartLineIcon,
     ArrowUpOnSquareIcon,
@@ -19,8 +15,6 @@ import {
 
 import { awaitTimeout, boolValue, getUserSession } from "../utils/functions";
 import SidebarMain from "./SidebarMain";
-import { RiMegaphoneFill } from "react-icons/ri";
-import { ArrowDownTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { getRequest, postRequest, putRequest } from "../utils/apiHelpers";
 
 const defaultNav = [
@@ -57,8 +51,28 @@ const defaultNav = [
     {
         id: "results",
         title: "Results",
-        link: "/results",
+        // link: "/results",
         icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+        children: [
+            // {
+            //     id: "resultsAll",
+            //     title: "All Results",
+            //     link: "/results",
+            //     icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+            // },
+            {
+                id: "resultsCandidates",
+                title: "By Candidate",
+                link: "/results/candidates",
+                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+            },
+            {
+                id: "resultsPrecincts",
+                title: "By Precinct",
+                link: "/results/precincts",
+                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+            },
+        ]
     },
     {
         id: "electionReturns",
@@ -106,7 +120,7 @@ const SideNavLayout = (props: any) => {
     let user = getUserSession();
     let selectedSidebar = sidebarData.filter((s: any) => s.id === selectedItem);
     let selectedTitle = selectedSidebar.length > 0 ? selectedSidebar[0].title : '';
-    
+
     const state = useLocation().state;
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const scrollToBottom = () => {
@@ -146,12 +160,22 @@ const SideNavLayout = (props: any) => {
 
         let mounted = false;
         if (mounted) return;
-        
+
 
         const path = window.location.pathname;
 
         if (["/", "/home"].includes(path)) {
             setSelectedItem('home');
+        } else if (path.includes('results')) {
+            setSelectedItem('results');
+            if (path.includes('candidates')) {
+                setSelectedSubItem('resultsCandidates');
+            } else if (path.includes('precincts')) {
+                setSelectedSubItem('resultsPrecincts');
+            }
+            // else {
+            //     setSelectedSubItem('resultsAll');
+            // }
         } else if (path.includes('national')) {
             setSelectedItem('national');
         } else if (path.includes('local')) {
@@ -162,8 +186,6 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('candidates');
         } else if (path.includes('upload-results')) {
             setSelectedItem('upload-results');
-        } else if (path.includes('results')) {
-            setSelectedItem('results');
         } else if (path.includes('election-returns')) {
             setSelectedItem('electionReturns');
         } else if (path.includes('settings')) {

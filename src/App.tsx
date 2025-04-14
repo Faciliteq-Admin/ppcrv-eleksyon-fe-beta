@@ -27,6 +27,7 @@ import NationalElectionListPage from './pages/sidebar_pages/national/NationalEle
 import ResultListPage from './pages/sidebar_pages/results/ResultListPage';
 import UploadResultListPage from './pages/sidebar_pages/results/UploadResultListPage';
 import ElectionReturnsListPage from './pages/sidebar_pages/results/ElectionReturnsListPage';
+import ResultCandidatePage from './pages/sidebar_pages/results/ResultCandidatePage';
 
 const routes = createBrowserRouter([
     {
@@ -58,6 +59,36 @@ const routes = createBrowserRouter([
         path: "national",
         element: <SideNavLayout> <NationalElectionListPage /> </SideNavLayout>,
         errorElement: <PageNotFound />,
+    },
+    {
+        path: "results",
+        children: [
+            // {
+            //     path: "/results/",
+            //     element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+            //     errorElement: <PageNotFound />,
+            // },
+            {
+                path: "/results/candidates",
+                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/candidates/:id",
+                element: <SideNavLayout> <ResultCandidatePage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/precincts",
+                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/precincts/:id",
+                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+        ],
     },
     {
         path: "results",

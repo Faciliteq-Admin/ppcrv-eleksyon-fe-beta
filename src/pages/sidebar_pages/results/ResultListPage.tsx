@@ -13,6 +13,7 @@ export default function ResultListPage(props: any) {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(50);
     const [search, setSearch] = useState("");
+    const [searchCandidate, setSearchCandidate] = useState("");
 
     const {
         data, total, loading,
@@ -45,6 +46,10 @@ export default function ResultListPage(props: any) {
         },
     ];
 
+    const handleRowClick = (e: any, row: any) => {
+        navigate(`/results/candidates/${row.candidateName}`, { state: row });
+    }
+
     const handleRowsPerPageChange = (e: any) => {
         console.log(e.target.value);
 
@@ -70,31 +75,38 @@ export default function ResultListPage(props: any) {
 
     const handleFilter = (e: any) => {
         setPage(1);
-        getResultSummary(search);
+        getResultSummary(searchCandidate + "-" + search);
     }
 
     return (
         <div>
             {loading && <Loader />}
             <span className="text-sm font-medium">Results</span>
-            <div className="flex flex-col">
-                <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
-                    <div className="flex gap-2">
-                        <input
-                            type="text"
-                            placeholder="Search position / location"
-                            className="px-4 py-2 border border-gray-300 rounded-md"
-                            value={search}
-                            onChange={e => setSearch(e.target.value)}
-                        />
-                        <button
-                            onClick={handleFilter}
-                            className="px-4 py-2 bg-blue-300 rounded-md hover:bg-gray-400 disabled:opacity-50 self-end"
-                        >
-                            Filter
-                        </button>
-                    </div>
-                    <p>Total: {total}</p>
+            <div className="mt-4 flex flex-col">
+                <div className="flex gap-2 w-full lg:w-1/2">
+                    <input
+                        type="text"
+                        placeholder="candidate"
+                        className="px-4 py-2 border border-gray-300 rounded-md w-full"
+                        value={searchCandidate}
+                        onChange={e => setSearchCandidate(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="position / location"
+                        className="px-4 py-2 border border-gray-300 rounded-md w-full"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                    />
+                    <button
+                        onClick={handleFilter}
+                        className="px-4 py-2 bg-blue-300 rounded-md hover:bg-gray-400 disabled:opacity-50 self-end"
+                    >
+                        Filter
+                    </button>
+                </div>
+                <div className="grid gap-2 my-2 lg:flex lg:justify-between py-1">
+                    <p className="self-end">Total: {total}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
@@ -114,7 +126,7 @@ export default function ResultListPage(props: any) {
                     </div>
                 </div>
                 {data && data.length > 0 &&
-                    <Table data={data} columns={tColumns} />
+                    <Table data={data} columns={tColumns} handleRowClick={handleRowClick} />
                 }
                 {!data || data.length === 0 && <EmptyCard>
                     <div className="place-self-center">
@@ -128,7 +140,7 @@ export default function ResultListPage(props: any) {
                 {data && data.length > 0 &&
                     < div className={`mt-4 ${limit > 20 ? 'grid grid-cols-1 gap-2 md:flex' : 'flex'}  justify-between`}>
                         <div className='flex justify-between space-x-2'>
-                            {limit > 20 &&
+                            {limit > 20 && data.length > 20 &&
                                 <select
                                     className="px-4 py-2 border border-gray-300 rounded-md"
                                     value={limit}

@@ -11,6 +11,7 @@ export default function CandidateListPage(props: any) {
 
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(50);
+    const [text, setText] = useState("");
     const [search, setSearch] = useState("");
     const { data, total, loading, getCandidates } = useCandidates(page, limit);
 
@@ -84,24 +85,32 @@ export default function CandidateListPage(props: any) {
 
     const handleSearch = (e: any) => {
         setPage(1);
-        setSearch(e.target.value);
+        setSearch(text);
     }
 
     return (
         <div>
             {loading && <Loader />}
             <span className="text-sm font-medium">Candidates</span>
-            <div className="flex flex-col">
-                <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
+            <div className="mt-4 flex flex-col">
+
+                <div className="flex gap-2 py-1">
                     <input
                         type="text"
                         placeholder="Search candidate"
                         className="px-4 py-2 border border-gray-300 rounded-md"
-                        value={search}
-                        onChange={handleSearch}
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
                     />
-                    <p>Total Candidates: {total}</p>
-
+                    <button
+                        onClick={handleSearch}
+                        className="px-4 py-2 bg-blue-300 rounded-md hover:bg-gray-400 disabled:opacity-50 self-end"
+                    >
+                        Search
+                    </button>
+                </div>
+                <div className="grid gap-2 my-2 lg:flex lg:justify-between">
+                    <p className="self-end">Total Candidates: {total}</p>
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
                             <select
@@ -134,7 +143,7 @@ export default function CandidateListPage(props: any) {
                 {data && data.length > 0 &&
                     < div className={`mt-4 ${limit > 20 ? 'grid grid-cols-1 gap-2 md:flex' : 'flex'}  justify-between`}>
                         <div className='flex justify-between space-x-2'>
-                            {limit > 20 &&
+                            {limit > 20 && data.length > 20 &&
                                 <select
                                     className="px-4 py-2 border border-gray-300 rounded-md"
                                     value={limit}

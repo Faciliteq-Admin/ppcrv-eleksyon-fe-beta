@@ -156,7 +156,7 @@ export default function ElectionReturnsListPage(props: any) {
                 {data && data.length > 0 &&
                     < div className={`mt-4 ${limit > 20 ? 'grid grid-cols-1 gap-2 md:flex' : 'flex'}  justify-between`}>
                         <div className='flex justify-between space-x-2'>
-                            {limit > 20 &&
+                            {limit > 20 && data.length > 20 &&
                                 <select
                                     className="px-4 py-2 border border-gray-300 rounded-md"
                                     value={limit}
