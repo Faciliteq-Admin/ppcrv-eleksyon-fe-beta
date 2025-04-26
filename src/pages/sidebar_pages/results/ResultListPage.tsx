@@ -1,10 +1,7 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
-import { getRequest } from "../../../utils/apiHelpers";
 import EmptyCard from "../../../components/EmptyCard";
-import TableCheckbox from "../../../components/TableCheckbox";
-import moment from "moment";
 import Table from "../../../components/Table";
 import { useResultSummary } from "../../../hooks/useResultSummary";
 
@@ -81,7 +78,7 @@ export default function ResultListPage(props: any) {
     return (
         <div>
             {loading && <Loader />}
-            <span className="text-sm font-medium">Results</span>
+            <span className="text-sm font-medium">Results by Candidates</span>
             <div className="mt-4 flex flex-col">
                 <div className="flex gap-2 w-full lg:w-1/2">
                     <input

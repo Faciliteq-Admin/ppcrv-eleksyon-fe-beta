@@ -1,17 +1,14 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
-import { useResultCandidateSummary } from "../../../hooks/useResultCandidateSummary";
 import { useLocations } from "../../../hooks/useLocations";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { awaitTimeout } from "../../../utils/functions";
+import { useResultPrecinctSummary } from "../../../hooks/useResultPrecinctSummary";
 
-export default function ResultCandidatePage(props: any) {
+export default function ResultPrecinctListPage(props: any) {
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(50);
-    const state = useLocation().state;
 
     const [selectedRegion, setSelectedRegion] = useState("");
     const [selectedProvince, setSelectedProvince] = useState("");
@@ -20,7 +17,7 @@ export default function ResultCandidatePage(props: any) {
     const {
         data, total, loading,
         getResultSummary,
-    } = useResultCandidateSummary(page, limit);
+    } = useResultPrecinctSummary(page, limit);
     const {
         isLoading, regions, provinces, cityMuns, barangays,
         getRegions, getProvinces, getBarangays, getMunicipalities
@@ -30,10 +27,7 @@ export default function ResultCandidatePage(props: any) {
 
     useEffect(() => {
         getRegions();
-        getResultSummary(state.candidateName);
-
-        console.log(selectedBarangay);
-
+        getResultSummary();
     }, [page, limit]);
 
     const handleRowsPerPageChange = (e: any) => {
@@ -95,7 +89,7 @@ export default function ResultCandidatePage(props: any) {
 
     const handleFilter = (e: any) => {
         setPage(1);
-        getResultSummary(state.candidateName, selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
+        getResultSummary(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
     }
 
     const handleClear = (e: any) => {
@@ -107,54 +101,23 @@ export default function ResultCandidatePage(props: any) {
         getProvinces();
         getMunicipalities();
         getBarangays();
-        getResultSummary(state.candidateName);
+        // getResultSummary(state.candidateName);
     }
 
     const handleBack = () => {
         navigate('/results/candidates');
     }
 
-    const handleRowClick = async (
-        { regName, prvName, munName, brgyName }: { regName?: string, prvName?: string, munName?: string, brgyName?: string }
-    ) => {
-
-
-        if (regName) handleSelect({ target: { name: 'selectedRegion', value: regName } });
-        if (prvName) handleSelect({ target: { name: 'selectedProvince', value: prvName } });
-        if (munName) handleSelect({ target: { name: 'selectedCityMuns', value: munName } });
-        if (brgyName) handleSelect({ target: { name: 'selectedBarangay', value: brgyName } });
-
-
-        console.log({ brgyName });
-
-
-        setPage(1);
-        await awaitTimeout(200);
-        getResultSummary(
-            state.candidateName,
-            regName ?? selectedRegion,
-            prvName ?? selectedProvince,
-            munName ?? selectedCityMuns,
-            brgyName ?? selectedBarangay,
-        );
+    const handleRowClick = async (data: any) => {
+        navigate('/results/precincts/' + data._id, { state: data });
     }
 
     return (
         <div>
             {loading && <Loader />}
             {isLoading && <Loader />}
-            <span className="flex text-sm font-medium text-gray-500">Results <ChevronRightIcon className="size-4 self-center" /> Candidates <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">{state.candidateName}</p> </span>
-            <div className="mt-4 flex justify-between px-2">
-                <div className="">
-                    <button type="button" onClick={handleBack} className="flex text-sm/6 font-semibold text-gray-900">
-                        <ChevronLeftIcon className="w-6 h-6" />
-                        Back
-                    </button>
-                </div>
-                <div className="flex items-center justify-end gap-x-3">
+            <span className="flex text-sm font-medium">Results by Precinct</span>
 
-                </div>
-            </div>
             <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
@@ -275,44 +238,20 @@ export default function ResultCandidatePage(props: any) {
                             <table className="min-w-full shadow-md rounded-lg">
                                 <thead className="bg-gray-100">
                                     <tr>
-                                        {data[0].regName && <th key="regionName"
+                                        <th key="acmId"
                                             scope="col"
                                             className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
                                         >
                                             <b className='flex'>
-                                                Region
+                                                ACM ID
                                             </b>
-                                        </th>}
-                                        {data[0].prvName && <th key="provinceName"
-                                            scope="col"
-                                            className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                                        >
-                                            <b className='flex'>
-                                                Province
-                                            </b>
-                                        </th>}
-                                        {data[0].munName && <th key="municipalityName"
-                                            scope="col"
-                                            className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                                        >
-                                            <b className='flex'>
-                                                City / Municipality
-                                            </b>
-                                        </th>}
-                                        {data[0].brgyName && <th key="barangayName"
-                                            scope="col"
-                                            className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
-                                        >
-                                            <b className='flex'>
-                                                Barangay
-                                            </b>
-                                        </th>}
+                                        </th>
                                         <th key="count"
                                             scope="col"
                                             className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
                                         >
                                             <b className='flex'>
-                                                Vote Count
+                                                Total Votes
                                             </b>
                                         </th>
                                         <th key="percent"
@@ -323,50 +262,43 @@ export default function ResultCandidatePage(props: any) {
                                                 Percentage
                                             </b>
                                         </th>
+                                        <th key="address"
+                                            scope="col"
+                                            className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
+                                        >
+                                            <b className='flex'>
+                                                Address
+                                            </b>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {data.map((row: any, idx: number) => (
                                         <tr key={idx} className="bg-white border-b">
-                                            {row.regName && <td
-                                                key={`${row.regName}-${idx}`}
-                                                onClick={() => handleRowClick({ regName: row.regName })}
+                                            <td
+                                                key={`acmId-${idx}`}
+                                                onClick={() => handleRowClick(row)}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {row.regName}
-                                            </td>}
-                                            {row.prvName && <td
-                                                key={`${row.prvName}-${idx}`}
-                                                onClick={() => handleRowClick({ prvName: row.prvName })}
-                                                className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
-                                            >
-                                                {row.prvName}
-                                            </td>}
-                                            {row.munName && <td
-                                                key={`${row.munName}-${idx}`}
-                                                onClick={() => handleRowClick({ munName: row.munName })}
-                                                className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
-                                            >
-                                                {row.munName}
-                                            </td>}
-                                            {row.brgyName && <td
-                                                key={`${row.brgyName}-${idx}`}
-                                                onClick={() => handleRowClick({ brgyName: row.brgyName })}
-                                                className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
-                                            >
-                                                {row.brgyName}
-                                            </td>}
+                                                {row.acmId}
+                                            </td>
                                             <td
                                                 key={`count-${idx}`}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {row.totalVotes}
+                                                {row.totalVotes ?? 0}
                                             </td>
                                             <td
                                                 key={`percent-${idx}`}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {`${(row.totalVotes/row.registeredVoters).toFixed(2)} %`}
+                                                {`${(row.totalVotes / row.registeredVoters).toFixed(2)} %`}
+                                            </td>
+                                            <td
+                                                key={`address-${idx}`}
+                                                className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
+                                            >
+                                                {row.regName}, {row.prvName}, {row.munName}, {row.brgyName}
                                             </td>
                                         </tr>
                                     ))}

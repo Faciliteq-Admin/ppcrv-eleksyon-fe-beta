@@ -3,19 +3,12 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import LoginPage from './pages/login';
 import PageNotFound from './pages/pageNotFound';
 import HomePage from './pages/home';
-import BarangayListPage from './pages/sidebar_pages/location_management/barangays/barangayList';
-import BarangayFormPage from './pages/sidebar_pages/location_management/barangays/barangayForm';
-import MunicipalityListPage from './pages/sidebar_pages/location_management/municipalities/municipalityList';
-import MunicipalityFormPage from './pages/sidebar_pages/location_management/municipalities/municipalityForm';
-import ProvinceListPage, { loader as provListLoader } from './pages/sidebar_pages/location_management/provinces/provinceList';
-import ProvinceFormPage from './pages/sidebar_pages/location_management/provinces/provinceForm';
 import UserListPage from './pages/sidebar_pages/user_management/users/userList';
 import UserFormPage from './pages/sidebar_pages/user_management/users/userForm';
 import ForgotPasswordPage from './pages/forgotPassword';
 import UserAccountListPage from './pages/sidebar_pages/user_accounts/userAccountList';
 import UserAccountFormPage from './pages/sidebar_pages/user_accounts/userAccountForm';
 import SettingsPage from './pages/sidebar_pages/settings/SettingsPage';
-import { ProjectSetupProvider } from './contexts/ProjectSetupContext';
 import SideNavLayout from './components/SideNavLayout';
 import AdministratorListPage from './pages/sidebar_pages/user_management/administrators/AdministratorListPage';
 import AdministratorFormPage from './pages/sidebar_pages/user_management/administrators/AdministratorFormPage';
@@ -28,6 +21,8 @@ import ResultListPage from './pages/sidebar_pages/results/ResultListPage';
 import UploadResultListPage from './pages/sidebar_pages/results/UploadResultListPage';
 import ElectionReturnsListPage from './pages/sidebar_pages/results/ElectionReturnsListPage';
 import ResultCandidatePage from './pages/sidebar_pages/results/ResultCandidatePage';
+import ResultPrecinctListPage from './pages/sidebar_pages/results/ResultPrecinctListPage';
+import ResultPrecinctContestPage from './pages/sidebar_pages/results/ResultPrecinctContestPage';
 
 const routes = createBrowserRouter([
     {
@@ -80,12 +75,12 @@ const routes = createBrowserRouter([
             },
             {
                 path: "/results/precincts",
-                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+                element: <SideNavLayout> <ResultPrecinctListPage /> </SideNavLayout>,
                 errorElement: <PageNotFound />,
             },
             {
                 path: "/results/precincts/:id",
-                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+                element: <SideNavLayout> <ResultPrecinctContestPage /> </SideNavLayout>,
                 errorElement: <PageNotFound />,
             },
         ],

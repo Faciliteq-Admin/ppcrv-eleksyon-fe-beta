@@ -1,10 +1,7 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import TableCheckbox from "../../../components/TableCheckbox";
-import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
-import { getRequest } from "../../../utils/apiHelpers";
 import EmptyCard from "../../../components/EmptyCard";
-import { toDate } from "../../../utils/functions";
 import { usePrecincts } from "../../../hooks/usePrecincts";
 import Table from "../../../components/Table";
 import { useLocations } from "../../../hooks/useLocations";
@@ -36,26 +33,13 @@ export default function PrecintListPage(props: any) {
         getRegions();
     }, [page, limit, search]);
 
-    const filterFields = ['acmId', 'registeredVoters', 'regName', 'prvName', 'pollplace'];
     const tColumns = [
         {
             header: 'ACM ID',
             accessorKey: 'acmId',
             cell: (info: any) => `${info ?? 'N/A'}`,
-            // accessorKey: null,
-            // cell: (info: any) => {
-            //     return <span className="">
-            //         <a className="text-blue-500" onClick={(e) => handleView(e, info)}>{data[info].acmId}</a>
-            //     </span>
-            // },
             sort: true,
         },
-        // {
-        //     header: 'Clustered Precint',
-        //     accessorKey: 'clusteredPrec',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
         {
             header: 'Registered Voters',
             accessorKey: 'registeredVoters',
@@ -80,37 +64,7 @@ export default function PrecintListPage(props: any) {
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        // {
-        //     header: 'City/Municipality',
-        //     accessorKey: 'munName',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
-        // {
-        //     header: 'Barangay',
-        //     accessorKey: 'brgyName',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
-        // {
-        //     header: 'Actions',
-        //     accessorKey: null,
-        //     cell: (info: any) => {
-        //         return <span className="">
-        //             <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
-        //         </span>
-        //     }
-        // }
     ];
-
-
-    const handleView = (e: any, index: any) => {
-        // navigate(`/precints/${(data as any[])[index].id}`, { state: data[index] });
-    }
-
-    const handleAddNew = () => {
-        navigate('/precints/new');
-    }
 
     const handleRowsPerPageChange = (e: any) => {
         setLimit(Number(e.target.value));
@@ -165,6 +119,9 @@ export default function PrecintListPage(props: any) {
     const handleFilter = (e: any) => {
         setPage(1);
         getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
+    }
+
+    const handleRowClick = async (e: any, row: any) => {
     }
 
     return (
@@ -277,7 +234,7 @@ export default function PrecintListPage(props: any) {
                     </div>
                 </div>
                 {data && data.length > 0 &&
-                    <Table data={data} columns={tColumns} />
+                    <Table data={data} columns={tColumns} handleRowClick={handleRowClick} />
                 }
                 {!data || data.length === 0 && <EmptyCard>
                     <div className="place-self-center">

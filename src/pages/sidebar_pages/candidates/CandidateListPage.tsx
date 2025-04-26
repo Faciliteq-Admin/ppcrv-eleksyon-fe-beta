@@ -1,6 +1,5 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import TableCheckbox from "../../../components/TableCheckbox";
-import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import Table from "../../../components/Table";
@@ -28,43 +27,13 @@ export default function CandidateListPage(props: any) {
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        // {
-        //     header: 'Candidate Code',
-        //     accessorKey: 'candidateCode',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
-        // {
-        //     header: 'Contest Code',
-        //     accessorKey: 'contestCode',
-        //     cell: (info: any) => `${info ?? 'N/A'}`,
-        //     sort: true,
-        // },
         {
             header: 'Contest Name',
             accessorKey: 'contestName',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        // {
-        //     header: 'Actions',
-        //     accessorKey: null,
-        //     cell: (info: any) => {
-        //         return <span className="">
-        //             <a className="text-blue-500" onClick={(e) => handleView(e, info)}>View</a>
-        //         </span>
-        //     }
-        // }
     ];
-
-
-    const handleView = (e: any, index: any) => {
-        // navigate(`/candidates/${(data as any[])[index].id}`, { state: data[index] });
-    }
-
-    const handleAddNew = () => {
-        navigate('/candidates/new');
-    }
 
     const handleRowsPerPageChange = (e: any) => {
         setLimit(Number(e.target.value));
@@ -86,6 +55,9 @@ export default function CandidateListPage(props: any) {
     const handleSearch = (e: any) => {
         setPage(1);
         setSearch(text);
+    }
+
+    const handleRowClick = async (e: any, row: any) => {
     }
 
     return (
@@ -129,7 +101,7 @@ export default function CandidateListPage(props: any) {
                     </div>
                 </div>
                 {data && data.length > 0 &&
-                    <Table data={data} columns={tColumns} />
+                    <Table data={data} columns={tColumns} handleRowClick={handleRowClick} />
                 }
                 {!data || data.length === 0 && <EmptyCard>
                     <div className="place-self-center">

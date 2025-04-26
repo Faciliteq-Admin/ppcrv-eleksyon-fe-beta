@@ -28,7 +28,7 @@ function LocationCombobox({ data }: any) {
                     value={option}
                     className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
                 >
-                    {option.name}
+                    {option}
                 </ComboboxOption>
             ))}
         </ComboboxOptions>
