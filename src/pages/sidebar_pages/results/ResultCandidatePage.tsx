@@ -5,7 +5,7 @@ import EmptyCard from "../../../components/EmptyCard";
 import { useResultCandidateSummary } from "../../../hooks/useResultCandidateSummary";
 import { useLocations } from "../../../hooks/useLocations";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { awaitTimeout } from "../../../utils/functions";
+import { awaitTimeout, getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultCandidatePage(props: any) {
     const navigate = useNavigate();
@@ -155,7 +155,8 @@ export default function ResultCandidatePage(props: any) {
 
                 </div>
             </div>
-            <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
+            <div className="mt-4 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
+            <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
                         Region
@@ -366,7 +367,7 @@ export default function ResultCandidatePage(props: any) {
                                                 key={`percent-${idx}`}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {`${(row.totalVotes/row.registeredVoters).toFixed(2)} %`}
+                                                {`${(row.totalVotes / row.registeredVoters).toFixed(2)} %`}
                                             </td>
                                         </tr>
                                     ))}

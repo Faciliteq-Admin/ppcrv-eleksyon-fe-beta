@@ -13,9 +13,9 @@ import {
     DocumentChartBarIcon,
 } from "@heroicons/react/20/solid";
 
-import { awaitTimeout, boolValue, getUserSession } from "../utils/functions";
+import { boolValue, getUserSession, saveActiveBatchNumber } from "../utils/functions";
 import SidebarMain from "./SidebarMain";
-import { getRequest, postRequest, putRequest } from "../utils/apiHelpers";
+import { getRequest } from "../utils/apiHelpers";
 
 const defaultNav = [
     {
@@ -51,7 +51,6 @@ const defaultNav = [
     {
         id: "results",
         title: "Results",
-        // link: "/results",
         icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
         children: [
             // {
@@ -100,19 +99,11 @@ const SideNavLayout = (props: any) => {
     let savedIsMinified = boolValue(localStorage.getItem('isMinified')) ?? false;
     const [isMinified, setIsMinified] = useState(savedIsMinified);
 
-    const [isOpen, setIsOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<string>('home');
     const [selectedSubItem, setSelectedSubItem] = useState<string>('');
     const [openSection, setOpenSection] = useState<string>('');
     const navigate = useNavigate();
-    const [message, setMessage] = useState<any | null | undefined>();
-    const [messages, setMessages] = useState<any[]>([]);
-    const [isSending, setIsSending] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [text, setText] = useState("");
-    const [image, setImage] = useState("");
-    const [file, setFile] = useState("");
 
     const ref = useRef<HTMLLIElement>(null);
     const refE = useRef<HTMLElement>(null);
@@ -122,16 +113,6 @@ const SideNavLayout = (props: any) => {
     let selectedTitle = selectedSidebar.length > 0 ? selectedSidebar[0].title : '';
 
     const state = useLocation().state;
-    const messagesEndRef = useRef<null | HTMLDivElement>(null);
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "end" });
-    }
-    const scrollToEnd = async () => {
-        if (messagesEndRef.current) {
-            await awaitTimeout(50);
-            messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-        }
-    }
 
     useEffect(() => {
         if (!user) {
@@ -140,23 +121,6 @@ const SideNavLayout = (props: any) => {
         }
 
         sidebarData = defaultNav;
-
-        if (user && user.user && user.user.lguId) {
-            if (sidebarData.length < 4) {
-                // sidebarData.push(userManagement);
-            }
-        } else {
-            if (sidebarData.length < 4) {
-                // let um = userManagement;
-                // if (um.children.length === 2) {
-                //     um.children.push(citizen);
-                // }
-
-                // sidebarData.push(lgu);
-                // sidebarData.push(um);
-                // sidebarData.push(location);
-            }
-        }
 
         let mounted = false;
         if (mounted) return;
@@ -192,6 +156,8 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('settings');
         }
 
+        handleGetActiveBatch();
+
         navigate(path, { state: state });
 
         document.addEventListener('mousedown', handleClickOutside);
@@ -199,31 +165,13 @@ const SideNavLayout = (props: any) => {
             mounted = true;
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [message]);
+    }, []);
 
-    let processing = false;
-    const handleFetchMessages = async (category: string, referenceId: string) => {
-        if (!message) return;
-        processing = true;
-        setLoading(true);
-        let msgRes = await getRequest(`/messages?category=${category}&referenceId=${referenceId}`);
-        if (msgRes.data) {
-            setMessages(msgRes.data.items.reverse());
+    const handleGetActiveBatch = async () => {
+        let res = await getRequest('/settings?field=activeBatch');
+        if (res.data && res.data.length > 0) {
+            saveActiveBatchNumber(res.data[0].value);
         }
-        setLoading(false);
-        processing = false;
-    }
-
-    const handleSetReadMessages = async (message: any) => {
-        if (!message) return;
-        const payload = {
-            "referenceId": message.referenceId,
-            "category": message.category,
-            "senderId": message.senderId,
-            "isRead": true
-        }
-
-        await putRequest('/messages', payload);
     }
 
     const handleSidebarSelect = (e: any, item: string, link: string) => {
@@ -259,46 +207,31 @@ const SideNavLayout = (props: any) => {
     // Toggle child items visibility
     const handleSectionToggle = (section: string) => {
         setOpenSection(openSection === section ? '' : section);
-        // localStorage.setItem('openSection', openSection);
     };
 
     const handleOnclick = (item: string, subItem: string) => {
         setSelectedItem(item);
         setSelectedSubItem(subItem ? subItem : '');
-        // localStorage.setItem('selectedItem', item);
-        // localStorage.setItem('selectedSubItem', subItem);
-        // localStorage.setItem('openSection', item);
     }
 
     const handleSidebarMinify = () => {
-        // console.log(isMinified);
-
         setIsMinified(!isMinified)
-        // localStorage.setItem('isMinified', (!isMinified).toString());
     }
 
     const toggleSidebar = () => {
-        // console.log({ isSidebarOpen });
         setIsSidebarOpen(!isSidebarOpen);
-        // localStorage.setItem('isSidebarOpen', isSidebarOpen.toString());
     }
 
 
     // Close the dropdown if clicked outside
     const handleClickOutside = (event: any) => {
         if (refE.current) {
-            // console.log('ref cur', {openSection});
             if (openSection) {
-                // console.log('ref cur opn sec', { openSection });
-                // localStorage.setItem('openSection', '');
                 setOpenSection('');
             }
         }
         if (ref.current && !ref.current.contains(event.target)) {
-            // console.log('ref not cur', { openSection });
             if (openSection) {
-                // console.log('ref not cur opn sec', { openSection });
-                // localStorage.setItem('openSection', '');
                 setOpenSection('');
             }
         }

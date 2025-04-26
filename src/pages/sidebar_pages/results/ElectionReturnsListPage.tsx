@@ -7,6 +7,7 @@ import TableCheckbox from "../../../components/TableCheckbox";
 import moment from "moment";
 import { useElectionResults } from "../../../hooks/useElectionResults";
 import Table from "../../../components/Table";
+import { getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ElectionReturnsListPage(props: any) {
     const navigate = useNavigate();
@@ -14,10 +15,10 @@ export default function ElectionReturnsListPage(props: any) {
     const [limit, setLimit] = useState(50);
     const [search, setSearch] = useState("");
 
-    const { 
+    const {
         data, total, loading,
         getElectionResults,
-     } = useElectionResults(page, limit);
+    } = useElectionResults(page, limit);
     const totalPages = Math.ceil(total / limit);
 
     useEffect(() => {
@@ -25,12 +26,12 @@ export default function ElectionReturnsListPage(props: any) {
     }, [page, limit]);
 
     const tColumns = [
-        {
-            header: 'Batch',
-            accessorKey: 'uploadBatchNum',
-            cell: (info: any) => `${info ?? 'N/A'}`,
-            sort: false,
-        },
+        // {
+        //     header: 'Batch',
+        //     accessorKey: 'uploadBatchNum',
+        //     cell: (info: any) => `${info ?? 'N/A'}`,
+        //     sort: false,
+        // },
         {
             header: 'Precinct Code',
             accessorKey: 'precinctCode',
@@ -83,7 +84,7 @@ export default function ElectionReturnsListPage(props: any) {
 
     const handleRowsPerPageChange = (e: any) => {
         console.log(e.target.value);
-        
+
         setLimit(Number(e.target.value));
         setPage(1); // Reset to first page after changing rows per page
     };
@@ -122,7 +123,10 @@ export default function ElectionReturnsListPage(props: any) {
                         value={search}
                         onChange={handleSearch}
                     /> */}
-                    <p>Total: {total}</p>
+                    <span>
+                        <p>Active Batch Number: {getActiveBatchNumber()}</p>
+                        <p>Total: {total}</p>
+                    </span>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&

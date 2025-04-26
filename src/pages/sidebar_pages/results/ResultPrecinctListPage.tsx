@@ -4,6 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { useLocations } from "../../../hooks/useLocations";
 import { useResultPrecinctSummary } from "../../../hooks/useResultPrecinctSummary";
+import { getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultPrecinctListPage(props: any) {
     const navigate = useNavigate();
@@ -117,8 +118,8 @@ export default function ResultPrecinctListPage(props: any) {
             {loading && <Loader />}
             {isLoading && <Loader />}
             <span className="flex text-sm font-medium">Results by Precinct</span>
-
-            <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
+            <div className="mt-4 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
+            <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
                         Region

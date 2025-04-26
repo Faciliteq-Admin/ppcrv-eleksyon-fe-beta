@@ -2,7 +2,6 @@ import axios from "axios";
 import { getUserSession } from "./functions";
 
 const BASE_URL = process.env.REACT_APP_BASEURL;
-// const BASE_URL = 'https://esumbongmo-backend-beta.faciliteq.net/v1';
 
 const getHeaders = () => {
     const headers: any = { 'x-api-key': 'k@2!-v-$j%5je-8!' };

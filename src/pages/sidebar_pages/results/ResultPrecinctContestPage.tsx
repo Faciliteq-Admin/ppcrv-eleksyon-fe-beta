@@ -4,7 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
 import { getRequest } from "../../../utils/apiHelpers";
-import { awaitTimeout } from "../../../utils/functions";
+import { awaitTimeout, getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultPrecinctContestPage(props: any) {
     const navigate = useNavigate();
@@ -26,12 +26,14 @@ export default function ResultPrecinctContestPage(props: any) {
     const getData = async () => {
         if (processing) return;
 
+        const activeBatch = getActiveBatchNumber();
+
         processing = true;
         setLoading(true);
         let senatorContestRes = await getRequest('/contests?contestType=national&contestPosition=senator');
         if (senatorContestRes && senatorContestRes.data && senatorContestRes.data.length > 0) {
 
-            let senatorRes = await getRequest(`/candidates?contestCode=${senatorContestRes.data[0].contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=3`);
+            let senatorRes = await getRequest(`/candidates?contestCode=${senatorContestRes.data[0].contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=${activeBatch}`);
             if (senatorRes.data) {
                 setSenators(senatorRes.data.items);
             }
@@ -39,7 +41,7 @@ export default function ResultPrecinctContestPage(props: any) {
 
         let plContestRes = await getRequest('/contests?contestType=national&contestPosition=party list');
         if (plContestRes && plContestRes.data && plContestRes.data.length > 0) {
-            let plRes = await getRequest(`/candidates?contestCode=${plContestRes.data[0].contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=3`);
+            let plRes = await getRequest(`/candidates?contestCode=${plContestRes.data[0].contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=${activeBatch}`);
             if (plRes.data) {
                 setPartyLists(plRes.data.items);
             }
@@ -53,6 +55,8 @@ export default function ResultPrecinctContestPage(props: any) {
     }
 
     const getProvincialContestsAndCandidates = async (selectedRegion: string, selectedProvince: string) => {
+        const activeBatch = getActiveBatchNumber();
+
         let path = '/contests?contestType=local';
         path += `&regName=${selectedRegion}`;
         if (selectedProvince.toLowerCase().includes("national capital region")) return;
@@ -64,7 +68,7 @@ export default function ResultPrecinctContestPage(props: any) {
             if (contestsRes.data.length > 0) {
                 let contRes: any[] = [];
                 for (const c of contestsRes.data) {
-                    const res = await getRequest(`/candidates?contestCode=${c.contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=3`);
+                    const res = await getRequest(`/candidates?contestCode=${c.contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=${activeBatch}`);
                     if (res.data) {
                         c.candidates = res.data.items;
                         contRes.push(c);
@@ -124,6 +128,8 @@ export default function ResultPrecinctContestPage(props: any) {
     }
 
     const getMunicipalContestsAndCandidates = async (selectedRegion: string, selectedProvince: string, selectedCityMuns: string) => {
+        const activeBatch = getActiveBatchNumber();
+
         let path = '/contests?contestType=local';
         path += `&regName=${selectedRegion}`;
         if (selectedProvince.toLowerCase().includes("national capital region")) {
@@ -139,7 +145,7 @@ export default function ResultPrecinctContestPage(props: any) {
             if (contestsRes.data.length > 0) {
                 let contRes: any[] = [];
                 for (const c of contestsRes.data) {
-                    const res = await getRequest(`/candidates?contestCode=${c.contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=3`);
+                    const res = await getRequest(`/candidates?contestCode=${c.contestCode}&precinctCode=${locationState.acmId}&uploadBatchNum=${activeBatch}`);
                     if (res.data) {
                         c.candidates = res.data.items;
                         contRes.push(c);
@@ -320,6 +326,8 @@ export default function ResultPrecinctContestPage(props: any) {
                     <p className="self-end">Total Votes: {locationState.totalVotes ?? 0}</p>
                 </div>
             </div>
+            <div className="px-2 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
+
 
             <Accordion items={items} />
         </div>

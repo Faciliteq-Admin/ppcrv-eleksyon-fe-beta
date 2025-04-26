@@ -13,7 +13,7 @@ const getUserSession = () => {
             localStorage.removeItem('user');
             return null;
         }
-        
+
         return JSON.parse(user);
     }
     return null;
@@ -23,12 +23,24 @@ const saveUserSession = (data: any) => {
     localStorage.setItem('user', JSON.stringify(data));
 }
 
+const saveActiveBatchNumber = (data: any) => {
+    localStorage.setItem("activeBatch", data);
+}
+
+const getActiveBatchNumber = () => {
+    const batch = localStorage.getItem('activeBatch');
+    if (batch) {
+        if (batch === 'undefined') {
+            localStorage.removeItem('activeBatch');
+            return null;
+        }
+
+        return batch;
+    }
+    return null;
+}
+
 const prepareLogout = () => {
-    // localStorage.setItem('isOpen', '');
-    // localStorage.setItem('isSidebarOpen', '');
-    // localStorage.setItem('selectedItem', '');
-    // localStorage.setItem('selectedSubItem', '');
-    // localStorage.setItem('openSection', '');
     localStorage.removeItem('user');
     localStorage.removeItem('authToken');
 }
@@ -171,7 +183,7 @@ const convertBase64Blob = (base64: string) => {
     return new Blob([byteArray]);
 };
 
-const blobToFile = (blob: Blob, filename: string, type: string = "application/pdf" ) => {
+const blobToFile = (blob: Blob, filename: string, type: string = "application/pdf") => {
     return new File([blob], filename, { type });
 }
 
@@ -222,4 +234,6 @@ export {
     convertImage,
     fileToBase64,
     generateCode,
+    getActiveBatchNumber,
+    saveActiveBatchNumber,
 }

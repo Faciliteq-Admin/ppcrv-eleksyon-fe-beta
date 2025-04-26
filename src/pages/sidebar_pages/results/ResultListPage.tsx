@@ -4,6 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import Table from "../../../components/Table";
 import { useResultSummary } from "../../../hooks/useResultSummary";
+import { getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultListPage(props: any) {
     const navigate = useNavigate();
@@ -80,6 +81,7 @@ export default function ResultListPage(props: any) {
             {loading && <Loader />}
             <span className="text-sm font-medium">Results by Candidates</span>
             <div className="mt-4 flex flex-col">
+                <div className="mt-4 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
                 <div className="flex gap-2 w-full lg:w-1/2">
                     <input
                         type="text"
