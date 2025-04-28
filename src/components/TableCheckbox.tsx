@@ -9,17 +9,17 @@ const TableCheckbox = (props: any) => {
     const navigate = useNavigate();
 
     const tCols = props.columns;
-    
+
     const [data, setData] = useState(props.data);
     const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
     const [filterQuery, setFilterQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage ?? 10);
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
     useEffect(() => {
         setData(props.data);
-    }, [props.data]); 
+    }, [props.data]);
 
     const sortData = (key: any) => {
         let direction = 'ascending';
@@ -42,21 +42,21 @@ const TableCheckbox = (props: any) => {
     };
 
     // Filter logic
-    const filteredData = useMemo(() => { 
+    const filteredData = useMemo(() => {
         return (!data || data.length === 0) ? [] : filterQuery === '' ? data : data.filter((row: any) => {
-                if (props.filterFields) {
-                    let boolValue = false;
-                    for(let key of props.filterFields) {
-                        boolValue = boolValue || row[key].toLowerCase().includes(filterQuery.toLowerCase());
-                    }
-                    return boolValue;
-                } else if (row.name) {
-                    return row.name.toLowerCase().includes(filterQuery.toLowerCase());
-                } else {
-                    return true;
+            if (props.filterFields) {
+                let boolValue = false;
+                for (let key of props.filterFields) {
+                    boolValue = boolValue || row[key].toLowerCase().includes(filterQuery.toLowerCase());
                 }
-            });
-        },
+                return boolValue;
+            } else if (row.name) {
+                return row.name.toLowerCase().includes(filterQuery.toLowerCase());
+            } else {
+                return true;
+            }
+        });
+    },
         [data, filterQuery.toLocaleLowerCase()]
     );
 
@@ -133,12 +133,13 @@ const TableCheckbox = (props: any) => {
                         value={rowsPerPage}
                         onChange={handleRowsPerPageChange}
                     >
+                        {props.rowsPerPage && <option value={props.rowsPerPage}>{props.rowsPerPage} rows</option>}
                         <option value={10}>10 rows</option>
                         <option value={25}>25 rows</option>
                         <option value={50}>50 rows</option>
                         <option value={100}>100 rows</option>
                     </select>
-                    {props.showActionButton && 
+                    {props.showActionButton &&
                         <button
                             onClick={props.handleAdd}
                             className={`px-4 py-2 ml-4 bg-green-700 text-white rounded-md`}
@@ -163,7 +164,7 @@ const TableCheckbox = (props: any) => {
                             </th>}
                             {tCols.map((h: any) => {
                                 return (
-                                    <th key={h.accessorKey}
+                                    <th key={h.header}
                                         scope="col"
                                         className="cursor-pointer text-sm font-medium text-gray-900 px-4 py-4 text-left"
                                         onClick={() => h.sort && sortData(h.accessorKey)}
@@ -190,7 +191,7 @@ const TableCheckbox = (props: any) => {
                                     />
                                 </td>}
                                 {tCols.map((h: any) => {
-                                    return <td key={`${row.id}-${h.accessorKey}`} className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900">
+                                    return <td key={`${row.id}-${h.header}`} className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900">
                                         {h.cell(h.accessorKey ? row[h.accessorKey] : idx)}
                                     </td>
                                 })}
@@ -202,7 +203,7 @@ const TableCheckbox = (props: any) => {
 
             {/* Pagination Controls  md:flex-col justify-between  */}
             <div className={`mt-4 ${rowsPerPage > 20 ? 'grid grid-cols-1 gap-2 md:flex' : 'flex'}  justify-between`}>
-                
+
                 <div className='flex justify-between space-x-2'>
                     {props.selectable && <button
                         onClick={handleBulkDelete}
@@ -217,6 +218,7 @@ const TableCheckbox = (props: any) => {
                             value={rowsPerPage}
                             onChange={handleRowsPerPageChange}
                         >
+                            {props.rowsPerPage && <option value={props.rowsPerPage}>{props.rowsPerPage} rows</option>}
                             <option value={10}>10 rows</option>
                             <option value={25}>25 rows</option>
                             <option value={50}>50 rows</option>
