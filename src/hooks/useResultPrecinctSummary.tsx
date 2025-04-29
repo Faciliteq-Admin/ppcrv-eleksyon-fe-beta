@@ -7,8 +7,9 @@ export const useResultPrecinctSummary = (page: number, limit: number) => {
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    const getResultSummary = async (regName?: string, prvName?: string, munName?: string, brgyName?: string) => {
+    const getResultSummary = async (regName?: string, prvName?: string, munName?: string, brgyName?: string, search?: string) => {
         let path = `/precints/results?page=${page}&limit=${limit}`;
+        if (search) path += `&acmId=${search}`;
         if (regName) path += `&regName=${regName}`;
         if (prvName) path += `&prvName=${prvName}`;
         if (munName) path += `&munName=${munName}`;

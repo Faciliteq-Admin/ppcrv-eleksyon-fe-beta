@@ -11,13 +11,14 @@ export const usePrecincts = (page: number, limit: number) => {
     const [cityMuns, setCityMuns] = useState<any[]>([]);
     const [barangays, setBarangays] = useState<any[]>([]);
 
-    const getPrecincts = async (regName?: string, prvName?: string, munName?: string, brgyName?: string) => {
+    const getPrecincts = async (regName?: string, prvName?: string, munName?: string, brgyName?: string, search?: string) => {
         let path = `/precints?page=${page}&limit=${limit}`;
         let filters = [];
         if (regName) filters.push(`regName=${regName}`);
         if (prvName) filters.push(`prvName=${prvName}`);
         if (munName) filters.push(`munName=${munName}`);
         if (brgyName) filters.push(`brgyName=${brgyName}`);
+        if (search) filters.push(`acmId=${search}`);
 
         if (filters.length > 0) path += `&${filters.join('&')}`;
 

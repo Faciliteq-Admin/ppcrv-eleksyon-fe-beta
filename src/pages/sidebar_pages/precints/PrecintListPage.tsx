@@ -31,7 +31,7 @@ export default function PrecintListPage(props: any) {
     useEffect(() => {
         getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
         getRegions();
-    }, [page, limit, search]);
+    }, [page, limit]);
 
     const tColumns = [
         {
@@ -118,7 +118,7 @@ export default function PrecintListPage(props: any) {
 
     const handleFilter = (e: any) => {
         setPage(1);
-        getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
+        getPrecincts(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay, search);
     }
 
     const handleRowClick = async (e: any, row: any) => {
@@ -131,6 +131,20 @@ export default function PrecintListPage(props: any) {
             <span className="text-sm font-medium">Precints</span>
             <div className="mt-4 flex flex-col">
                 <div className="flex flex-col gap-2 lg:flex-row lg:items-center py-1">
+                    <div className="">
+                        <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
+                            ACM ID / Precinct
+                        </label>
+                        <div className="mt-1">
+                            <input
+                                type="text"
+                                placeholder="ACM ID / Precinct"
+                                className="px-4 py-2 border border-gray-300 rounded-md "
+                                value={search}
+                                onChange={e => setSearch(e.target.value)}
+                            />
+                        </div>
+                    </div>
                     <div className="">
                         <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
                             Region

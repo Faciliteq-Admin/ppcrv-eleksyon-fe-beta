@@ -10,6 +10,7 @@ export default function ResultPrecinctListPage(props: any) {
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(50);
+    const [search, setSearch] = useState("");
 
     const [selectedRegion, setSelectedRegion] = useState("");
     const [selectedProvince, setSelectedProvince] = useState("");
@@ -90,11 +91,12 @@ export default function ResultPrecinctListPage(props: any) {
 
     const handleFilter = (e: any) => {
         setPage(1);
-        getResultSummary(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
+        getResultSummary(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay, search);
     }
 
     const handleClear = (e: any) => {
         setPage(1);
+        setSearch("");
         setSelectedRegion("");
         setSelectedProvince("");
         setSelectedCityMuns("");
@@ -102,11 +104,6 @@ export default function ResultPrecinctListPage(props: any) {
         getProvinces();
         getMunicipalities();
         getBarangays();
-        // getResultSummary(state.candidateName);
-    }
-
-    const handleBack = () => {
-        navigate('/results/candidates');
     }
 
     const handleRowClick = async (data: any) => {
@@ -120,6 +117,20 @@ export default function ResultPrecinctListPage(props: any) {
             <span className="flex text-sm font-medium">Results by Precinct</span>
             <div className="mt-4 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
             <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
+                <div className="">
+                    <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
+                        ACM ID / Precinct
+                    </label>
+                    <div className="mt-1">
+                        <input
+                            type="text"
+                            placeholder="ACM ID / Precinct"
+                            className="px-4 py-2 border border-gray-300 rounded-md "
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                        />
+                    </div>
+                </div>
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
                         Region
