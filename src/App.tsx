@@ -176,8 +176,7 @@ function App() {
             case "Final Validator":
                 routes = [...defaultRoutes, ...initialValidatorRoutes, ...finalValidatorRoutes];
                 break;
-            case "First Validator":
-            case "Second Validator":
+            case "Initial Validator":
                 routes = [...defaultRoutes, ...initialValidatorRoutes];
                 break;
             default:

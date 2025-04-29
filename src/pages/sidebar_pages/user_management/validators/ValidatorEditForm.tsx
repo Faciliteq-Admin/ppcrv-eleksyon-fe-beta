@@ -125,8 +125,7 @@ export default function ValidatorEditForm({ admin, handleInput, edit, showPasswo
                                     onChange={handleInput}
                                     className="px-4 py-2 border border-gray-300 rounded-md"
                                 >
-                                    <option value={"First Validator"}>First Validator</option>
-                                    <option value={"Second Validator"}>Second Validator</option>
+                                    <option value={"Initial Validator"}>Initial Validator</option>
                                     <option value={"Final Validator"}>Final Validator</option>
                                 </select>}
                             </div>
