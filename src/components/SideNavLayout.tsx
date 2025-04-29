@@ -86,6 +86,24 @@ const defaultNav = [
         icon: <ArrowUpOnSquareIcon className="w-5 h-5 shrink-0 self-center" />,
     },
     {
+        id: "userManagement",
+        title: "User Management",
+        link: "/user-management",
+        icon: <UsersIcon className="w-5 h-5 shrink-0 self-center" />,
+        children: [
+            {
+                id: "administrators",
+                title: "Administrators",
+                link: "/user-management/administrators",
+            },
+            {
+                id: "validators",
+                title: "Validators",
+                link: "/user-management/validators",
+            },
+        ]
+    },
+    {
         id: "settings",
         title: "Settings",
         link: "/settings",
@@ -137,9 +155,13 @@ const SideNavLayout = (props: any) => {
             } else if (path.includes('precincts')) {
                 setSelectedSubItem('resultsPrecincts');
             }
-            // else {
-            //     setSelectedSubItem('resultsAll');
-            // }
+        } else if (path.includes('user-management')) {
+            setSelectedItem('user-management');
+            if (path.includes('administrators')) {
+                setSelectedSubItem('administrators');
+            } else if (path.includes('validators')) {
+                setSelectedSubItem('validators');
+            }
         } else if (path.includes('national')) {
             setSelectedItem('national');
         } else if (path.includes('local')) {

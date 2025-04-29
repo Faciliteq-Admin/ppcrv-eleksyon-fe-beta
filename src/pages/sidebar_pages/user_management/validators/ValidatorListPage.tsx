@@ -7,7 +7,7 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import TableCheckbox from "../../../../components/TableCheckbox";
 import EmptyCard from "../../../../components/EmptyCard";
 
-export default function AdministratorListPage(props: any) {
+export default function ValidatorListPage(props: any) {
     const navigate = useNavigate();
 
     const [data, setData] = useState([]);
@@ -28,6 +28,11 @@ export default function AdministratorListPage(props: any) {
         {
             header: 'Name',
             accessorKey: 'fullName',
+            cell: (info: any) => `${info ?? 'N/A'}`,
+        },
+        {
+            header: 'Type',
+            accessorKey: 'role',
             cell: (info: any) => `${info ?? 'N/A'}`,
         },
         {
@@ -67,7 +72,7 @@ export default function AdministratorListPage(props: any) {
         }
         processing = true;
         setLoading(true);
-        let response = await getRequest('/administrators' + lguId );
+        let response = await getRequest('/validators' + lguId );
         if (response && response.data) {
             setData(response.data.items);
         }
@@ -78,7 +83,7 @@ export default function AdministratorListPage(props: any) {
     const handleView = (e: any, index: any) => {
         // console.log({ e, index });
 
-        navigate(`/user-management/administrators/${(data as any[])[index].id}`, { state: data[index] });
+        navigate(`/user-management/validators/${(data as any[])[index].id}`, { state: data[index] });
     }
 
     const handleReject = (e: any, index: any) => {
@@ -86,13 +91,13 @@ export default function AdministratorListPage(props: any) {
     }
 
     const handleAddNew = () => {
-        navigate('/user-management/administrators/new');
+        navigate('/user-management/validators/new');
     }
 
     return (
         <div>
             {loading && <Loader />}
-            <span className="flex text-sm font-medium text-gray-500">User Management <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">Administrators</p> </span>
+            <span className="flex text-sm font-medium text-gray-500">User Management <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">Validators</p> </span>
             {data && data.length > 0 && <TableCheckbox data={data} columns={tColumns} showActionButton={true} handleAdd={handleAddNew} />}
             {!data || data.length === 0 && <EmptyCard>
                 <div className="place-self-center">

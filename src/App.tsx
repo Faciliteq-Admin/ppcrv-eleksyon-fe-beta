@@ -3,8 +3,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import LoginPage from './pages/login';
 import PageNotFound from './pages/pageNotFound';
 import HomePage from './pages/home';
-import UserListPage from './pages/sidebar_pages/user_management/users/userList';
-import UserFormPage from './pages/sidebar_pages/user_management/users/userForm';
 import ForgotPasswordPage from './pages/forgotPassword';
 import UserAccountListPage from './pages/sidebar_pages/user_accounts/userAccountList';
 import UserAccountFormPage from './pages/sidebar_pages/user_accounts/userAccountForm';
@@ -23,6 +21,9 @@ import ElectionReturnsListPage from './pages/sidebar_pages/results/ElectionRetur
 import ResultCandidatePage from './pages/sidebar_pages/results/ResultCandidatePage';
 import ResultPrecinctListPage from './pages/sidebar_pages/results/ResultPrecinctListPage';
 import ResultPrecinctContestPage from './pages/sidebar_pages/results/ResultPrecinctContestPage';
+import ValidatorListPage from './pages/sidebar_pages/user_management/validators/ValidatorListPage';
+import ValidatorFormPage from './pages/sidebar_pages/user_management/validators/ValidatorFormPage';
+import ValidatorFormEditPage from './pages/sidebar_pages/user_management/validators/ValidatorFormEditPage';
 
 const routes = createBrowserRouter([
     {
@@ -133,22 +134,22 @@ const routes = createBrowserRouter([
                 element: <SideNavLayout> <AdministratorFormEditPage /> </SideNavLayout>,
                 errorElement: <PageNotFound />,
             },
+            {
+                path: "/user-management/validators",
+                element: <SideNavLayout> <ValidatorListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/user-management/validators/new",
+                element: <SideNavLayout> <ValidatorFormPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/user-management/validators/:id",
+                element: <SideNavLayout> <ValidatorFormEditPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
         ],
-    },
-    {
-        path: "/users",
-        element: <SideNavLayout> <UserListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "/users/new",
-        element: <SideNavLayout> <UserFormPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "/users/:id",
-        element: <SideNavLayout> <UserFormPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
     },
     {
         path: "/page-not-found",

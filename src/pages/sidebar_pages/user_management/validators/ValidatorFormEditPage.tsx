@@ -5,10 +5,10 @@ import Loader from "../../../../components/Loader";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { postRequest, putRequest } from "../../../../utils/apiHelpers";
 import ActionButton from "../../../../components/ActionButton";
-import AdministratorEditForm from "./AdministratorEditForm";
+import AdministratorEditForm from "./ValidatorEditForm";
 import ModalDialog from "../../../../components/ModalDialog";
 
-export default function AdministratorFormEditPage(props: any) {
+export default function ValidatorFormEditPage(props: any) {
     const navigate = useNavigate();
 
     const locationData = useLocation();
@@ -25,7 +25,7 @@ export default function AdministratorFormEditPage(props: any) {
     }
 
     const handleBack = () => {
-        navigate('/user-management/administrators');
+        navigate('/user-management/validators');
     }
 
     const addAlert = (type: "info" | "success" | "warning" | "error", message: string, duration: number) => {
@@ -58,7 +58,7 @@ export default function AdministratorFormEditPage(props: any) {
             processing = true;
             setLoading(true);
             try {
-                const res = await putRequest(`/administrators/${admin.id}`, admin);
+                const res = await putRequest(`/validators/${admin.id}`, admin);
                 processing = false;
                 setLoading(false);
                 if (res.data) {
@@ -157,7 +157,7 @@ export default function AdministratorFormEditPage(props: any) {
                     </div>
                 </div>
             </ModalDialog>}
-            <span className="flex text-sm font-medium text-gray-500">User Management <ChevronRightIcon className="size-4 self-center" /> Administrators <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">{admin.fullName}</p> </span>
+            <span className="flex text-sm font-medium text-gray-500">User Management <ChevronRightIcon className="size-4 self-center" /> Validators <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">{admin.fullName}</p> </span>
             <div className="flex justify-between px-2 mt-4">
                 <div className="">
                     <button type="button" onClick={handleBack} className="flex text-sm/6 font-semibold text-gray-900">
