@@ -16,6 +16,7 @@ import {
 import { boolValue, getUserSession, saveActiveBatchNumber } from "../utils/functions";
 import SidebarMain from "./SidebarMain";
 import { getRequest } from "../utils/apiHelpers";
+import { log } from "node:console";
 
 const defaultNav = [
     {
@@ -48,17 +49,13 @@ const defaultNav = [
         link: "/candidates",
         icon: <UsersIcon className="w-5 h-5 shrink-0 self-center" />,
     },
+];
+const finalValidatorNav = [
     {
         id: "results",
         title: "Results",
         icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
         children: [
-            // {
-            //     id: "resultsAll",
-            //     title: "All Results",
-            //     link: "/results",
-            //     icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            // },
             {
                 id: "resultsCandidates",
                 title: "By Candidate",
@@ -79,6 +76,8 @@ const defaultNav = [
         link: "/election-returns",
         icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
     },
+];
+const adminNav = [
     {
         id: "uploadResults",
         title: "Upload ER",
@@ -126,19 +125,28 @@ const SideNavLayout = (props: any) => {
     const ref = useRef<HTMLLIElement>(null);
     const refE = useRef<HTMLElement>(null);
 
-    let user = getUserSession();
+    let session = getUserSession();
     let selectedSidebar = sidebarData.filter((s: any) => s.id === selectedItem);
     let selectedTitle = selectedSidebar.length > 0 ? selectedSidebar[0].title : '';
 
     const state = useLocation().state;
 
     useEffect(() => {
-        if (!user) {
+        if (!session) {
             console.log('should navigate to login');
             navigate('/login');
         }
 
-        sidebarData = defaultNav;
+        console.log(session.user.role);
+        
+
+        if (session.user.role === "Administrator") {
+            sidebarData = [...defaultNav, finalValidatorNav, adminNav];
+        } else if (session.user.role === "Final Validator") {
+            sidebarData = [...defaultNav, ...finalValidatorNav];
+        } else {
+            sidebarData = defaultNav;
+        }
 
         let mounted = false;
         if (mounted) return;
@@ -281,7 +289,7 @@ const SideNavLayout = (props: any) => {
             />
 
             <main className="main flex-1 overflow-y-auto" ref={refE}>
-                <Navbar title={selectedTitle} user={user} toggleSidebar={toggleSidebar}></Navbar>
+                <Navbar title={selectedTitle} toggleSidebar={toggleSidebar}></Navbar>
                 <div className="p-4">
                     {props.children}
                 </div>

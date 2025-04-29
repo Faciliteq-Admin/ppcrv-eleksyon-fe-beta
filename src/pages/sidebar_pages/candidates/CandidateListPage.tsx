@@ -69,7 +69,7 @@ export default function CandidateListPage(props: any) {
                 <div className="flex gap-2 py-1">
                     <input
                         type="text"
-                        placeholder="Search candidate"
+                        placeholder="Search Candidate"
                         className="px-4 py-2 border border-gray-300 rounded-md"
                         value={text}
                         onChange={(e) => setText(e.target.value)}

@@ -4,8 +4,6 @@ import LoginPage from './pages/login';
 import PageNotFound from './pages/pageNotFound';
 import HomePage from './pages/home';
 import ForgotPasswordPage from './pages/forgotPassword';
-import UserAccountListPage from './pages/sidebar_pages/user_accounts/userAccountList';
-import UserAccountFormPage from './pages/sidebar_pages/user_accounts/userAccountForm';
 import SettingsPage from './pages/sidebar_pages/settings/SettingsPage';
 import SideNavLayout from './components/SideNavLayout';
 import AdministratorListPage from './pages/sidebar_pages/user_management/administrators/AdministratorListPage';
@@ -24,97 +22,39 @@ import ResultPrecinctContestPage from './pages/sidebar_pages/results/ResultPreci
 import ValidatorListPage from './pages/sidebar_pages/user_management/validators/ValidatorListPage';
 import ValidatorFormPage from './pages/sidebar_pages/user_management/validators/ValidatorFormPage';
 import ValidatorFormEditPage from './pages/sidebar_pages/user_management/validators/ValidatorFormEditPage';
+import { getUserSession } from './utils/functions';
 
-const routes = createBrowserRouter([
-    {
-        path: "",
-        element: <SideNavLayout> <HomePage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "home",
-        element: <SideNavLayout> <HomePage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "precints",
-        element: <SideNavLayout> <PrecintListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "candidates",
-        element: <SideNavLayout> <CandidateListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "local",
-        element: <SideNavLayout> <LocalElectionListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "national",
-        element: <SideNavLayout> <NationalElectionListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "results",
-        children: [
-            // {
-            //     path: "/results/",
-            //     element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
-            //     errorElement: <PageNotFound />,
-            // },
-            {
-                path: "/results/candidates",
-                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
-                errorElement: <PageNotFound />,
-            },
-            {
-                path: "/results/candidates/:id",
-                element: <SideNavLayout> <ResultCandidatePage /> </SideNavLayout>,
-                errorElement: <PageNotFound />,
-            },
-            {
-                path: "/results/precincts",
-                element: <SideNavLayout> <ResultPrecinctListPage /> </SideNavLayout>,
-                errorElement: <PageNotFound />,
-            },
-            {
-                path: "/results/precincts/:id",
-                element: <SideNavLayout> <ResultPrecinctContestPage /> </SideNavLayout>,
-                errorElement: <PageNotFound />,
-            },
-        ],
-    },
-    {
-        path: "results",
-        element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "election-returns",
-        element: <SideNavLayout> <ElectionReturnsListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "upload-results",
-        element: <SideNavLayout> <UploadResultListPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
+const defaultRoutes = [
     {
         path: "login",
         element: <LoginPage />,
         errorElement: <PageNotFound />
     },
     {
-        path: "settings",
-        element: <SideNavLayout> <SettingsPage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
         path: "forgot-password",
         element: <ForgotPasswordPage />,
         errorElement: <PageNotFound />
+    },
+    {
+        path: "/page-not-found",
+        element: <PageNotFound />,
+    },
+    {
+        path: "*",
+        element: <Navigate to="/page-not-found" />,
+    },
+];
+
+const adminRoutes = [
+    {
+        path: "upload-results",
+        element: <SideNavLayout> <UploadResultListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+    {
+        path: "settings",
+        element: <SideNavLayout> <SettingsPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
     },
     {
         path: "user-management",
@@ -151,35 +91,102 @@ const routes = createBrowserRouter([
             },
         ],
     },
-    {
-        path: "/page-not-found",
-        element: <PageNotFound />,
-    },
-    {
-        path: "*",
-        element: <Navigate to="/page-not-found" />,
-    },
+];
 
-    //----- Developer Hub Routes -----\\
+const finalValidatorRoutes = [
     {
-        path: "user-accounts",
-        element: <SideNavLayout> <UserAccountListPage /> </SideNavLayout>,
+        path: "results",
+        children: [
+            {
+                path: "/results/candidates",
+                element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/candidates/:id",
+                element: <SideNavLayout> <ResultCandidatePage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/precincts",
+                element: <SideNavLayout> <ResultPrecinctListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/precincts/:id",
+                element: <SideNavLayout> <ResultPrecinctContestPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+        ],
+    },
+    {
+        path: "election-returns",
+        element: <SideNavLayout> <ElectionReturnsListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+];
+
+const initialValidatorRoutes = [
+    {
+        path: "",
+        element: <SideNavLayout> <HomePage /> </SideNavLayout>,
         errorElement: <PageNotFound />,
     },
     {
-        path: "user-accounts/:id",
-        element: <SideNavLayout> <UserAccountFormPage /> </SideNavLayout>,
+        path: "home",
+        element: <SideNavLayout> <HomePage /> </SideNavLayout>,
         errorElement: <PageNotFound />,
     },
-]);
+    {
+        path: "precints",
+        element: <SideNavLayout> <PrecintListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+    {
+        path: "candidates",
+        element: <SideNavLayout> <CandidateListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+    {
+        path: "local",
+        element: <SideNavLayout> <LocalElectionListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+    {
+        path: "national",
+        element: <SideNavLayout> <NationalElectionListPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
+    },
+];
 
 function App() {
 
     // localStorage - use for long term use.
     // sessionStorage - use when you need to store something that changes or something
-
+    let session = getUserSession();
+    let routes = [];
+    
+    if (!session) {
+        routes = defaultRoutes;
+    } else {
+        switch (session.user.role) {
+            case "Administrator":
+                routes = [...defaultRoutes, ...initialValidatorRoutes, ...finalValidatorRoutes, ...adminRoutes];
+                break;
+            case "Final Validator":
+                routes = [...defaultRoutes, ...initialValidatorRoutes, ...finalValidatorRoutes];
+                break;
+            case "First Validator":
+            case "Second Validator":
+                routes = [...defaultRoutes, ...initialValidatorRoutes];
+                break;
+            default:
+                routes = defaultRoutes; 
+        }
+    }    
+    
     return (
-        <RouterProvider router={routes} />
+        <RouterProvider router={createBrowserRouter(routes)} />
     );
 }
 

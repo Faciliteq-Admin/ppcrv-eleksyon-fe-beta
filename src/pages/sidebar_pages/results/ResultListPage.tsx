@@ -85,14 +85,14 @@ export default function ResultListPage(props: any) {
                 <div className="flex gap-2 w-full lg:w-1/2">
                     <input
                         type="text"
-                        placeholder="candidate"
+                        placeholder="Candidate"
                         className="px-4 py-2 border border-gray-300 rounded-md w-full"
                         value={searchCandidate}
                         onChange={e => setSearchCandidate(e.target.value)}
                     />
                     <input
                         type="text"
-                        placeholder="position / location"
+                        placeholder="Position / Location"
                         className="px-4 py-2 border border-gray-300 rounded-md w-full"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
