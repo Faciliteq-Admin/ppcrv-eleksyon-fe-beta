@@ -115,7 +115,7 @@ const TableCheckbox = (props: any) => {
 
     return (
         <div className="flex flex-col">
-            <div className="grid gap-2 my-2 lg:flex lg:justify-between lg:py-4">
+            <div className="grid gap-2 my-2 lg:flex lg:justify-between">
                 {props.showFilter && <input
                     type="text"
                     placeholder="Search keyword"
@@ -128,7 +128,7 @@ const TableCheckbox = (props: any) => {
                 </div>
                 <p></p>
                 <div className="flex justify-between">
-                    <select
+                    {data.length > 10 && <select
                         className="px-4 py-2 border border-gray-300 rounded-md"
                         value={rowsPerPage}
                         onChange={handleRowsPerPageChange}
@@ -138,7 +138,7 @@ const TableCheckbox = (props: any) => {
                         <option value={25}>25 rows</option>
                         <option value={50}>50 rows</option>
                         <option value={100}>100 rows</option>
-                    </select>
+                    </select>}
                     {props.showActionButton &&
                         <button
                             onClick={props.handleAdd}
@@ -226,7 +226,7 @@ const TableCheckbox = (props: any) => {
                         </select>
                     }
                 </div>
-                <div className="flex justify-between space-x-2">
+                {data.length > 10 && <div className="flex justify-between space-x-2">
                     <button
                         onClick={handlePreviousPage}
                         disabled={currentPage === 1}
@@ -244,7 +244,7 @@ const TableCheckbox = (props: any) => {
                     >
                         Next
                     </button>
-                </div>
+                </div>}
             </div>
         </div>
     );

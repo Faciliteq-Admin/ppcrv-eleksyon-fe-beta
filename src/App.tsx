@@ -23,6 +23,9 @@ import ValidatorListPage from './pages/sidebar_pages/user_management/validators/
 import ValidatorFormPage from './pages/sidebar_pages/user_management/validators/ValidatorFormPage';
 import ValidatorFormEditPage from './pages/sidebar_pages/user_management/validators/ValidatorFormEditPage';
 import { getUserSession } from './utils/functions';
+import MyValidationListPage from './pages/sidebar_pages/validations/MyValidationListPage';
+import ValidationPrecinctListPage from './pages/sidebar_pages/validations/ValidationPrecinctListPage';
+import ValidationPrecinctDetailsPage from './pages/sidebar_pages/validations/ValidationPrecinctDetailsPage';
 
 const defaultRoutes = [
     {
@@ -46,6 +49,21 @@ const defaultRoutes = [
 ];
 
 const adminRoutes = [
+    {
+        path: "validations",
+        children: [
+            {
+                path: "/validations",
+                element: <SideNavLayout> <ValidationPrecinctListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/validations/:id",
+                element: <SideNavLayout> <ValidationPrecinctDetailsPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+        ],
+    },
     {
         path: "upload-results",
         element: <SideNavLayout> <UploadResultListPage /> </SideNavLayout>,
@@ -159,13 +177,36 @@ const initialValidatorRoutes = [
     },
 ];
 
+const validatorRoutes = [
+    {
+        path: "validations",
+        children: [
+            {
+                path: "/validations/my-validations",
+                element: <SideNavLayout> <MyValidationListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/validations/for-validations",
+                element: <SideNavLayout> <ValidationPrecinctListPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/validations/for-validations/:id",
+                element: <SideNavLayout> <ValidationPrecinctDetailsPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+        ],
+    },
+];
+
 function App() {
 
     // localStorage - use for long term use.
     // sessionStorage - use when you need to store something that changes or something
     let session = getUserSession();
     let routes = [];
-    
+
     if (!session) {
         routes = defaultRoutes;
     } else {
@@ -174,16 +215,16 @@ function App() {
                 routes = [...defaultRoutes, ...initialValidatorRoutes, ...finalValidatorRoutes, ...adminRoutes];
                 break;
             case "Final Validator":
-                routes = [...defaultRoutes, ...initialValidatorRoutes, ...finalValidatorRoutes];
+                routes = [...defaultRoutes, ...initialValidatorRoutes, ...validatorRoutes, ...finalValidatorRoutes];
                 break;
             case "Initial Validator":
-                routes = [...defaultRoutes, ...initialValidatorRoutes];
+                routes = [...defaultRoutes, ...initialValidatorRoutes, ...validatorRoutes];
                 break;
             default:
-                routes = defaultRoutes; 
+                routes = defaultRoutes;
         }
-    }    
-    
+    }
+
     return (
         <RouterProvider router={createBrowserRouter(routes)} />
     );

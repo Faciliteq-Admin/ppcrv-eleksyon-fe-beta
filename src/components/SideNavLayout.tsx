@@ -11,6 +11,7 @@ import {
     MapIcon,
     Cog6ToothIcon,
     DocumentChartBarIcon,
+    DocumentCheckIcon,
 } from "@heroicons/react/20/solid";
 
 import { boolValue, getUserSession, saveActiveBatchNumber } from "../utils/functions";
@@ -50,6 +51,27 @@ const defaultNav = [
         icon: <UsersIcon className="w-5 h-5 shrink-0 self-center" />,
     },
 ];
+const initialValidatorNav = [
+    {
+        id: "validations",
+        title: "ER Validations",
+        icon: <DocumentCheckIcon className="w-5 h-5 shrink-0 self-center" />,
+        children: [
+            {
+                id: "forValidations",
+                title: "For Validations",
+                link: "/validations/for-validations",
+                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+            },
+            {
+                id: "myValidations",
+                title: "My Validations",
+                link: "/validations/my-validations",
+                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+            },
+        ]
+    },
+];
 const finalValidatorNav = [
     {
         id: "results",
@@ -78,6 +100,12 @@ const finalValidatorNav = [
     },
 ];
 const adminNav = [
+    {
+        id: "validations",
+        title: "ER Validations",
+        link: "/validations",
+        icon: <DocumentCheckIcon className="w-5 h-5 shrink-0 self-center" />,
+    },
     {
         id: "uploadResults",
         title: "Upload ER",
@@ -137,15 +165,12 @@ const SideNavLayout = (props: any) => {
             navigate('/login');
         }
 
-        console.log(session.user.role);
-        
-
         if (session.user.role === "Administrator") {
-            sidebarData = [...defaultNav, finalValidatorNav, adminNav];
+            sidebarData = [...defaultNav, ...finalValidatorNav, ...adminNav];
         } else if (session.user.role === "Final Validator") {
-            sidebarData = [...defaultNav, ...finalValidatorNav];
+            sidebarData = [...defaultNav, ...initialValidatorNav, ...finalValidatorNav];
         } else {
-            sidebarData = defaultNav;
+            sidebarData = [...defaultNav, ...initialValidatorNav];
         }
 
         let mounted = false;
@@ -169,6 +194,13 @@ const SideNavLayout = (props: any) => {
                 setSelectedSubItem('administrators');
             } else if (path.includes('validators')) {
                 setSelectedSubItem('validators');
+            }
+        } else if (path.includes('validations')) {
+            setSelectedItem('validations');
+            if (path.includes('for')) {
+                setSelectedSubItem('for-validations');
+            } else if (path.includes('my')) {
+                setSelectedSubItem('my-validations');
             }
         } else if (path.includes('national')) {
             setSelectedItem('national');
