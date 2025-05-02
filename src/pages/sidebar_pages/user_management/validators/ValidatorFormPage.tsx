@@ -11,7 +11,7 @@ import { getUserSession } from "../../../../utils/functions";
 export default function ValidatorFormPage(props: any) {
     const navigate = useNavigate();
 
-    const [admin, setAdmin] = useState<any>({});
+    const [admin, setAdmin] = useState<any>({ role: 'Initial Validator' });
     const [loading, setLoading] = useState(false);
     const [alerts, setAlerts] = useState<any[]>([]);
 
@@ -58,7 +58,7 @@ export default function ValidatorFormPage(props: any) {
 
             setLoading(true);
             try {
-                const res = await postRequest(`/administrators`, admin);
+                const res = await postRequest(`/validators`, admin);
                 setLoading(false);
                 // console.log({ res });
                 if (window.confirm("Successfully created data.\nGo back to list?")) {

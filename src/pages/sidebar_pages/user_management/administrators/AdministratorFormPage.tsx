@@ -11,7 +11,7 @@ import { getUserSession } from "../../../../utils/functions";
 export default function AdministratorFormPage(props: any) {
     const navigate = useNavigate();
 
-    const [admin, setAdmin] = useState<any>({});
+    const [admin, setAdmin] = useState<any>({ role: "Administrator" });
     const [loading, setLoading] = useState(false);
     const [alerts, setAlerts] = useState<any[]>([]);
 
