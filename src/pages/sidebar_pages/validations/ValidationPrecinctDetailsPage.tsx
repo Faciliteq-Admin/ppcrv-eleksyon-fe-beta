@@ -443,24 +443,52 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         if (senColumns.length < 4) senColumns = [...senColumns, ...adminAdditionalColumns];
         if (plColumns.length < 4) plColumns = [...plColumns, ...adminAdditionalColumns];
     } else if (user.role === "Final Validator") {
-        // if (locationState.headerLabel === "For Validations") {
-        //     if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols];
-        //     if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols];
-        // } else {
-        //     const col = [{
-        //         header: 'My Validation',
-        //         accessorKey: 'finalPassFlag',
-        //         cell: (info: any) => {
-        //             switch (info) {
-        //                 case true: return <FlagIcon className="size-4 text-red-600" />;
-        //                 case false: return <FlagIcon className="size-4 text-green-600" />;
-        //                 default: return <FlagIcon className="size-4 text-gray-400" />;
-        //             }
-        //         },
-        //     }];
-        //     if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols, ...col];
-        //     if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols, ...col];
-        // }
+        if (locationState.headerLabel === "For Validations") {
+            const sencol = [{
+                header: 'Status',
+                accessorKey: 'rank',
+                cell: (info: any) => {
+                    if (senators && senators.length > 0) {
+                        return <button onClick={() => toggleFlag('senators', 'finalPassFlag', info - 1, -1)}>
+                            {senators[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                            {!(senators[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                        </button>
+                    } else {
+                        return '';
+                    }
+                },
+            }];
+            const plcol = [{
+                header: 'Status',
+                accessorKey: 'rank',
+                cell: (info: any) => {
+                    if (partyLists && partyLists.length > 0) {
+                        return <button onClick={() => toggleFlag('partylist', 'finalPassFlag', info - 1, -1)}>
+                            {partyLists[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                            {!(partyLists[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                        </button>
+                    } else {
+                        return '';
+                    }
+                },
+            }];
+            if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols, ...sencol];
+            if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols, ...plcol];
+        } else {
+            const col = [{
+                header: 'My Validation',
+                accessorKey: 'finalPassFlag',
+                cell: (info: any) => {
+                    switch (info) {
+                        case true: return <FlagIcon className="size-4 text-red-600" />;
+                        case false: return <FlagIcon className="size-4 text-green-600" />;
+                        default: return <FlagIcon className="size-4 text-gray-400" />;
+                    }
+                },
+            }];
+            if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols, ...col];
+            if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols, ...col];
+        }
     } else {
         if (locationState.headerLabel === "For Validations") {
             let accessorKey = 'firstPassFlag';
@@ -567,24 +595,36 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                             if (user.role === "Administrator") {
                                 if (cColumns.length < 4) cColumns = [...cColumns, ...adminAdditionalColumns];
                             } else if (user.role === "Final Validator") {
-                                // if (locationState.headerLabel === "For Validations") {
-                                //     if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols];
-                                //     if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols];
-                                // } else {
-                                //     const col = [{
-                                //         header: 'My Validation',
-                                //         accessorKey: 'finalPassFlag',
-                                //         cell: (info: any) => {
-                                //             switch (info) {
-                                //                 case true: return <FlagIcon className="size-4 text-red-600" />;
-                                //                 case false: return <FlagIcon className="size-4 text-green-600" />;
-                                //                 default: return <FlagIcon className="size-4 text-gray-400" />;
-                                //             }
-                                //         },
-                                //     }];
-                                //     if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols, ...col];
-                                //     if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols, ...col];
-                                // }
+                                if (locationState.headerLabel === "For Validations") {
+                                    const addcol = [{
+                                        header: 'Status',
+                                        accessorKey: 'rank',
+                                        cell: (info: any) => {
+                                            if (provContest && provContest.length > 0) {
+                                                return <button onClick={() => toggleFlag('prov', 'finalPassFlag', idx, info - 1)}>
+                                                    {provContest[idx].candidates[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                                                    {!(provContest[idx].candidates[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                                                </button>
+                                            } else {
+                                                return '';
+                                            }
+                                        },
+                                    }];
+                                    if (cColumns.length < 4) cColumns = [...cColumns, ...initialValidatorCols, ...addcol];
+                                } else {
+                                    const col = [{
+                                        header: 'My Validation',
+                                        accessorKey: 'finalPassFlag',
+                                        cell: (info: any) => {
+                                            switch (info) {
+                                                case true: return <FlagIcon className="size-4 text-red-600" />;
+                                                case false: return <FlagIcon className="size-4 text-green-600" />;
+                                                default: return <FlagIcon className="size-4 text-gray-400" />;
+                                            }
+                                        },
+                                    }];
+                                    if (cColumns.length < 4) cColumns = [...cColumns, ...initialValidatorCols, ...col];
+                                }
                             } else {
                                 if (locationState.headerLabel === "For Validations") {
                                     let accessorKey = 'firstPassFlag';
@@ -665,24 +705,36 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                             if (user.role === "Administrator") {
                                 if (cColumns.length < 4) cColumns = [...cColumns, ...adminAdditionalColumns];
                             } else if (user.role === "Final Validator") {
-                                // if (locationState.headerLabel === "For Validations") {
-                                //     if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols];
-                                //     if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols];
-                                // } else {
-                                //     const col = [{
-                                //         header: 'My Validation',
-                                //         accessorKey: 'finalPassFlag',
-                                //         cell: (info: any) => {
-                                //             switch (info) {
-                                //                 case true: return <FlagIcon className="size-4 text-red-600" />;
-                                //                 case false: return <FlagIcon className="size-4 text-green-600" />;
-                                //                 default: return <FlagIcon className="size-4 text-gray-400" />;
-                                //             }
-                                //         },
-                                //     }];
-                                //     if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols, ...col];
-                                //     if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols, ...col];
-                                // }
+                                if (locationState.headerLabel === "For Validations") {
+                                    const addcol = [{
+                                        header: 'Status',
+                                        accessorKey: 'rank',
+                                        cell: (info: any) => {
+                                            if (munContest && munContest.length > 0) {
+                                                return <button onClick={() => toggleFlag('mun', 'finalPassFlag', idx, info - 1)}>
+                                                    {munContest[idx].candidates[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                                                    {!(munContest[idx].candidates[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                                                </button>
+                                            } else {
+                                                return '';
+                                            }
+                                        },
+                                    }];
+                                    if (cColumns.length < 4) cColumns = [...cColumns, ...initialValidatorCols, ...addcol];
+                                } else {
+                                    const col = [{
+                                        header: 'My Validation',
+                                        accessorKey: 'finalPassFlag',
+                                        cell: (info: any) => {
+                                            switch (info) {
+                                                case true: return <FlagIcon className="size-4 text-red-600" />;
+                                                case false: return <FlagIcon className="size-4 text-green-600" />;
+                                                default: return <FlagIcon className="size-4 text-gray-400" />;
+                                            }
+                                        },
+                                    }];
+                                    if (cColumns.length < 4) cColumns = [...cColumns, ...initialValidatorCols, ...col];
+                                }
                             } else {
                                 if (locationState.headerLabel === "For Validations") {
                                     let accessorKey = 'firstPassFlag';
@@ -782,7 +834,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                     {payload && payload.validationData && <div>
                         {payload.validationData.map((d: any) => {
                             if (d.candidates.length > 0) {
-                                return <div  key={d.contest}  className="mb-2 mt-2">
+                                return <div key={d.contest} className="mb-2 mt-2">
                                     <div className="font-semibold text-sm">{d.contest}</div>
                                     <div>
                                         {d.candidates.map((c: any) =>
@@ -866,7 +918,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                         <>Matched</>
                     </span>
                     {user.role === "Administrator" && <span className="flex gap-4">
-                        <FlagIcon className="size-4 text-gray-400" />  
+                        <FlagIcon className="size-4 text-gray-400" />
                         <>Unvalidated</>
                     </span>}
                 </div>

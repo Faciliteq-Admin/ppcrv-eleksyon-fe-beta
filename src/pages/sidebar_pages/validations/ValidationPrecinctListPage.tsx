@@ -318,8 +318,8 @@ export default function ValidationPrecinctListPage(props: any) {
                                             >
                                                 <b className='flex'>
                                                     {!row.finalPassDone && <FlagIcon className="size-4 text-gray-400" />}
-                                                    {row.finalPassDone && row.finalPassFlag && <FlagIcon className="size-4 text-green-600" />}
-                                                    {row.finalPassDone && !row.finalPassFlag && <FlagIcon className="size-4 text-red-600" />}
+                                                    {row.finalPassDone && !row.finalPassFlag && <FlagIcon className="size-4 text-green-600" />}
+                                                    {row.finalPassDone && row.finalPassFlag && <FlagIcon className="size-4 text-red-600" />}
                                                 </b>
                                             </th>}
                                             <td
