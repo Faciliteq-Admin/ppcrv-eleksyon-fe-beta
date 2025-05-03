@@ -2,10 +2,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
-import { ChevronLeftIcon, FlagIcon } from "@heroicons/react/20/solid";
+import { ChevronLeftIcon, ChevronRightIcon, FlagIcon } from "@heroicons/react/20/solid";
 import { getRequest } from "../../../utils/apiHelpers";
 import { awaitTimeout, getActiveBatchNumber, getUserSession } from "../../../utils/functions";
 import TableCheckbox from "../../../components/TableCheckbox";
+import ActionButton from "../../../components/ActionButton";
 
 export default function ValidationPrecinctDetailsPage(props: any) {
     const navigate = useNavigate();
@@ -133,11 +134,6 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                     {contRes.map((c: any, idx: number) => {
                                         let cColumns = [
                                             {
-                                                header: 'Rank',
-                                                accessorKey: 'rank',
-                                                cell: (info: any) => `${info ?? 0}`,
-                                            },
-                                            {
                                                 header: 'Candidate',
                                                 accessorKey: 'rank',
                                                 cell: (info: any) => {
@@ -155,7 +151,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                                 cell: (info: any) => `${info ?? 0}`,
                                             },
                                         ];
-                                        
+
                                         if (user.role === "Administrator") {
                                             if (cColumns.length < 4) cColumns = [...cColumns, ...adminAdditionalColumns];
                                         }
@@ -169,24 +165,6 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                                 }</p>
                                             </div>
                                             <TableCheckbox data={c.candidates} columns={cColumns} rowsPerPage={12} showActionButton={false} />
-                                            {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
-                                                {c.candidates && (c.candidates as any[]).map((s: any, idx: number) => {
-                                                    const cand = s.candidateName.split('(');
-                                                    const name = cand[0];
-                                                    // const party = cand[1].replace(')', '');
-                                                    return (
-                                                        <div key={idx} className="flex flex-row justify-between items-center">
-                                                            <div className="flex flex-row items-center gap-2 m-1">
-                                                                <div className="p-1 size-7 bg-slate-700 rounded-full">
-                                                                    <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
-                                                                </div>
-                                                                <p className="text-sm font-medium capitalize">{name.toLowerCase()}</p> -
-                                                                <p className="font-bold text-green-500">{s.totalVotes ?? 0}</p>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div> */}
                                         </EmptyCard>
                                     })}
                                 </div>
@@ -244,11 +222,6 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                     {contRes.map((c: any, idx: number) => {
                                         let cColumns = [
                                             {
-                                                header: 'Rank',
-                                                accessorKey: 'rank',
-                                                cell: (info: any) => `${info ?? 0}`,
-                                            },
-                                            {
                                                 header: 'Candidate',
                                                 accessorKey: 'rank',
                                                 cell: (info: any) => {
@@ -278,24 +251,6 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                                 }</p>
                                             </div>
                                             <TableCheckbox data={c.candidates} columns={cColumns} rowsPerPage={12} showActionButton={false} />
-                                            {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
-                                                {c.candidates && (c.candidates as any[]).map((s: any, idx: number) => {
-                                                    const cand = s.candidateName.split('(');
-                                                    const name = cand[0];
-                                                    // const party = cand[1].replace(')', '');
-                                                    return (
-                                                        <div key={idx} className="flex flex-row justify-between items-center">
-                                                            <div className="flex flex-row items-center gap-2 m-1">
-                                                                <div className="p-1 size-7 bg-slate-700 rounded-full">
-                                                                    <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
-                                                                </div>
-                                                                <p className="text-sm font-medium capitalize">{name.toLowerCase()}</p> -
-                                                                <p className="font-bold text-green-500">{s.totalVotes ?? 0}</p>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div> */}
                                         </EmptyCard>
                                     })}
                                 </div>
@@ -312,15 +267,25 @@ export default function ValidationPrecinctDetailsPage(props: any) {
     }
 
     const handleBack = () => {
-        navigate('/results/precincts');
+        let session = getUserSession();
+        console.log(session.user.role);
+
+        if (session.user.role === "Administrator") {
+            navigate('/validations/');
+        } else {
+            if (locationState.headerLabel === 'For Validations') {
+                navigate('/validations/for-validations');
+            } else {
+                navigate('/validations/my-validations');
+            }
+        }
     }
 
-    let senColumns = [
-        {
-            header: 'Rank',
-            accessorKey: 'rank',
-            cell: (info: any) => `${info ?? 0}`,
-        },
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+    }
+
+    let senColumns: any = [
         {
             header: 'Candidate',
             accessorKey: 'rank',
@@ -340,12 +305,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         },
     ];
 
-    let plColumns = [
-        {
-            header: 'Rank',
-            accessorKey: 'rank',
-            cell: (info: any) => `${info ?? 0}`,
-        },
+    let plColumns: any = [
         {
             header: 'Candidate',
             accessorKey: 'rank',
@@ -365,10 +325,129 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         },
     ];
 
-    
+    const initialValidatorCols = [
+        {
+            header: '1st Validation',
+            accessorKey: 'firstPassFlag',
+            cell: (info: any) => {
+                switch (info) {
+                    case true: return <FlagIcon className="size-4 text-red-600" />;
+                    case false: return <FlagIcon className="size-4 text-green-600" />;
+                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                }
+            },
+        },
+        {
+            header: '2nd Validation',
+            accessorKey: 'secondPassFlag',
+            cell: (info: any) => {
+                switch (info) {
+                    case true: return <FlagIcon className="size-4 text-red-600" />;
+                    case false: return <FlagIcon className="size-4 text-green-600" />;
+                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                }
+            },
+        },
+    ];
+
+    console.log({ senators });
+
+
+    const toggleFlag = (data: string, accessorKey: string, index1: number, index2?: number) => {
+        console.log(data, accessorKey, index1, index2);
+        if (data === 'senators') {
+            let arr = [...senators];
+            const value = arr[index1][accessorKey];
+            arr[index1][accessorKey] = value ? false : true;
+            setSenators([...arr]);
+        } else if (data === 'partylist') {
+            let arr = [...partyLists];
+            const value = arr[index1][accessorKey];
+            arr[index1][accessorKey] = value ? false : true;
+            setPartyLists([...arr]);
+        } else {
+
+        }
+    }
+
     if (user.role === "Administrator") {
         if (senColumns.length < 4) senColumns = [...senColumns, ...adminAdditionalColumns];
         if (plColumns.length < 4) plColumns = [...plColumns, ...adminAdditionalColumns];
+    } else if (user.role === "Final Validator") {
+        if (locationState.headerLabel === "For Validations") {
+            if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols];
+            if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols];
+        } else {
+            const col = [{
+                header: 'My Validation',
+                accessorKey: 'finalPassFlag',
+                cell: (info: any) => {
+                    switch (info) {
+                        case true: return <FlagIcon className="size-4 text-red-600" />;
+                        case false: return <FlagIcon className="size-4 text-green-600" />;
+                        default: return <FlagIcon className="size-4 text-gray-400" />;
+                    }
+                },
+            }];
+            if (senColumns.length < 4) senColumns = [...senColumns, ...initialValidatorCols, ...col];
+            if (plColumns.length < 4) plColumns = [...plColumns, ...initialValidatorCols, ...col];
+        }
+    } else {
+        if (locationState.headerLabel === "For Validations") {
+            let accessorKey = 'firstPassFlag';
+            if (locationState.firstValidator !== null) {
+                accessorKey = 'secondPassFlag'
+            }
+            const sencol = [{
+                header: 'For Validation',
+                accessorKey: 'rank',
+                cell: (info: any) => {
+                    if (senators && senators.length > 0) {
+                        return <button onClick={() => toggleFlag('senators', accessorKey, info - 1, undefined)}>
+                            {senators[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
+                            {!(senators[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
+                        </button>
+                    } else {
+                        return '';
+                    }
+                },
+            }];
+            const plcol = [{
+                header: 'For Validation',
+                accessorKey: 'rank',
+                cell: (info: any) => {
+                    if (partyLists && partyLists.length > 0) {
+                        return <button onClick={() => toggleFlag('partylist', accessorKey, info - 1, undefined)}>
+                            {partyLists[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
+                            {!(partyLists[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
+                        </button>
+                    } else {
+                        return '';
+                    }
+                },
+            }];
+
+            if (senColumns.length < 4) senColumns = [...senColumns, ...sencol];
+            if (plColumns.length < 4) plColumns = [...plColumns, ...plcol];
+        } else {
+            let accessorKey = 'firstPassFlag';
+            if (locationState.firstValidator !== user.id) {
+                accessorKey = 'secondPassFlag'
+            }
+            const col = [{
+                header: 'My Validation',
+                accessorKey: accessorKey,
+                cell: (info: any) => {
+                    switch (info) {
+                        case true: return <FlagIcon className="size-4 text-red-600" />;
+                        case false: return <FlagIcon className="size-4 text-green-600" />;
+                        default: return <FlagIcon className="size-4 text-gray-400" />;
+                    }
+                },
+            }];
+            if (senColumns.length < 4) senColumns = [...senColumns, ...col];
+            if (plColumns.length < 4) plColumns = [...plColumns, ...col];
+        }
     }
 
     const items = [
@@ -386,21 +465,6 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                     content: <div className="grid">
                         {partyLists && <TableCheckbox data={partyLists} columns={plColumns} rowsPerPage={12} showActionButton={false} />}
                     </div>
-                    // <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-                    //     {partyLists && partyLists.map((s: any, idx: number) => {
-                    //         return (
-                    //             <div key={idx} className="flex flex-row justify-between m-1 items-center">
-                    //                 <div className="flex flex-row items-center gap-2">
-                    //                     <div className="p-1 size-7 bg-slate-700 rounded-full">
-                    //                         <p className="text-sm font-medium text-center text-white">{`${s.totalizationOrder}`}</p>
-                    //                     </div>
-                    //                     <p className="text-sm font-medium capitalize">{`${s.candidateName}`}</p> -
-                    //                     <p className="font-bold text-green-500">{s.totalVotes ?? 0}</p>
-                    //                 </div>
-                    //             </div>
-                    //         );
-                    //     })}
-                    // </div>
                 }
             ]} />,
         },
@@ -413,7 +477,11 @@ export default function ValidationPrecinctDetailsPage(props: any) {
     return (
         <div>
             {(loading || prvLoading || munLoading) && <Loader />}
-            <span className="flex text-sm font-medium">Results by Precinct</span>
+            <span className="flex text-sm font-medium text-gray-500">
+                ER Validations <ChevronRightIcon className="size-4 self-center" />
+                {locationState.headerLabel && <p className="flex">{locationState.headerLabel} <ChevronRightIcon className="size-4 self-center" /></p>}
+                <p className="text-black">{locationState.precinctCode}</p>
+            </span>
             <div className="mt-4 flex justify-between px-2">
                 <div className="">
                     <button type="button" onClick={handleBack} className="flex text-sm/6 font-semibold text-gray-900">
@@ -466,7 +534,35 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 </div>
             </div>
 
+            {(!locationState.headerLabel || locationState.headerLabel !== "For Validations") && <div className="justify-between px-2 mt-4">
+                <div className="">
+                    Legend:
+                </div>
+                <div className="flex gap-4">
+                    <span className="flex text-end">
+                        <FlagIcon className="size-4 text-red-600" /> mismatched
+                    </span>
+                    <span className="flex">
+                        <FlagIcon className="size-4 text-green-600" /> - matched
+                    </span>
+                    <span className="flex">
+                        <FlagIcon className="size-4 text-gray-400" /> - unvalidated
+                    </span>
+                </div>
+            </div>}
             <Accordion items={items} />
+            {locationState.headerLabel === "For Validations" && <div className="flex justify-between px-2 mt-4">
+                <div className="">
+                </div>
+                <div className="flex items-center justify-end gap-x-6">
+                    <button
+                        onClick={handleSubmit}
+                        className="px-4 py-2 bg-green-500 rounded-md hover:bg-green-400 disabled:opacity-50 self-end text-white font-medium"
+                    >
+                        Submit Validation
+                    </button>
+                </div>
+            </div>}
         </div>
     );
 }

@@ -7,8 +7,9 @@ export const useResultPrecinctSummary = (page: number, limit: number) => {
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    const getResultSummary = async (regName?: string, prvName?: string, munName?: string, brgyName?: string, search?: string) => {
+    const getResultSummary = async (regName?: string, prvName?: string, munName?: string, brgyName?: string, search?: string, type?: string) => {
         let path = `/qr/summary?page=${page}&limit=${limit}`;
+        if (type) path += `&type=${type}`;
         if (search) path += `&acmId=${search}`;
         if (regName) path += `&regName=${regName}`;
         if (prvName) path += `&prvName=${prvName}`;

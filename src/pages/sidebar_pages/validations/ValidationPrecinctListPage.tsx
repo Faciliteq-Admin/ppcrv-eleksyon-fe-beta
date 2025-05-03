@@ -4,8 +4,8 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { useLocations } from "../../../hooks/useLocations";
 import { useResultPrecinctSummary } from "../../../hooks/useValidationSummary";
-import { getActiveBatchNumber, getUserSession } from "../../../utils/functions";
-import { FlagIcon } from "@heroicons/react/20/solid";
+import { getUserSession } from "../../../utils/functions";
+import { ChevronRightIcon, FlagIcon } from "@heroicons/react/20/solid";
 
 export default function ValidationPrecinctListPage(props: any) {
     const navigate = useNavigate();
@@ -115,7 +115,8 @@ export default function ValidationPrecinctListPage(props: any) {
         if (session.user.role === "Administrator") {
             navigate('/validations/' + data._id, { state: data });
         } else {
-            navigate('/validations/for-validations/' + data._id, { state: data });
+            const newData = { ...data, headerLabel: 'For Validations' };
+            navigate('/validations/for-validations/' + data._id, { state: newData });
         }
     }
 
@@ -123,7 +124,7 @@ export default function ValidationPrecinctListPage(props: any) {
         <div>
             {loading && <Loader />}
             {isLoading && <Loader />}
-            <span className="flex text-sm font-medium">QR Results Validation</span>
+            <span className="flex text-sm font-medium text-gray-500">ER Validations <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">For Validations</p> </span>
             <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
