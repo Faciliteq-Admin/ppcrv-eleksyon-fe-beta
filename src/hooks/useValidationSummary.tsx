@@ -19,9 +19,6 @@ export const useResultPrecinctSummary = (page: number, limit: number) => {
         setLoading(true);
         getRequest(path).then(response => {
 
-            console.log(response.data);
-            
-
             setData(response.data.items);
             setTotal(response.data.total);
         }).finally(() => {
