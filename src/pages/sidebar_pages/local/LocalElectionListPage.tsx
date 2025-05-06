@@ -16,7 +16,7 @@ export default function LocalElectionListPage(props: any) {
     const [cityMuns, setCityMuns] = useState<any[]>([]);
     const [barangays, setBarangays] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
-    const [selectedRegion, setSelectedRegion] = useState("NATIONAL CAPITAL REGION");
+    const [selectedRegion, setSelectedRegion] = useState("CORDILLERA ADMINISTRATIVE REGION");
     const [selectedProvince, setSelectedProvince] = useState("ABRA");
     const [selectedCityMuns, setSelectedCityMuns] = useState("");
     const [selectedBarangay, setSelectedBarangay] = useState("");
@@ -113,7 +113,7 @@ export default function LocalElectionListPage(props: any) {
 
     const getLocations = async () => {
         await getRegions();
-        await getProvinces();
+        await getProvinces(selectedRegion);
         await getMunicipalities(selectedProvince);
     }
 
