@@ -908,7 +908,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 <div className="">
                     Legend:
                 </div>
-                <div className="gap-4 ml-4">
+                <div className="gap-4 ml-4 lg:flex lg:gap-10">
                     <span className="flex gap-4">
                         <FlagIcon className="size-4 text-red-600" />
                         <>Mismatched</>

@@ -2,7 +2,6 @@ import './App.css';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import LoginPage from './pages/login';
 import PageNotFound from './pages/pageNotFound';
-import HomePage from './pages/home';
 import ForgotPasswordPage from './pages/forgotPassword';
 import SettingsPage from './pages/sidebar_pages/settings/SettingsPage';
 import SideNavLayout from './components/SideNavLayout';
@@ -147,12 +146,7 @@ const finalValidatorRoutes = [
 const initialValidatorRoutes = [
     {
         path: "",
-        element: <SideNavLayout> <HomePage /> </SideNavLayout>,
-        errorElement: <PageNotFound />,
-    },
-    {
-        path: "home",
-        element: <SideNavLayout> <HomePage /> </SideNavLayout>,
+        element: <SideNavLayout> <NationalElectionListPage /> </SideNavLayout>,
         errorElement: <PageNotFound />,
     },
     {
@@ -182,7 +176,7 @@ const validatorRoutes = [
         path: "validations",
         children: [
             {
-                path: "/validations/my-validations",
+                path: "/validations/completed-validations",
                 element: <SideNavLayout> <MyValidationListPage /> </SideNavLayout>,
                 errorElement: <PageNotFound />,
             },

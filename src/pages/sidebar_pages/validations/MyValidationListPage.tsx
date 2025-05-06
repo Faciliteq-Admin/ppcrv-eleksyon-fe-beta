@@ -109,7 +109,7 @@ export default function MyValidationListPage(props: any) {
     }
 
     const handleRowClick = async (data: any) => {
-        const newData = { ...data, headerLabel: 'My Validations' };
+        const newData = { ...data, headerLabel: 'Completed Validations' };
         navigate('/validations/for-validations/' + data._id, { state: newData });
     }
 
@@ -117,7 +117,7 @@ export default function MyValidationListPage(props: any) {
         <div>
             {loading && <Loader />}
             {isLoading && <Loader />}
-            <span className="flex text-sm font-medium text-gray-500">ER Validations <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">My Validations</p> </span>
+            <span className="flex text-sm font-medium text-gray-500">ER Validations <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">Completed Validations</p> </span>
             <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">

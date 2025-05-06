@@ -17,15 +17,8 @@ import {
 import { boolValue, getUserSession, saveActiveBatchNumber } from "../utils/functions";
 import SidebarMain from "./SidebarMain";
 import { getRequest } from "../utils/apiHelpers";
-import { log } from "node:console";
 
 const defaultNav = [
-    {
-        id: "home",
-        title: "Home",
-        link: "/",
-        icon: <HomeIcon className="w-5 h-5 shrink-0 self-center" />,
-    },
     {
         id: "national",
         title: "National",
@@ -64,9 +57,9 @@ const initialValidatorNav = [
                 icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
             },
             {
-                id: "myValidations",
-                title: "My Validations",
-                link: "/validations/my-validations",
+                id: "completedValidations",
+                title: "Completed Validations",
+                link: "/validations/completed-validations",
                 icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
             },
         ]
@@ -180,7 +173,7 @@ const SideNavLayout = (props: any) => {
         const path = window.location.pathname;
 
         if (["/", "/home"].includes(path)) {
-            setSelectedItem('home');
+            setSelectedItem('national');
         } else if (path.includes('results')) {
             setSelectedItem('results');
             if (path.includes('candidates')) {
@@ -199,8 +192,8 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('validations');
             if (path.includes('for')) {
                 setSelectedSubItem('for-validations');
-            } else if (path.includes('my')) {
-                setSelectedSubItem('my-validations');
+            } else if (path.includes('completed')) {
+                setSelectedSubItem('completed-validations');
             }
         } else if (path.includes('national')) {
             setSelectedItem('national');

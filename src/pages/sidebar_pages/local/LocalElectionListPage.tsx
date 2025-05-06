@@ -288,7 +288,7 @@ export default function LocalElectionListPage(props: any) {
             </div>
 
             {municipalContest && municipalContest.length > 0 && municipalContest.map((c: any, idx: number) => (
-                <EmptyCard>
+                <EmptyCard key={`${idx}-${c.contestName}`}>
                     <div className="mb-4">
                         <p className="text-sm font-medium">{c.contestName}</p>
                     </div>
@@ -316,7 +316,7 @@ export default function LocalElectionListPage(props: any) {
             {municipalContest.length > 0 && provincialContest.length > 0 && <hr className="h-px my-8 bg-gray-200 border-2 dark:bg-gray-700" />}
 
             {provincialContest && provincialContest.length > 0 && provincialContest.map((c: any, idx: number) => (
-                <EmptyCard>
+                <EmptyCard key={`${idx}-${c.contestName}`}>
                     <div className="mb-4">
                         <p className="text-sm font-medium">{c.contestName}</p>
                     </div>

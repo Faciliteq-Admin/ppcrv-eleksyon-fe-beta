@@ -5,6 +5,7 @@ import { getActiveBatchNumber, saveActiveBatchNumber } from "../utils/functions"
 export const useResultPrecinctSummary = (page: number, limit: number) => {
     const [data, setData] = useState<any[]>();
     const [total, setTotal] = useState(0);
+    const [count, setCount] = useState<any|undefined>();
     const [loading, setLoading] = useState(false);
 
     const getResultSummary = async (regName?: string, prvName?: string, munName?: string, brgyName?: string, search?: string, type?: string) => {
@@ -21,10 +22,11 @@ export const useResultPrecinctSummary = (page: number, limit: number) => {
 
             setData(response.data.items);
             setTotal(response.data.total);
+            setCount(response.data.count);
         }).finally(() => {
             setLoading(false);
         });
     };
 
-    return { data, total, loading, getResultSummary };
+    return { data, total, loading, count, getResultSummary };
 }

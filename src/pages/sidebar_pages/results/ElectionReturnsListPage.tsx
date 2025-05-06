@@ -146,7 +146,7 @@ export default function ElectionReturnsListPage(props: any) {
                     </div>
                 </div>
                 {data && data.length > 0 &&
-                    <Table data={data} columns={tColumns} />
+                    <Table data={data} columns={tColumns} handleRowClick={() => {}} />
                 }
                 {!data || data.length === 0 && <EmptyCard>
                     <div className="place-self-center">
