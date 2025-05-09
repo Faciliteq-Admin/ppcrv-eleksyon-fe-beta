@@ -7,6 +7,7 @@ import Loader from "../../../components/Loader";
 import { useElectionResults } from "../../../hooks/useElectionResults";
 import EmptyCard from "../../../components/EmptyCard";
 import { getRequest, putRequest } from "../../../utils/apiHelpers";
+import Alert from "../../../components/Alert";
 
 export default function SettingsPage(props: any) {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function SettingsPage(props: any) {
     const [activeBatch, setActiveBatch] = useState("");
     const [activeBatchSetting, setActiveBatchSetting] = useState<any>();
     const [uploadBatchNumSetting, setUploadBatchNumSetting] = useState<any>();
+    const [alerts, setAlerts] = useState<any[]>([]);
 
     let uploadCount = 0;
 
@@ -50,12 +52,35 @@ export default function SettingsPage(props: any) {
             setActiveBatch(settingRes.data.value);
             saveActiveBatchNumber(settingRes.data.value);
         }
+        if (settingRes && settingRes.error) {
+            addAlert("error", settingRes.error.response.data.message, 1500);
+        }
         setLoading(false);
     }
+
+    const addAlert = (type: "info" | "success" | "warning" | "error", message: string, duration: number) => {
+        const id = Date.now();
+        setAlerts((prev) => [...prev, { id, type, message, duration }]);
+    };
+
+    const removeAlert = (id: any) => {
+        setAlerts((prev) => prev.filter((alert) => alert.id !== id));
+    };
 
     return (
         <div>
             {loading && <Loader />}
+            <div className="fixed top-20 right-20">
+                {alerts.map((alert) =>
+                    <Alert
+                        key={alert.id}
+                        type={alert.type}
+                        message={alert.message}
+                        duration={alert.duration} // 3 seconds
+                        onClose={() => removeAlert(alert.id)}
+                    />
+                )}
+            </div>
             <span className="text-sm font-medium">Settings</span>
             <div className="flex flex-col">
                 <EmptyCard>
