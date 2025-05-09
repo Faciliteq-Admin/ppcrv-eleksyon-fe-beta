@@ -367,7 +367,7 @@ export default function ResultCandidatePage(props: any) {
                                                 key={`percent-${idx}`}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {`${(row.totalVotes / row.registeredVoters).toFixed(2)} %`}
+                                                {`${((row.totalVotes / row.registeredVoters) * 100).toFixed(2)} %`}
                                             </td>
                                         </tr>
                                     ))}

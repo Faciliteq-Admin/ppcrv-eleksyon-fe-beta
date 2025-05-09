@@ -12,6 +12,7 @@ import {
     Cog6ToothIcon,
     DocumentChartBarIcon,
     DocumentCheckIcon,
+    ClipboardDocumentListIcon,
 } from "@heroicons/react/20/solid";
 
 import { boolValue, getUserSession, saveActiveBatchNumber } from "../utils/functions";
@@ -93,6 +94,12 @@ const finalValidatorNav = [
     },
 ];
 const adminNav = [
+    {
+        id: "summary",
+        title: "ER Summary",
+        link: "/summary",
+        icon: <ClipboardDocumentListIcon className="w-5 h-5 shrink-0 self-center" />,
+    },
     {
         id: "validations",
         title: "ER Validations",
@@ -209,6 +216,8 @@ const SideNavLayout = (props: any) => {
             setSelectedItem('electionReturns');
         } else if (path.includes('settings')) {
             setSelectedItem('settings');
+        } else if (path.includes('summary')) {
+            setSelectedItem('summary');
         }
 
         handleGetActiveBatch();

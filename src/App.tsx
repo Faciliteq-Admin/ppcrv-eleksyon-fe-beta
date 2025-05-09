@@ -25,6 +25,7 @@ import { getUserSession } from './utils/functions';
 import MyValidationListPage from './pages/sidebar_pages/validations/MyValidationListPage';
 import ValidationPrecinctListPage from './pages/sidebar_pages/validations/ValidationPrecinctListPage';
 import ValidationPrecinctDetailsPage from './pages/sidebar_pages/validations/ValidationPrecinctDetailsPage';
+import ResultSummaryPage from './pages/sidebar_pages/results/ResultSummaryPage';
 
 const defaultRoutes = [
     {
@@ -62,6 +63,11 @@ const adminRoutes = [
                 errorElement: <PageNotFound />,
             },
         ],
+    },
+    {
+        path: "summary",
+        element: <SideNavLayout> <ResultSummaryPage /> </SideNavLayout>,
+        errorElement: <PageNotFound />,
     },
     {
         path: "upload-results",
@@ -202,7 +208,14 @@ function App() {
     let routes = [];
 
     if (!session) {
-        routes = defaultRoutes;
+        routes = [
+            ...defaultRoutes,
+            {
+                path: "",
+                element: <LoginPage />,
+                errorElement: <PageNotFound />
+            }
+        ];
     } else {
         switch (session.user.role) {
             case "Administrator":
