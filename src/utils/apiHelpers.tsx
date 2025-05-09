@@ -2,9 +2,10 @@ import axios from "axios";
 import { getUserSession } from "./functions";
 
 const BASE_URL = process.env.REACT_APP_BASEURL;
+const API_KEY = process.env.REACT_APP_APIKEY;
 
 const getHeaders = () => {
-    const headers: any = { 'x-api-key': 'k@2!-v-$j%5je-8!' };
+    const headers: any = { 'x-api-key': API_KEY };
 
     let session = getUserSession();
     if (session) headers['Authorization'] = 'Bearer ' + session.token;
