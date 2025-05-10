@@ -58,18 +58,18 @@ export default function UploadResultListPage(props: any) {
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
-        {
-            header: 'Has Error',
-            accessorKey: 'hasErrors',
-            cell: (info: any) => {
-                console.log(info);
+        // {
+        //     header: 'Has Error',
+        //     accessorKey: 'hasErrors',
+        //     cell: (info: any) => {
+        //         console.log(info);
 
-                if (info === null) return '';
-                else if (info) return <p className="text-red-500">Yes</p>;
-                else return <p className="text-green-500">No</p>;
-            },
-            sort: true,
-        },
+        //         if (info === null) return '';
+        //         else if (info) return <p className="text-red-500">Yes</p>;
+        //         else return <p className="text-green-500">No</p>;
+        //     },
+        //     sort: true,
+        // },
         {
             header: 'Date Uploaded',
             accessorKey: 'createdAt',
@@ -88,32 +88,32 @@ export default function UploadResultListPage(props: any) {
         //     cell: (info: any) => `${info ?? 'N/A'}`,
         //     sort: true,
         // },
-        {
-            header: 'Actions',
-            accessorKey: null,
-            cell: (info: any) => {
+        // {
+        //     header: 'Actions',
+        //     accessorKey: null,
+        //     cell: (info: any) => {
                 
-                if (results && results.length > 0) {
+        //         if (results && results.length > 0) {
 
-                    if (["Ongoing","Completed"].includes(results[info].status)) {
-                        return <span className="disabled">
-                            <button className="text-gray-500">Ingest Data</button>
-                        </span>
-                    } else if (results[info].status === "Incomplete") {
-                        return <span className="">
-                            <button className="text-blue-500" onClick={(e) => handleIngest(e, info)}>Re-ingest Data</button>
-                        </span>
-                    } else {
-                        return <span className="disabled">
-                            <button className="text-blue-500" onClick={(e) => handleIngest(e, info)}>Ingest Data</button>
-                        </span>
-                    }
-                } else {
-                    return '';
-                }
+        //             if (["Ongoing","Completed"].includes(results[info].status)) {
+        //                 return <span className="disabled">
+        //                     <button className="text-gray-500">Ingest Data</button>
+        //                 </span>
+        //             } else if (results[info].status === "Incomplete") {
+        //                 return <span className="">
+        //                     <button className="text-blue-500" onClick={(e) => handleIngest(e, info)}>Re-ingest Data</button>
+        //                 </span>
+        //             } else {
+        //                 return <span className="disabled">
+        //                     <button className="text-blue-500" onClick={(e) => handleIngest(e, info)}>Ingest Data</button>
+        //                 </span>
+        //             }
+        //         } else {
+        //             return '';
+        //         }
 
-            }
-        }
+        //     }
+        // }
     ];
 
     const handleIngest = async (e: any, index: any) => {
