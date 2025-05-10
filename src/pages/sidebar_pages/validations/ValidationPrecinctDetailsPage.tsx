@@ -902,6 +902,16 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                         {locationState.brgyName}
                     </div>
                 </div>
+                {(user.role === 'Administrator') && <div className="">
+                    <label htmlFor="selectedBarangay" className="block text-sm/6 font-medium text-gray-900">
+                        Status
+                    </label>
+                    <div className="mt">
+                        {(!locationState.finalPassDone) && <p className="font-semibold text-lg text-gray-700">Pending</p>}
+                        {(locationState.finalPassFlag && locationState.finalPassDone) && <p className="font-semibold text-lg text-red-700">With Discrepancy</p>}
+                        {(!locationState.finalPassFlag && locationState.finalPassDone) && <p className="font-semibold text-lg text-green-700">Without Discrepancy</p>}
+                    </div>
+                </div>}
             </div>
 
             {(!locationState.headerLabel || locationState.headerLabel !== "For Validations") && <div className="justify-between px-2 mt-4">
