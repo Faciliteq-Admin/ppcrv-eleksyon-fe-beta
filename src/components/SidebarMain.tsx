@@ -65,13 +65,13 @@ export default function SidebarMain(props: any) {
                         } </ul>
                     </div>
                 </div>
-                <div className="mt-10 text-center text-sm text-gray-500">
-                    <button
+                <div className="mt-1 text-center text-sm text-gray-500">
+                    {/* <button
                         className="text-white mb-4 w-8 h-8 rounded-full bg-slate-500 mx-auto flex"
                         onClick={() => props.handleSidebarMinify()}
                     >
                         {props.isMinified ? <ChevronRightIcon className='w-6 h-6 mx-auto my-auto' /> : <ChevronLeftIcon className='w-6 h-6 mx-auto my-auto' />}
-                    </button>
+                    </button> */}
                     <a href="https://mytechph.net/" target="_blank">
                         <img
                             alt="Powered by MyTechPH"
