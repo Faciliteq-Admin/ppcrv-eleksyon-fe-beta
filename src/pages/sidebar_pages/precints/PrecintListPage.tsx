@@ -164,7 +164,7 @@ export default function PrecintListPage(props: any) {
                             </select>
                         </div>
                     </div>
-                    <div className="">
+                    {selectedRegion && <div className="">
                         <label htmlFor="selectedProvince" className="block text-sm/6 font-medium text-gray-900">
                             Province
                         </label>
@@ -182,8 +182,8 @@ export default function PrecintListPage(props: any) {
                                 {provinces.map((m, index) => <option key={index}>{m}</option>)}
                             </select>
                         </div>
-                    </div>
-                    <div className="">
+                    </div>}
+                    {selectedProvince && <div className="">
                         <label htmlFor="selectedCityMuns" className="block text-sm/6 font-medium text-gray-900">
                             City/Municipality
                         </label>
@@ -201,8 +201,8 @@ export default function PrecintListPage(props: any) {
                                 {cityMuns.map((m, index) => <option key={index}>{m}</option>)}
                             </select>
                         </div>
-                    </div>
-                    <div className="">
+                    </div>}
+                    {selectedCityMuns && <div className="">
                         <label htmlFor="selectedBarangay" className="block text-sm/6 font-medium text-gray-900">
                             Barangay
                         </label>
@@ -220,7 +220,7 @@ export default function PrecintListPage(props: any) {
                                 {barangays.map((m, index) => <option key={index}>{m}</option>)}
                             </select>
                         </div>
-                    </div>
+                    </div>}
                     <button
                         onClick={handleFilter}
                         className="px-4 py-2 bg-blue-300 rounded-md hover:bg-gray-400 disabled:opacity-50 self-end"

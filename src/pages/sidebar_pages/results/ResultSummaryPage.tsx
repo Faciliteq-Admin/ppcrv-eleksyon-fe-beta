@@ -169,7 +169,7 @@ export default function ResultSummaryPage(props: any) {
                         </select>
                     </div>
                 </div>
-                <div className="">
+                {selectedRegion && <div className="">
                     <label htmlFor="selectedProvince" className="block text-sm/6 font-medium text-gray-900">
                         Province
                     </label>
@@ -187,8 +187,8 @@ export default function ResultSummaryPage(props: any) {
                             {provinces.map((m, index) => <option key={index}>{m}</option>)}
                         </select>
                     </div>
-                </div>
-                <div className="">
+                </div>}
+                {selectedProvince && <div className="">
                     <label htmlFor="selectedCityMuns" className="block text-sm/6 font-medium text-gray-900">
                         City/Municipality
                     </label>
@@ -206,7 +206,7 @@ export default function ResultSummaryPage(props: any) {
                             {cityMuns.map((m, index) => <option key={index}>{m}</option>)}
                         </select>
                     </div>
-                </div>
+                </div>}
                 <div className="flex gap-2 self-end">
                     <button
                         onClick={handleFilter}
