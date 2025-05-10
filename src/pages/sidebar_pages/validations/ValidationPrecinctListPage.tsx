@@ -13,6 +13,7 @@ export default function ValidationPrecinctListPage(props: any) {
     const [limit, setLimit] = useState(50);
     const [search, setSearch] = useState("");
 
+    const [discrepancy, setDiscrepancy] = useState("All");
     const [selectedRegion, setSelectedRegion] = useState("");
     const [selectedProvince, setSelectedProvince] = useState("");
     const [selectedCityMuns, setSelectedCityMuns] = useState("");
@@ -88,12 +89,17 @@ export default function ValidationPrecinctListPage(props: any) {
 
                 setSelectedBarangay(e.target.value);
             }
+
+        } else if (e.target.name === "discrepancy") {
+            if (e.target.value !== discrepancy) {
+                setDiscrepancy(e.target.value);
+            }
         }
     }
 
     const handleFilter = (e: any) => {
         setPage(1);
-        getResultSummary(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay, search);
+        getResultSummary(selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay, search, undefined, discrepancy);
     }
 
     const handleClear = (e: any) => {
@@ -124,19 +130,40 @@ export default function ValidationPrecinctListPage(props: any) {
             <span className="flex text-sm font-medium text-gray-500">ER Validations <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">For Validation</p> </span>
             <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
-                    <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
+                    <label htmlFor="acmId" className="block text-sm/6 font-medium text-gray-900">
                         ACM ID / Precinct
                     </label>
                     <div className="mt-1">
                         <input
                             type="text"
                             placeholder="ACM ID / Precinct"
-                            className="px-4 py-2 border border-gray-300 rounded-md "
+                            className="px-4 py-2 border border-gray-300 rounded-md w-full"
                             value={search}
                             onChange={e => setSearch(e.target.value)}
                         />
                     </div>
                 </div>
+                <div className="">
+                    <label htmlFor="discrepancy" className="block text-sm/6 font-medium text-gray-900">
+                        Result
+                    </label>
+                    <div className="mt-1">
+                        <select
+                            id="discrepancy"
+                            name="discrepancy"
+                            value={discrepancy}
+                            onChange={handleSelect}
+                            autoComplete="reported-area"
+                            className="px-2 py-2 w-full border border-gray-300 rounded-md text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                        >
+                            <option>All</option>
+                            <option>With Discrepancy</option>
+                            <option>Without Discrepancy</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-3 flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
                         Region
@@ -155,7 +182,7 @@ export default function ValidationPrecinctListPage(props: any) {
                         </select>
                     </div>
                 </div>
-                <div className="">
+                {selectedRegion != "" && <div className="">
                     <label htmlFor="selectedProvince" className="block text-sm/6 font-medium text-gray-900">
                         Province
                     </label>
@@ -173,8 +200,8 @@ export default function ValidationPrecinctListPage(props: any) {
                             {provinces.map((m, index) => <option key={index}>{m}</option>)}
                         </select>
                     </div>
-                </div>
-                <div className="">
+                </div>}
+                {selectedProvince != "" && <div className="">
                     <label htmlFor="selectedCityMuns" className="block text-sm/6 font-medium text-gray-900">
                         City/Municipality
                     </label>
@@ -192,8 +219,8 @@ export default function ValidationPrecinctListPage(props: any) {
                             {cityMuns.map((m, index) => <option key={index}>{m}</option>)}
                         </select>
                     </div>
-                </div>
-                <div className="">
+                </div>}
+                {selectedCityMuns != "" && <div className="">
                     <label htmlFor="selectedBarangay" className="block text-sm/6 font-medium text-gray-900">
                         Barangay
                     </label>
@@ -211,7 +238,7 @@ export default function ValidationPrecinctListPage(props: any) {
                             {barangays.filter(e => e !== selectedBarangay).map((m, index) => <option key={index}>{m}</option>)}
                         </select>
                     </div>
-                </div>
+                </div>}
                 <div className="flex gap-2 self-end">
                     <button
                         onClick={handleFilter}
