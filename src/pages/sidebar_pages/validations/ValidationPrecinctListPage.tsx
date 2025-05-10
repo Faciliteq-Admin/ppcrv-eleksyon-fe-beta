@@ -109,10 +109,7 @@ export default function ValidationPrecinctListPage(props: any) {
     }
 
     const handleRowClick = async (data: any) => {
-        let session = getUserSession();
-        console.log(session.user.role);
-
-        if (session.user.role === "Administrator") {
+        if (user.role === "Administrator") {
             navigate('/validations/' + data._id, { state: data });
         } else {
             const newData = { ...data, headerLabel: 'For Validations' };
@@ -230,7 +227,7 @@ export default function ValidationPrecinctListPage(props: any) {
                     </button>}
                 </div>
             </div>
-            {count && <div className="my-4">
+            {(count && user.role === "Administrator") && <div className="my-4">
                 <table cellPadding={2}><tbody>
                     <tr>
                         <td>Precints with Discrepancy</td>
