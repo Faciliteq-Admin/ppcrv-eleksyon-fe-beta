@@ -53,7 +53,7 @@ const initialValidatorNav = [
         children: [
             {
                 id: "forValidations",
-                title: "For Validations",
+                title: "For Validation",
                 link: "/validations/for-validations",
                 icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
             },
@@ -102,7 +102,7 @@ const adminNav = [
     },
     {
         id: "validations",
-        title: "ER Validations",
+        title: "ER Validation",
         link: "/validations",
         icon: <DocumentCheckIcon className="w-5 h-5 shrink-0 self-center" />,
     },

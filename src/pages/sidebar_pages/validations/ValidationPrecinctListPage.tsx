@@ -121,7 +121,7 @@ export default function ValidationPrecinctListPage(props: any) {
         <div>
             {loading && <Loader />}
             {isLoading && <Loader />}
-            <span className="flex text-sm font-medium text-gray-500">ER Validations <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">For Validations</p> </span>
+            <span className="flex text-sm font-medium text-gray-500">ER Validations <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">For Validation</p> </span>
             <div className="mt-4 flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">
