@@ -17,6 +17,7 @@ export default function SettingsPage(props: any) {
     const [activeBatch, setActiveBatch] = useState("");
     const [activeBatchSetting, setActiveBatchSetting] = useState<any>();
     const [uploadBatchNumSetting, setUploadBatchNumSetting] = useState<any>();
+    const [batches, setBatches] = useState<any[]>();
     const [alerts, setAlerts] = useState<any[]>([]);
 
     let uploadCount = 0;
@@ -37,6 +38,9 @@ export default function SettingsPage(props: any) {
                     setUploadBatchNumSetting(s);
                 }
             }
+        }
+        if (settingRes && settingRes.batches) {
+            setBatches(settingRes.batches);
         }
         setLoading(false);
     }
@@ -103,12 +107,12 @@ export default function SettingsPage(props: any) {
                                     onChange={handleSelect}
                                     className="px-2 py-2 w-full border border-gray-300 rounded-md text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                                 >
-                                    {Array.from({ length: +uploadBatchNumSetting.value }, (_, i) => i + 1).map((v: any, i: number) =>
+                                    {batches && batches.map((v: any, i: number) =>
                                         <option key={i}>{v}</option>
                                     )}
                                 </select>
                             </div>
-                            {activeBatch !== "" && <div className="flex gap-2 self-end">
+                            {(activeBatch !== "" && (+activeBatch !== +activeBatchSetting.value)) && <div className="flex gap-2 self-end">
                                 <button
                                     onClick={handleUpdateBatch}
                                     className="px-4 py-2 bg-blue-300 rounded-md hover:bg-gray-400 disabled:opacity-50"
