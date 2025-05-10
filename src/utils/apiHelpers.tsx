@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserSession } from "./functions";
 
 const BASE_URL = process.env.REACT_APP_BASEURL;
-const API_KEY = process.env.REACT_APP_APIKEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const getHeaders = () => {
     const headers: any = { 'x-api-key': API_KEY };
