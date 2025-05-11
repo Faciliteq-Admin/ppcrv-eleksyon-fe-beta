@@ -15,7 +15,7 @@ import {
     ClipboardDocumentListIcon,
 } from "@heroicons/react/20/solid";
 
-import { boolValue, getUserSession, saveActiveBatchNumber } from "../utils/functions";
+import { boolValue, getUserSession, prepareLogout, saveActiveBatchNumber } from "../utils/functions";
 import SidebarMain from "./SidebarMain";
 import { getRequest } from "../utils/apiHelpers";
 
@@ -169,8 +169,11 @@ const SideNavLayout = (props: any) => {
             sidebarData = [...defaultNav, ...finalValidatorNav, ...adminNav];
         } else if (session.user.role === "Final Validator") {
             sidebarData = [...defaultNav, ...initialValidatorNav, ...finalValidatorNav];
-        } else {
+        } else if (session.user.role === "Initial Validator") {
             sidebarData = [...defaultNav, ...initialValidatorNav];
+        } else {
+            prepareLogout();
+            navigate('/login')
         }
 
         let mounted = false;

@@ -52,9 +52,13 @@ export default function LoginPage() {
             processing = false;
 
             if (response && response.success) {
-                saveUserSession(response);
-                navigate('/');
-                window.location.reload();
+                if (["Administrator", "Initial Validator", "Final Validator"].includes(response.user.role)) {
+                    saveUserSession(response);
+                    navigate('/');
+                    window.location.reload();
+                } else {
+                    addAlert("error", "Invalid user role.", 2000);
+                }
             } else {
                 addAlert("error", "Invalid email or password.", 2000);
             }
