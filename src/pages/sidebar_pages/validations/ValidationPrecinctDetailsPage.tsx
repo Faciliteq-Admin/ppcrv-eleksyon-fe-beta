@@ -4,7 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { ChevronLeftIcon, ChevronRightIcon, FlagIcon } from "@heroicons/react/20/solid";
 import { getRequest, putRequest } from "../../../utils/apiHelpers";
-import { awaitTimeout, getActiveBatchNumber, getUserSession } from "../../../utils/functions";
+import { awaitTimeout, formatNumber, getActiveBatchNumber, getUserSession } from "../../../utils/functions";
 import TableCheckbox from "../../../components/TableCheckbox";
 import ActionButton from "../../../components/ActionButton";
 import ModalDialog from "../../../components/ModalDialog";
@@ -335,7 +335,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         {
             header: 'Scanned Votes',
             accessorKey: 'totalVotes',
-            cell: (info: any) => `${info ?? 0}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 0}`,
         },
     ];
 
@@ -355,7 +355,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         {
             header: 'Scanned Votes',
             accessorKey: 'totalVotes',
-            cell: (info: any) => `${info ?? 0}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 0}`,
         },
     ];
 
@@ -588,7 +588,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                 {
                                     header: 'Scanned Votes',
                                     accessorKey: 'totalVotes',
-                                    cell: (info: any) => `${info ?? 0}`,
+                                    cell: (info: any) => `${info ? formatNumber(info) : 0}`,
                                 },
                             ];
 
@@ -699,7 +699,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                 {
                                     header: 'Scanned Votes',
                                     accessorKey: 'totalVotes',
-                                    cell: (info: any) => `${info ?? 0}`,
+                                    cell: (info: any) => `${info ? formatNumber(info) : 0}`,
                                 },
                             ];
                             if (user.role === "Administrator") {

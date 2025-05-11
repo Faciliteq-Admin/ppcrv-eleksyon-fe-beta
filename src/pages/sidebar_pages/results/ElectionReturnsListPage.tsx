@@ -7,7 +7,7 @@ import TableCheckbox from "../../../components/TableCheckbox";
 import moment from "moment";
 import { useElectionResults } from "../../../hooks/useElectionResults";
 import Table from "../../../components/Table";
-import { getActiveBatchNumber } from "../../../utils/functions";
+import { formatNumber, getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ElectionReturnsListPage(props: any) {
     const navigate = useNavigate();
@@ -53,25 +53,25 @@ export default function ElectionReturnsListPage(props: any) {
         {
             header: 'Registered Voters',
             accessorKey: 'numberVoters',
-            cell: (info: any) => `${info ?? 'N/A'}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Total Votes',
             accessorKey: 'votesAmount',
-            cell: (info: any) => `${info ?? 'N/A'}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Under Votes',
             accessorKey: 'underVotes',
-            cell: (info: any) => `${info ?? 'N/A'}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Over Votes',
             accessorKey: 'overVotes',
-            cell: (info: any) => `${info ?? 'N/A'}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
@@ -146,7 +146,7 @@ export default function ElectionReturnsListPage(props: any) {
                     </div>
                 </div>
                 {data && data.length > 0 &&
-                    <Table data={data} columns={tColumns} handleRowClick={() => {}} />
+                    <Table data={data} columns={tColumns} handleRowClick={() => { }} />
                 }
                 {!data || data.length === 0 && <EmptyCard>
                     <div className="place-self-center">

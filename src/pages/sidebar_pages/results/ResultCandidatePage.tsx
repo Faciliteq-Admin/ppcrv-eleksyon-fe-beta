@@ -5,7 +5,7 @@ import EmptyCard from "../../../components/EmptyCard";
 import { useResultCandidateSummary } from "../../../hooks/useResultCandidateSummary";
 import { useLocations } from "../../../hooks/useLocations";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { awaitTimeout, getActiveBatchNumber } from "../../../utils/functions";
+import { awaitTimeout, formatNumber, getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultCandidatePage(props: any) {
     const navigate = useNavigate();
@@ -249,7 +249,7 @@ export default function ResultCandidatePage(props: any) {
             </div>
             <div className="flex flex-col">
                 <div className="grid gap-2 my-0 lg:flex lg:justify-between py-1">
-                    <p className="self-end">Total: {total}</p>
+                    <p className="self-end">Total: {formatNumber(total)}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
@@ -361,7 +361,7 @@ export default function ResultCandidatePage(props: any) {
                                                 key={`count-${idx}`}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {row.totalVotes}
+                                                {formatNumber(row.totalVotes)}
                                             </td>
                                             <td
                                                 key={`percent-${idx}`}

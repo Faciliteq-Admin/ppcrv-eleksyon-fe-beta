@@ -4,7 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { useLocations } from "../../../hooks/useLocations";
 import { useResultPrecinctSummary } from "../../../hooks/useResultPrecinctSummary";
-import { getActiveBatchNumber } from "../../../utils/functions";
+import { formatNumber, getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultPrecinctListPage(props: any) {
     const navigate = useNavigate();
@@ -223,7 +223,7 @@ export default function ResultPrecinctListPage(props: any) {
             </div>
             <div className="flex flex-col">
                 <div className="grid gap-2 my-0 lg:flex lg:justify-between py-1">
-                    <p className="self-end">Total: {total}</p>
+                    <p className="self-end">Total: {formatNumber(total)}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
@@ -298,7 +298,7 @@ export default function ResultPrecinctListPage(props: any) {
                                                 key={`count-${idx}`}
                                                 className="px-4 py-2  whitespace-nowrap text-sm font-medium text-gray-900"
                                             >
-                                                {row.totalVotes ?? 0}
+                                                {row.totalVotes ? formatNumber(row.totalVotes) : 0}
                                             </td>
                                             <td
                                                 key={`percent-${idx}`}

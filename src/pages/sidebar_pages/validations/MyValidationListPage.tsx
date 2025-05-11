@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
-import { getUserSession } from "../../../utils/functions";
+import { formatNumber, getUserSession } from "../../../utils/functions";
 import { ChevronRightIcon, FlagIcon } from "@heroicons/react/20/solid";
 import { useResultPrecinctSummary } from "../../../hooks/useValidationSummary";
 import { useLocations } from "../../../hooks/useLocations";
@@ -225,7 +225,7 @@ export default function MyValidationListPage(props: any) {
             </div>
             <div className="flex flex-col">
                 <div className="grid gap-2 my-0 lg:flex lg:justify-between py-1">
-                    <p className="self-end">Total: {total}</p>
+                    <p className="self-end">Total: {formatNumber(total)}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&

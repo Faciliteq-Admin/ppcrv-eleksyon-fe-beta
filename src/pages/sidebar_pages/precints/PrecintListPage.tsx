@@ -5,6 +5,7 @@ import EmptyCard from "../../../components/EmptyCard";
 import { usePrecincts } from "../../../hooks/usePrecincts";
 import Table from "../../../components/Table";
 import { useLocations } from "../../../hooks/useLocations";
+import { formatNumber } from "../../../utils/functions";
 
 export default function PrecintListPage(props: any) {
     const navigate = useNavigate();
@@ -229,7 +230,7 @@ export default function PrecintListPage(props: any) {
                     </button>
                 </div>
                 <div className="grid gap-2 my-2 lg:flex lg:justify-between">
-                    <p className="self-end">Total Precints: {total}</p>
+                    <p className="self-end">Total Precints: {formatNumber(total)}</p>
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
                             <select

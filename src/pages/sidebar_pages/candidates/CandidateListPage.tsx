@@ -4,6 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import Table from "../../../components/Table";
 import { useCandidates } from "../../../hooks/useCandidates";
+import { formatNumber } from "../../../utils/functions";
 
 export default function CandidateListPage(props: any) {
     const navigate = useNavigate();
@@ -82,7 +83,7 @@ export default function CandidateListPage(props: any) {
                     </button>
                 </div>
                 <div className="grid gap-2 my-2 lg:flex lg:justify-between">
-                    <p className="self-end">Total Candidates: {total}</p>
+                    <p className="self-end">Total Candidates: {formatNumber(total)}</p>
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
                             <select

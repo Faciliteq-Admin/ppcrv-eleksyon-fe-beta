@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import jsonData from '../../../mockdata/platforms.json';
 import TableCheckbox from "../../../components/TableCheckbox";
-import { formatDateString, saveActiveBatchNumber } from "../../../utils/functions";
+import { formatDateString, formatNumber, saveActiveBatchNumber } from "../../../utils/functions";
 import Loader from "../../../components/Loader";
 import { useElectionResults } from "../../../hooks/useElectionResults";
 import EmptyCard from "../../../components/EmptyCard";
@@ -92,7 +92,7 @@ export default function SettingsPage(props: any) {
                         <label htmlFor="uploadBatchNum" className="block text-sm/6 font-medium text-gray-900">
                             Uploaded Results:
                         </label>
-                        {uploadBatchNumSetting.value}
+                        {formatNumber(uploadBatchNumSetting.value)}
                     </div>}
                     {activeBatchSetting && <div key={"activeBatch"} className="mt-2">
                         <label htmlFor="activeBatch" className="block text-sm/6 font-medium text-gray-900">

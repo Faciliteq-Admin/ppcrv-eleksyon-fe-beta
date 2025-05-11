@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { getRequest } from "../../../utils/apiHelpers";
-import { getActiveBatchNumber, saveActiveBatchNumber } from "../../../utils/functions";
+import { formatNumber, getActiveBatchNumber, saveActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultSummaryPage(props: any) {
 
@@ -51,7 +51,7 @@ export default function ResultSummaryPage(props: any) {
         if (selectedCityMuns) {
             queries.push(`munName=${selectedCityMuns}`);
         }
-        
+
         const activeBatch = getActiveBatchNumber();
         if (activeBatch) {
             queries.push(`uploadBatchNum=` + activeBatch);
@@ -320,19 +320,19 @@ export default function ResultSummaryPage(props: any) {
                                             scope="col"
                                             className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900"
                                         >
-                                            {row.totalAcms}
+                                            {formatNumber(row.totalAcms)}
                                         </th>
                                         <th key={`totalVoters-${idx}`}
                                             scope="col"
                                             className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900"
                                         >
-                                            {row.totalVoters}
+                                            {formatNumber(row.totalVoters)}
                                         </th>
                                         <th key={`totalVotes-${idx}`}
                                             scope="col"
                                             className="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900"
                                         >
-                                            {row.totalVotes}
+                                            {formatNumber(row.totalVotes)}
                                         </th>
                                     </tr>
                                 ))}

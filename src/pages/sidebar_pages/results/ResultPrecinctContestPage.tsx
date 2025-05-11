@@ -4,7 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { ChevronLeftIcon } from "@heroicons/react/20/solid";
 import { getRequest } from "../../../utils/apiHelpers";
-import { awaitTimeout, getActiveBatchNumber } from "../../../utils/functions";
+import { awaitTimeout, formatNumber, getActiveBatchNumber } from "../../../utils/functions";
 import TableCheckbox from "../../../components/TableCheckbox";
 
 export default function ResultPrecinctContestPage(props: any) {
@@ -118,7 +118,7 @@ export default function ResultPrecinctContestPage(props: any) {
                                             {
                                                 header: 'Total Votes',
                                                 accessorKey: 'totalVotes',
-                                                cell: (info: any) => `${info ?? 0}`,
+                                                cell: (info: any) => `${info ? formatNumber(info) : 0}`,
                                             },
                                         ];
                                         return <EmptyCard key={`prov-${idx}`}>
@@ -225,7 +225,7 @@ export default function ResultPrecinctContestPage(props: any) {
                                             {
                                                 header: 'Total Votes',
                                                 accessorKey: 'totalVotes',
-                                                cell: (info: any) => `${info ?? 0}`,
+                                                cell: (info: any) => `${info ? formatNumber(info) : 0}`,
                                             },
                                         ];
                                         return <EmptyCard key={`mun-${idx}`}>
@@ -295,7 +295,7 @@ export default function ResultPrecinctContestPage(props: any) {
         {
             header: 'Total Votes',
             accessorKey: 'totalVotes',
-            cell: (info: any) => `${info ?? 0}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 0}`,
         },
     ];
 
@@ -320,7 +320,7 @@ export default function ResultPrecinctContestPage(props: any) {
         {
             header: 'Total Votes',
             accessorKey: 'totalVotes',
-            cell: (info: any) => `${info ?? 0}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 0}`,
         },
     ];
 
@@ -422,8 +422,8 @@ export default function ResultPrecinctContestPage(props: any) {
             </div>
             <div className="px-2 flex flex-col">
                 <div className="grid lg:gap-4 my-0 lg:flex py-1 max-lg:mt-2">
-                    <p className="self-end">Total Voters: {locationState.registeredVoters}</p>
-                    <p className="self-end">Total Votes: {locationState.totalVotes ?? 0}</p>
+                    <p className="self-end">Total Voters: {locationState.registeredVoters ? formatNumber(locationState.registeredVoters) : 0}</p>
+                    <p className="self-end">Total Votes: {locationState.totalVotes ? formatNumber(locationState.totalVotes) : 0}</p>
                 </div>
             </div>
             <div className="px-2 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>

@@ -216,6 +216,10 @@ function generateCode(len: number, an: string) {
     return code;
 }
 
+function formatNumber(num: any) {
+    return `${num}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 export {
     saveUserSession,
     getUserSession,
@@ -236,4 +240,5 @@ export {
     generateCode,
     getActiveBatchNumber,
     saveActiveBatchNumber,
+    formatNumber,
 }

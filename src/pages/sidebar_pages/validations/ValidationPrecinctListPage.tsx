@@ -4,7 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import { useLocations } from "../../../hooks/useLocations";
 import { useResultPrecinctSummary } from "../../../hooks/useValidationSummary";
-import { getUserSession } from "../../../utils/functions";
+import { formatNumber, getUserSession } from "../../../utils/functions";
 import { ChevronRightIcon, FlagIcon } from "@heroicons/react/20/solid";
 
 export default function ValidationPrecinctListPage(props: any) {
@@ -259,23 +259,23 @@ export default function ValidationPrecinctListPage(props: any) {
                     <tr>
                         <td>Precints with Discrepancy</td>
                         <td>:</td>
-                        <td>{count.flagCount} / {count.precinctCount}</td>
+                        <td>{formatNumber(count.flagCount)} / {formatNumber(count.precinctCount)}</td>
                     </tr>
                     <tr>
                         <td>Total Precints Scanned</td>
                         <td>:</td>
-                        <td>{count.scannedCount} / {count.precinctCount}</td>
+                        <td>{formatNumber(count.scannedCount)} / {formatNumber(count.precinctCount)}</td>
                     </tr>
                     <tr>
                         <td>Total Precints Validated</td>
                         <td>:</td>
-                        <td>{count.validatedCount} / {count.precinctCount}</td>
+                        <td>{formatNumber(count.validatedCount)} / {formatNumber(count.precinctCount)}</td>
                     </tr>
                 </tbody></table>
             </div>}
             <div className="flex flex-col">
                 <div className="grid gap-2 my-0 lg:flex lg:justify-between py-1">
-                    <p className="self-end">Total: {total}</p>
+                    <p className="self-end">Total: {formatNumber(total)}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&

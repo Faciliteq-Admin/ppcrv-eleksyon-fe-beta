@@ -4,7 +4,7 @@ import Loader from "../../../components/Loader";
 import EmptyCard from "../../../components/EmptyCard";
 import Table from "../../../components/Table";
 import { useResultSummary } from "../../../hooks/useResultSummary";
-import { getActiveBatchNumber } from "../../../utils/functions";
+import { formatNumber, getActiveBatchNumber } from "../../../utils/functions";
 
 export default function ResultListPage(props: any) {
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function ResultListPage(props: any) {
         {
             header: 'Total Votes',
             accessorKey: 'totalvotes',
-            cell: (info: any) => `${info ?? 'N/A'}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
@@ -105,7 +105,7 @@ export default function ResultListPage(props: any) {
                     </button>
                 </div>
                 <div className="grid gap-2 my-2 lg:flex lg:justify-between py-1">
-                    <p className="self-end">Total: {total}</p>
+                    <p className="self-end">Total: {formatNumber(total)}</p>
 
                     <div className="flex justify-between">
                         {data && data.length > 0 &&
