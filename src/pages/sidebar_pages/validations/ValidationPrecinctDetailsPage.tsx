@@ -91,7 +91,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
 
         let plContestRes = await getRequest('/contests?contestType=national&contestPosition=party list');
         if (plContestRes && plContestRes.data && plContestRes.data.length > 0) {
-            let plRes = await getRequest(`/candidates/qr?contestCode=${plContestRes.data[0].contestCode}&precinctCode=${locationState.precinctCode}`);
+            let plRes = await getRequest(`/candidates/qr?contestCode=${plContestRes.data[0].contestCode}&precinctCode=${locationState.precinctCode}&sort=totalization`);
             if (plRes.data) {
                 const a = plRes.data.items.map((s: any, idx: number) => {
                     return { rank: idx + 1, ...s }
