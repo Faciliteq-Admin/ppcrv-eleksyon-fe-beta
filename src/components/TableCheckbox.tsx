@@ -14,7 +14,7 @@ const TableCheckbox = (props: any) => {
     const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
     const [filterQuery, setFilterQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage ?? 10);
+    const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage ?? 12);
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
     useEffect(() => {
@@ -134,8 +134,8 @@ const TableCheckbox = (props: any) => {
                         onChange={handleRowsPerPageChange}
                     >
                         {props.rowsPerPage && <option value={props.rowsPerPage}>{props.rowsPerPage} rows</option>}
-                        <option value={10}>10 rows</option>
-                        <option value={25}>25 rows</option>
+                        <option value={12}>12 rows</option>
+                        <option value={24}>24 rows</option>
                         <option value={50}>50 rows</option>
                         <option value={100}>100 rows</option>
                     </select>}
@@ -219,8 +219,8 @@ const TableCheckbox = (props: any) => {
                             onChange={handleRowsPerPageChange}
                         >
                             {props.rowsPerPage && <option value={props.rowsPerPage}>{props.rowsPerPage} rows</option>}
-                            <option value={10}>10 rows</option>
-                            <option value={25}>25 rows</option>
+                            <option value={12}>12 rows</option>
+                            <option value={24}>24 rows</option>
                             <option value={50}>50 rows</option>
                             <option value={100}>100 rows</option>
                         </select>
