@@ -66,52 +66,64 @@ const initialValidatorNav = [
         ]
     },
 ];
-const finalValidatorNav = [
-    {
-        id: "results",
-        title: "Results",
-        icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-        children: [
-            {
-                id: "resultsCandidates",
-                title: "By Candidate",
-                link: "/results/candidates",
-                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            },
-            {
-                id: "resultsPrecincts",
-                title: "By Precinct",
-                link: "/results/precincts",
-                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            },
-        ]
-    },
-    {
-        id: "electionReturns",
-        title: "Election Returns",
-        link: "/election-returns",
-        icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
-    },
+const finalValidatorNav: any[] = [
+    // {
+    //     id: "results",
+    //     title: "Results",
+    //     icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //     children: [
+    //         {
+    //             id: "resultsSenators",
+    //             title: "By Senators",
+    //             link: "/results/senators",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //         {
+    //             id: "resultsPartyLists",
+    //             title: "By Party Lists",
+    //             link: "/results/partylists",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //         {
+    //             id: "resultsCandidates",
+    //             title: "By Candidate",
+    //             link: "/results/candidates",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //         {
+    //             id: "resultsPrecincts",
+    //             title: "By Precinct",
+    //             link: "/results/precincts",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //     ]
+    // },
+    // {
+    //     id: "electionReturns",
+    //     title: "Election Returns",
+    //     link: "/election-returns",
+    //     icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
+    // },
 ];
 const adminNav = [
-    {
-        id: "summary",
-        title: "ER Summary",
-        link: "/summary",
-        icon: <ClipboardDocumentListIcon className="w-5 h-5 shrink-0 self-center" />,
-    },
+    // {
+    //     id: "summary",
+    //     title: "ER Summary",
+    //     link: "/summary",
+    //     icon: <ClipboardDocumentListIcon className="w-5 h-5 shrink-0 self-center" />,
+    // },
     {
         id: "validations",
         title: "ER Validation",
         link: "/validations",
         icon: <DocumentCheckIcon className="w-5 h-5 shrink-0 self-center" />,
     },
-    {
-        id: "uploadResults",
-        title: "Upload ER",
-        link: "/upload-results",
-        icon: <ArrowUpOnSquareIcon className="w-5 h-5 shrink-0 self-center" />,
-    },
+    // {
+    //     id: "uploadResults",
+    //     title: "Upload ER",
+    //     link: "/upload-results",
+    //     icon: <ArrowUpOnSquareIcon className="w-5 h-5 shrink-0 self-center" />,
+    // },
     {
         id: "userManagement",
         title: "User Management",
@@ -130,12 +142,12 @@ const adminNav = [
             },
         ]
     },
-    {
-        id: "settings",
-        title: "Settings",
-        link: "/settings",
-        icon: <Cog6ToothIcon className="w-5 h-5 shrink-0 self-center" />,
-    },
+    // {
+    //     id: "settings",
+    //     title: "Settings",
+    //     link: "/settings",
+    //     icon: <Cog6ToothIcon className="w-5 h-5 shrink-0 self-center" />,
+    // },
 ]
 
 let sidebarData: any = [];
@@ -190,6 +202,10 @@ const SideNavLayout = (props: any) => {
                 setSelectedSubItem('resultsCandidates');
             } else if (path.includes('precincts')) {
                 setSelectedSubItem('resultsPrecincts');
+            } else if (path.includes('senators')) {
+                setSelectedSubItem('resultsSenators');
+            } else if (path.includes('partylists')) {
+                setSelectedSubItem('resultsPartyLists');
             }
         } else if (path.includes('user-management')) {
             setSelectedItem('user-management');
