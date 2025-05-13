@@ -37,7 +37,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 switch (info) {
                     case true: return <FlagIcon className="size-4 text-red-600" />;
                     case false: return <FlagIcon className="size-4 text-green-600" />
-                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                    default: return '';
                 }
             },
         },
@@ -48,7 +48,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 switch (info) {
                     case true: return <FlagIcon className="size-4 text-red-600" />;
                     case false: return <FlagIcon className="size-4 text-green-600" />
-                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                    default: return '';
                 }
             },
         },
@@ -59,7 +59,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 switch (info) {
                     case true: return <FlagIcon className="size-4 text-red-600" />;
                     case false: return <FlagIcon className="size-4 text-green-600" />
-                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                    default: return '';
                 }
             },
         },
@@ -335,7 +335,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         {
             header: 'Scanned Votes',
             accessorKey: 'totalVotes',
-            cell: (info: any) => `${info ? formatNumber(info) : 0}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
         },
     ];
 
@@ -355,7 +355,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         {
             header: 'Scanned Votes',
             accessorKey: 'totalVotes',
-            cell: (info: any) => `${info ? formatNumber(info) : 0}`,
+            cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
         },
     ];
 
@@ -367,7 +367,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 switch (info) {
                     case true: return <FlagIcon className="size-4 text-red-600" />;
                     case false: return <FlagIcon className="size-4 text-green-600" />;
-                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                    default: return '';
                 }
             },
         },
@@ -378,7 +378,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 switch (info) {
                     case true: return <FlagIcon className="size-4 text-red-600" />;
                     case false: return <FlagIcon className="size-4 text-green-600" />;
-                    default: return <FlagIcon className="size-4 text-gray-400" />;
+                    default: return '';
                 }
             },
         },
@@ -482,7 +482,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                     switch (info) {
                         case true: return <FlagIcon className="size-4 text-red-600" />;
                         case false: return <FlagIcon className="size-4 text-green-600" />;
-                        default: return <FlagIcon className="size-4 text-gray-400" />;
+                        default: return '';
                     }
                 },
             }];
@@ -500,10 +500,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 accessorKey: 'rank',
                 cell: (info: any) => {
                     if (senators && senators.length > 0) {
-                        return <button onClick={() => toggleFlag('senators', accessorKey, info - 1, -1)}>
-                            {senators[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
-                            {!(senators[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
-                        </button>
+                        if (senators[info - 1].totalVotes || senators[info - 1].totalVotes === 0) {
+                            return <button onClick={() => toggleFlag('senators', accessorKey, info - 1, -1)}>
+                                {senators[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
+                                {!(senators[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
+                            </button>
+                        } else return '';
                     } else {
                         return '';
                     }
@@ -514,10 +516,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 accessorKey: 'rank',
                 cell: (info: any) => {
                     if (partyLists && partyLists.length > 0) {
-                        return <button onClick={() => toggleFlag('partylist', accessorKey, info - 1, -1)}>
-                            {partyLists[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
-                            {!(partyLists[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
-                        </button>
+                        if (partyLists[info - 1].totalVotes || partyLists[info - 1].totalVotes === 0) {
+                            return <button onClick={() => toggleFlag('partylist', accessorKey, info - 1, -1)}>
+                                {partyLists[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
+                                {!(partyLists[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
+                            </button>
+                        } else return '';
                     } else {
                         return '';
                     }
@@ -538,7 +542,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                     switch (info) {
                         case true: return <FlagIcon className="size-4 text-red-600" />;
                         case false: return <FlagIcon className="size-4 text-green-600" />;
-                        default: return <FlagIcon className="size-4 text-gray-400" />;
+                        default: return '';
                     }
                 },
             }];
@@ -588,7 +592,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                 {
                                     header: 'Scanned Votes',
                                     accessorKey: 'totalVotes',
-                                    cell: (info: any) => `${info ? formatNumber(info) : 0}`,
+                                    cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
                                 },
                             ];
 
@@ -601,10 +605,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                         accessorKey: 'rank',
                                         cell: (info: any) => {
                                             if (provContest && provContest.length > 0) {
-                                                return <button onClick={() => toggleFlag('prov', 'finalPassFlag', idx, info - 1)}>
-                                                    {provContest[idx].candidates[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
-                                                    {!(provContest[idx].candidates[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
-                                                </button>
+                                                if (provContest[idx].candidates[info - 1].totalVotes || provContest[idx].candidates[info - 1].totalVotes === 0) {
+                                                    return <button onClick={() => toggleFlag('prov', 'finalPassFlag', idx, info - 1)}>
+                                                        {provContest[idx].candidates[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                                                        {!(provContest[idx].candidates[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                                                    </button>
+                                                } else return '';
                                             } else {
                                                 return '';
                                             }
@@ -619,7 +625,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                             switch (info) {
                                                 case true: return <FlagIcon className="size-4 text-red-600" />;
                                                 case false: return <FlagIcon className="size-4 text-green-600" />;
-                                                default: return <FlagIcon className="size-4 text-gray-400" />;
+                                                default: return '';
                                             }
                                         },
                                     }];
@@ -636,10 +642,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                         accessorKey: 'rank',
                                         cell: (info: any) => {
                                             if (provContest && provContest.length > 0) {
-                                                return <button onClick={() => toggleFlag('prov', accessorKey, idx, info - 1)}>
-                                                    {provContest[idx].candidates[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
-                                                    {!(provContest[idx].candidates[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
-                                                </button>
+                                                if (provContest[idx].candidates[info - 1].totalVotes || provContest[idx].candidates[info - 1].totalVotes === 0) {
+                                                    return <button onClick={() => toggleFlag('prov', accessorKey, idx, info - 1)}>
+                                                        {provContest[idx].candidates[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
+                                                        {!(provContest[idx].candidates[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
+                                                    </button>
+                                                } else return '';
                                             } else {
                                                 return '';
                                             }
@@ -658,7 +666,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                             switch (info) {
                                                 case true: return <FlagIcon className="size-4 text-red-600" />;
                                                 case false: return <FlagIcon className="size-4 text-green-600" />;
-                                                default: return <FlagIcon className="size-4 text-gray-400" />;
+                                                default: return '';
                                             }
                                         },
                                     }];
@@ -699,7 +707,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                 {
                                     header: 'Scanned Votes',
                                     accessorKey: 'totalVotes',
-                                    cell: (info: any) => `${info ? formatNumber(info) : 0}`,
+                                    cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
                                 },
                             ];
                             if (user.role === "Administrator") {
@@ -711,10 +719,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                         accessorKey: 'rank',
                                         cell: (info: any) => {
                                             if (munContest && munContest.length > 0) {
-                                                return <button onClick={() => toggleFlag('mun', 'finalPassFlag', idx, info - 1)}>
-                                                    {munContest[idx].candidates[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
-                                                    {!(munContest[idx].candidates[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
-                                                </button>
+                                                if (munContest[idx].candidates[info - 1].totalVotes || munContest[idx].candidates[info - 1].totalVotes === 0) {
+                                                    return <button onClick={() => toggleFlag('mun', 'finalPassFlag', idx, info - 1)}>
+                                                        {munContest[idx].candidates[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                                                        {!(munContest[idx].candidates[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                                                    </button>
+                                                } else return '';
                                             } else {
                                                 return '';
                                             }
@@ -729,7 +739,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                             switch (info) {
                                                 case true: return <FlagIcon className="size-4 text-red-600" />;
                                                 case false: return <FlagIcon className="size-4 text-green-600" />;
-                                                default: return <FlagIcon className="size-4 text-gray-400" />;
+                                                default: return '';
                                             }
                                         },
                                     }];
@@ -746,10 +756,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                         accessorKey: 'rank',
                                         cell: (info: any) => {
                                             if (munContest && munContest.length > 0) {
-                                                return <button onClick={() => toggleFlag('mun', accessorKey, idx, info - 1)}>
-                                                    {munContest[idx].candidates[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
-                                                    {!(munContest[idx].candidates[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
-                                                </button>
+                                                if (munContest[idx].candidates[info - 1].totalVotes || munContest[idx].candidates[info - 1].totalVotes === 0) {
+                                                    return <button onClick={() => toggleFlag('mun', accessorKey, idx, info - 1)}>
+                                                        {munContest[idx].candidates[info - 1][accessorKey] && <FlagIcon className="size-4 text-red-600" />}
+                                                        {!(munContest[idx].candidates[info - 1][accessorKey]) && <FlagIcon className="size-4 text-gray-600" />}
+                                                    </button>
+                                                } else return '';
                                             } else {
                                                 return '';
                                             }
@@ -768,7 +780,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                                             switch (info) {
                                                 case true: return <FlagIcon className="size-4 text-red-600" />;
                                                 case false: return <FlagIcon className="size-4 text-green-600" />;
-                                                default: return <FlagIcon className="size-4 text-gray-400" />;
+                                                default: return '';
                                             }
                                         },
                                     }];
