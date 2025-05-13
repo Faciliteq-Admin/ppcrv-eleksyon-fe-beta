@@ -449,10 +449,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 accessorKey: 'rank',
                 cell: (info: any) => {
                     if (senators && senators.length > 0) {
-                        return <button onClick={() => toggleFlag('senators', 'finalPassFlag', info - 1, -1)}>
-                            {senators[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
-                            {!(senators[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
-                        </button>
+                        if (senators[info - 1].totalVotes || senators[info - 1].totalVotes === 0) {
+                            return <button onClick={() => toggleFlag('senators', 'finalPassFlag', info - 1, -1)}>
+                                {senators[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                                {!(senators[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                            </button>
+                        } else return '';
                     } else {
                         return '';
                     }
@@ -463,10 +465,12 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 accessorKey: 'rank',
                 cell: (info: any) => {
                     if (partyLists && partyLists.length > 0) {
-                        return <button onClick={() => toggleFlag('partylist', 'finalPassFlag', info - 1, -1)}>
-                            {partyLists[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
-                            {!(partyLists[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
-                        </button>
+                        if (partyLists[info - 1].totalVotes || partyLists[info - 1].totalVotes === 0) {
+                            return <button onClick={() => toggleFlag('partylist', 'finalPassFlag', info - 1, -1)}>
+                                {partyLists[info - 1]['finalPassFlag'] && <FlagIcon className="size-4 text-red-600" />}
+                                {!(partyLists[info - 1]['finalPassFlag']) && <FlagIcon className="size-4 text-gray-600" />}
+                            </button>
+                        } else return '';
                     } else {
                         return '';
                     }
