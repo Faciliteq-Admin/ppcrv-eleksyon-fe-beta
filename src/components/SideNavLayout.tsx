@@ -98,12 +98,12 @@ const finalValidatorNav: any[] = [
     //         },
     //     ]
     // },
-    // {
-    //     id: "electionReturns",
-    //     title: "Election Returns",
-    //     link: "/election-returns",
-    //     icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
-    // },
+    {
+        id: "electionReturns",
+        title: "Election Returns",
+        link: "/election-returns",
+        icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
+    },
 ];
 const adminNav = [
     // {
