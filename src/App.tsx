@@ -26,6 +26,8 @@ import MyValidationListPage from './pages/sidebar_pages/validations/MyValidation
 import ValidationPrecinctListPage from './pages/sidebar_pages/validations/ValidationPrecinctListPage';
 import ValidationPrecinctDetailsPage from './pages/sidebar_pages/validations/ValidationPrecinctDetailsPage';
 import ResultSummaryPage from './pages/sidebar_pages/results/ResultSummaryPage';
+import SenatorResultPage from './pages/sidebar_pages/results/SenatorResultPage';
+import PartyListResultPage from './pages/sidebar_pages/results/PartyListResultPage';
 
 const defaultRoutes = [
     {
@@ -120,6 +122,16 @@ const finalValidatorRoutes = [
     {
         path: "results",
         children: [
+            {
+                path: "/results/senators",
+                element: <SideNavLayout> <SenatorResultPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
+            {
+                path: "/results/partylists",
+                element: <SideNavLayout> <PartyListResultPage /> </SideNavLayout>,
+                errorElement: <PageNotFound />,
+            },
             {
                 path: "/results/candidates",
                 element: <SideNavLayout> <ResultListPage /> </SideNavLayout>,

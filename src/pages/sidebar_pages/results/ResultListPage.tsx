@@ -9,7 +9,7 @@ import { formatNumber, getActiveBatchNumber } from "../../../utils/functions";
 export default function ResultListPage(props: any) {
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(50);
+    const [limit, setLimit] = useState(25);
     const [search, setSearch] = useState("");
     const [searchCandidate, setSearchCandidate] = useState("");
 
@@ -26,7 +26,7 @@ export default function ResultListPage(props: any) {
     const tColumns = [
         {
             header: 'Candidate Name',
-            accessorKey: 'candidateName',
+            accessorKey: 'candidate_name',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
@@ -45,7 +45,7 @@ export default function ResultListPage(props: any) {
     ];
 
     const handleRowClick = (e: any, row: any) => {
-        navigate(`/results/candidates/${row.candidateName}`, { state: row });
+        navigate(`/results/candidates/${row.candidate_name}`, { state: row });
     }
 
     const handleRowsPerPageChange = (e: any) => {
@@ -81,7 +81,6 @@ export default function ResultListPage(props: any) {
             {loading && <Loader />}
             <span className="text-sm font-medium">Results by Candidates</span>
             <div className="mt-4 flex flex-col">
-                <div className="mt-4 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
                 <div className="flex gap-2 w-full lg:w-1/2">
                     <input
                         type="text"

@@ -30,7 +30,7 @@ export default function ResultCandidatePage(props: any) {
 
     useEffect(() => {
         getRegions();
-        getResultSummary(state.candidateName);
+        getResultSummary(state.candidate_name);
 
         console.log(selectedBarangay);
 
@@ -95,7 +95,7 @@ export default function ResultCandidatePage(props: any) {
 
     const handleFilter = (e: any) => {
         setPage(1);
-        getResultSummary(state.candidateName, selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
+        getResultSummary(state.candidate_name, selectedRegion, selectedProvince, selectedCityMuns, selectedBarangay);
     }
 
     const handleClear = (e: any) => {
@@ -107,7 +107,7 @@ export default function ResultCandidatePage(props: any) {
         getProvinces();
         getMunicipalities();
         getBarangays();
-        getResultSummary(state.candidateName);
+        getResultSummary(state.candidate_name);
     }
 
     const handleBack = () => {
@@ -131,7 +131,7 @@ export default function ResultCandidatePage(props: any) {
         setPage(1);
         await awaitTimeout(200);
         getResultSummary(
-            state.candidateName,
+            state.candidate_name,
             regName ?? selectedRegion,
             prvName ?? selectedProvince,
             munName ?? selectedCityMuns,
@@ -143,7 +143,7 @@ export default function ResultCandidatePage(props: any) {
         <div>
             {loading && <Loader />}
             {isLoading && <Loader />}
-            <span className="flex text-sm font-medium text-gray-500">Results <ChevronRightIcon className="size-4 self-center" /> Candidates <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">{state.candidateName}</p> </span>
+            <span className="flex text-sm font-medium text-gray-500">Results <ChevronRightIcon className="size-4 self-center" /> Candidates <ChevronRightIcon className="size-4 self-center" /> <p className="text-black">{state.candidate_name}</p> </span>
             <div className="mt-4 flex justify-between px-2">
                 <div className="">
                     <button type="button" onClick={handleBack} className="flex text-sm/6 font-semibold text-gray-900">
@@ -155,7 +155,6 @@ export default function ResultCandidatePage(props: any) {
 
                 </div>
             </div>
-            <div className="mt-4 text-sm">Active Batch Number: {getActiveBatchNumber()}</div>
             <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
                 <div className="">
                     <label htmlFor="selectedRegion" className="block text-sm/6 font-medium text-gray-900">

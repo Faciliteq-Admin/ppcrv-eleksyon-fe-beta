@@ -8,23 +8,12 @@ export const useResultCandidateSummary = (page: number, limit: number) => {
     const [loading, setLoading] = useState(false);
 
     const getResultSummary = async (candidateName: string, regName?: string, prvName?: string, munName?: string, brgyName?: string) => {
-        let path = `/results/summary/candidate?page=${page}&limit=${limit}`;
+        let path = `/results/summary/candidate/raw?page=${page}&limit=${limit}`;
         path += `&candidateName=${candidateName}`;
         if (regName) path += `&regName=${regName}`;
         if (prvName) path += `&prvName=${prvName}`;
         if (munName) path += `&munName=${munName}`;
         if (brgyName) path += `&brgyName=${brgyName}`;
-
-        const activeBatch = getActiveBatchNumber();
-        if (activeBatch) {
-            path += `&uploadBatchNum=` + activeBatch;
-        } else {
-            let res = await getRequest('/settings?field=activeBatch');
-            if (res.data && res.data.length > 0) {
-                saveActiveBatchNumber(res.data[0].value);
-                path += `&uploadBatchNum=` + res.data[0].value;
-            }
-        }
 
         setLoading(true);
         getRequest(path).then(response => {
