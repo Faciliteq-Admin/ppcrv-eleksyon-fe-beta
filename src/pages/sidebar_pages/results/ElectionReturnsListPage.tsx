@@ -34,13 +34,13 @@ export default function ElectionReturnsListPage(props: any) {
         // },
         {
             header: 'Precinct Code',
-            accessorKey: 'precinctCode',
+            accessorKey: 'precint_code',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: false,
         },
         {
             header: 'Candidate Name',
-            accessorKey: 'candidateName',
+            accessorKey: 'candidate_name',
             cell: (info: any) => `${info ?? 'N/A'}`,
             sort: true,
         },
@@ -52,32 +52,32 @@ export default function ElectionReturnsListPage(props: any) {
         },
         {
             header: 'Registered Voters',
-            accessorKey: 'numberVoters',
+            accessorKey: 'number_voters',
             cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Total Votes',
-            accessorKey: 'votesAmount',
+            accessorKey: 'votes_amount',
             cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Under Votes',
-            accessorKey: 'underVotes',
+            accessorKey: 'under_votes',
             cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Over Votes',
-            accessorKey: 'overVotes',
+            accessorKey: 'over_votes',
             cell: (info: any) => `${info ? formatNumber(info) : 'N/A'}`,
             sort: true,
         },
         {
             header: 'Reception Date',
-            accessorKey: 'receptionDate',
-            cell: (info: any) => `${moment(info).format('YYYY-MM-DD HH:mm:ss') ?? 'N/A'}`,
+            accessorKey: 'reception_date',
+            cell: (info: any) => `${moment(info, "YYYY-MM-DD:HH:mm:ss").format('YYYY-MM-DD HH:mm:ss') ?? 'N/A'}`,
             sort: true,
         },
     ];
@@ -124,8 +124,8 @@ export default function ElectionReturnsListPage(props: any) {
                         onChange={handleSearch}
                     /> */}
                     <span>
-                        <p>Active Batch Number: {getActiveBatchNumber()}</p>
-                        <p>Total: {total}</p>
+                        {/* <p>Active Batch Number: {getActiveBatchNumber()}</p> */}
+                        <p>Total: {formatNumber(total)}</p>
                     </span>
 
                     <div className="flex justify-between">

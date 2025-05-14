@@ -8,18 +8,7 @@ export const useElectionResults = (page: number, limit: number) => {
     const [loading, setLoading] = useState(false);
 
     const getElectionResults = async (regName?: string, prvName?: string, munName?: string, brgyName?: string) => {
-        let path = `/results?page=${page}&limit=${limit}`;
-
-        const activeBatch = getActiveBatchNumber();
-        if (activeBatch) {
-            path += `&uploadBatchNum=${activeBatch}`;
-        } else {
-            let res = await getRequest('/settings?field=activeBatch');
-            if (res.data && res.data.length > 0) {
-                saveActiveBatchNumber(res.data[0].value);
-                path += `uploadBatchNum=${res.data[0].value}`;
-            }
-        }
+        let path = `/results/raw?page=${page}&limit=${limit}`;
 
         setLoading(true);
         getRequest(path).then(response => {
