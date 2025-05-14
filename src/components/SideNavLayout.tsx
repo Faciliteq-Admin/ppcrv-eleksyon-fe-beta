@@ -67,43 +67,43 @@ const initialValidatorNav = [
     },
 ];
 const finalValidatorNav: any[] = [
-    {
-        id: "results",
-        title: "Results",
-        icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-        children: [
-            {
-                id: "resultsSenators",
-                title: "By Senators",
-                link: "/results/senators",
-                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            },
-            {
-                id: "resultsPartyLists",
-                title: "By Party Lists",
-                link: "/results/partylists",
-                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            },
-            {
-                id: "resultsCandidates",
-                title: "By Candidate",
-                link: "/results/candidates",
-                icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            },
-            // {
-            //     id: "resultsPrecincts",
-            //     title: "By Precinct",
-            //     link: "/results/precincts",
-            //     icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
-            // },
-        ]
-    },
-    {
-        id: "electionReturns",
-        title: "Election Returns",
-        link: "/election-returns",
-        icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
-    },
+    // {
+    //     id: "results",
+    //     title: "Results",
+    //     icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //     children: [
+    //         {
+    //             id: "resultsSenators",
+    //             title: "By Senators",
+    //             link: "/results/senators",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //         {
+    //             id: "resultsPartyLists",
+    //             title: "By Party Lists",
+    //             link: "/results/partylists",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //         {
+    //             id: "resultsCandidates",
+    //             title: "By Candidate",
+    //             link: "/results/candidates",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //         {
+    //             id: "resultsPrecincts",
+    //             title: "By Precinct",
+    //             link: "/results/precincts",
+    //             icon: <PresentationChartLineIcon className="w-5 h-5 shrink-0 self-center" />,
+    //         },
+    //     ]
+    // },
+    // {
+    //     id: "electionReturns",
+    //     title: "Election Returns",
+    //     link: "/election-returns",
+    //     icon: <DocumentChartBarIcon className="w-5 h-5 shrink-0 self-center" />,
+    // },
 ];
 const adminNav = [
     // {
