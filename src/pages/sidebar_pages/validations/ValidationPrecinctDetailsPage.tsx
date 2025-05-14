@@ -213,6 +213,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 if (s[accessorKey]) {
                     withFlag = true;
                     senFlags.candidates.push({
+                        totalizationOrder: s.totalizationOrder,
                         candidateCode: s.candidateCode,
                         candidateName: s.candidateName,
                         [accessorKey]: s[accessorKey],
@@ -229,6 +230,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                 if (pl[accessorKey]) {
                     withFlag = true;
                     plFlags.candidates.push({
+                        totalizationOrder: pl.totalizationOrder,
                         candidateCode: pl.candidateCode,
                         candidateName: pl.candidateName,
                         [accessorKey]: pl[accessorKey],
@@ -250,6 +252,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                     if (cand[accessorKey]) {
                         withFlag = true;
                         provFlags.candidates.push({
+                            totalizationOrder: cand.totalizationOrder,
                             candidateCode: cand.candidateCode,
                             candidateName: cand.candidateName,
                             [accessorKey]: cand[accessorKey],
@@ -270,6 +273,7 @@ export default function ValidationPrecinctDetailsPage(props: any) {
                     if (cand[accessorKey]) {
                         withFlag = true;
                         munFlags.candidates.push({
+                            totalizationOrder: cand.totalizationOrder,
                             candidateCode: cand.candidateCode,
                             candidateName: cand.candidateName,
                             [accessorKey]: cand[accessorKey],
