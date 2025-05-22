@@ -30,28 +30,28 @@ export default function ValidationPrecinctDetailsPage(props: any) {
     const session = getUserSession();
     const user = session ? session.user : {};
     const adminAdditionalColumns = [
-        {
-            header: '1st Validation',
-            accessorKey: 'firstPassFlag',
-            cell: (info: any) => {
-                switch (info) {
-                    case true: return <FlagIcon className="size-4 text-red-600" />;
-                    case false: return <FlagIcon className="size-4 text-green-600" />
-                    default: return '';
-                }
-            },
-        },
-        {
-            header: '2nd Validation',
-            accessorKey: 'secondPassFlag',
-            cell: (info: any) => {
-                switch (info) {
-                    case true: return <FlagIcon className="size-4 text-red-600" />;
-                    case false: return <FlagIcon className="size-4 text-green-600" />
-                    default: return '';
-                }
-            },
-        },
+        // {
+        //     header: '1st Validation',
+        //     accessorKey: 'firstPassFlag',
+        //     cell: (info: any) => {
+        //         switch (info) {
+        //             case true: return <FlagIcon className="size-4 text-red-600" />;
+        //             case false: return <FlagIcon className="size-4 text-green-600" />
+        //             default: return '';
+        //         }
+        //     },
+        // },
+        // {
+        //     header: '2nd Validation',
+        //     accessorKey: 'secondPassFlag',
+        //     cell: (info: any) => {
+        //         switch (info) {
+        //             case true: return <FlagIcon className="size-4 text-red-600" />;
+        //             case false: return <FlagIcon className="size-4 text-green-600" />
+        //             default: return '';
+        //         }
+        //     },
+        // },
         {
             header: 'Final Validation',
             accessorKey: 'finalPassFlag',
@@ -363,29 +363,29 @@ export default function ValidationPrecinctDetailsPage(props: any) {
         },
     ];
 
-    const initialValidatorCols = [
-        {
-            header: '1st Validation',
-            accessorKey: 'firstPassFlag',
-            cell: (info: any) => {
-                switch (info) {
-                    case true: return <FlagIcon className="size-4 text-red-600" />;
-                    case false: return <FlagIcon className="size-4 text-green-600" />;
-                    default: return '';
-                }
-            },
-        },
-        {
-            header: '2nd Validation',
-            accessorKey: 'secondPassFlag',
-            cell: (info: any) => {
-                switch (info) {
-                    case true: return <FlagIcon className="size-4 text-red-600" />;
-                    case false: return <FlagIcon className="size-4 text-green-600" />;
-                    default: return '';
-                }
-            },
-        },
+    const initialValidatorCols: any[] = [
+        // {
+        //     header: '1st Validation',
+        //     accessorKey: 'firstPassFlag',
+        //     cell: (info: any) => {
+        //         switch (info) {
+        //             case true: return <FlagIcon className="size-4 text-red-600" />;
+        //             case false: return <FlagIcon className="size-4 text-green-600" />;
+        //             default: return '';
+        //         }
+        //     },
+        // },
+        // {
+        //     header: '2nd Validation',
+        //     accessorKey: 'secondPassFlag',
+        //     cell: (info: any) => {
+        //         switch (info) {
+        //             case true: return <FlagIcon className="size-4 text-red-600" />;
+        //             case false: return <FlagIcon className="size-4 text-green-600" />;
+        //             default: return '';
+        //         }
+        //     },
+        // },
     ];
 
     const toggleFlag = (data: string, accessorKey: string, index1: number, index2: number) => {
